@@ -1,0 +1,28 @@
+{
+    "development": {
+        "platform": "windows",
+        "base_path": "c:\\Users\\fivek\\source\\repos\\grannytv-client",
+        "log_file": "iptv_player.log",
+        "working_streams_file": "working_streams.json",
+        "use_vlc": true,
+        "test_mode": true,
+        "display": {
+            "setup_display": false,
+            "setup_audio": false
+        },
+        "player_command": "vlc --intf dummy --play-and-exit --no-video-title-show"
+    },
+    "production": {
+        "platform": "raspberry_pi",
+        "base_path": "/home/jeremy/pi",
+        "log_file": "/home/jeremy/pi/iptv_player.log",
+        "working_streams_file": "/home/jeremy/pi/working_streams.json",
+        "use_vlc": true,
+        "test_mode": false,
+        "display": {
+            "setup_display": true,
+            "setup_audio": true
+        },
+        "player_command": "vlc --intf dummy --play-and-exit --no-video-title-show --fullscreen"
+    }
+}

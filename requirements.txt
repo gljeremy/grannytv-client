@@ -1,0 +1,7 @@
+# Requirements for IPTV Smart Player
+# Add any Python dependencies here
+
+# For future features you might add:
+# requests>=2.25.1
+# python-vlc>=3.0.11115
+# psutil>=5.8.0
