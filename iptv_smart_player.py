@@ -165,45 +165,114 @@ class SmartIPTVPlayer:
     def launch_vlc(self, stream_url, env):
         """Launch VLC with optimal settings for Raspberry Pi"""
         try:
-            # Check VLC availability
+            # Check VLC availability and Pi hardware
             try:
                 vlc_version = subprocess.run(['vlc', '--version'], capture_output=True, text=True, timeout=5)
                 logging.info(f"   VLC Version: {vlc_version.stdout.split()[2] if vlc_version.stdout else 'Unknown'}")
             except Exception:
                 logging.warning("   Could not determine VLC version")
             
+            # Check if we're on a Raspberry Pi for hardware-specific optimizations
+            is_raspberry_pi = False
+            try:
+                with open('/proc/cpuinfo', 'r') as f:
+                    cpuinfo = f.read()
+                    if 'BCM' in cpuinfo or 'Raspberry Pi' in cpuinfo:
+                        is_raspberry_pi = True
+                        logging.info("   Detected Raspberry Pi - applying hardware optimizations")
+                        
+                        # Check GPU memory split for video performance
+                        try:
+                            gpu_mem = subprocess.run(['vcgencmd', 'get_mem', 'gpu'], 
+                                                   capture_output=True, text=True, timeout=3)
+                            if gpu_mem.returncode == 0:
+                                logging.info(f"   GPU Memory: {gpu_mem.stdout.strip()}")
+                        except Exception:
+                            pass
+            except Exception:
+                pass
+            
+            # Quick network connectivity test for streaming optimization
+            try:
+                import socket
+                test_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                test_socket.settimeout(2)
+                result = test_socket.connect_ex(('8.8.8.8', 53))  # Google DNS
+                test_socket.close()
+                if result == 0:
+                    logging.info("   Network connectivity: Good")
+                else:
+                    logging.warning("   Network connectivity: Limited - may affect streaming")
+            except Exception:
+                pass
+            
             # Detect video output method
             has_x11 = os.environ.get('DISPLAY') and self.check_x11_available()
             
-            # VLC configurations to try (in order of preference)
+            # VLC configurations optimized for low-latency performance
             if has_x11:
-                logging.info("[DISPLAY] X11 detected - using desktop mode")
+                logging.info("[DISPLAY] X11 detected - using optimized desktop mode")
                 vlc_configs = [
-                    # Stable X11 config for Pi
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-video-title-show', '--no-osd', '--aout', 'alsa', '--vout', 'x11'],
-                    # Alternative with different video output
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'gl'],
+                    # High-performance X11 with GPU acceleration
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', 
+                     '--vout', 'gl', '--deinterlace-mode', 'linear'],
+                    # Fallback X11 config  
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11'],
+                    # Software rendering fallback
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', 
+                     '--vout', 'x11', '--no-hw-decode'],
                 ]
             else:
-                logging.info("[DISPLAY] No X11 - trying framebuffer/console modes")
+                logging.info("[DISPLAY] No X11 - using optimized framebuffer mode")
                 vlc_configs = [
-                    # Framebuffer output with stable options
+                    # Optimized framebuffer with hardware decode
+                    ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', 
+                     '--no-osd', '--deinterlace-mode', 'linear'],
+                    # Fallback framebuffer without deinterlacing
                     ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', '--no-osd'],
-                    # Console output (ASCII art but with audio)
-                    ['vlc', '--intf', 'dummy', '--vout', 'caca', '--aout', 'alsa', '--no-osd'],
                 ]
             
-            # Try each configuration
+            # Try each configuration with performance optimizations
             for i, base_cmd in enumerate(vlc_configs, 1):
-                cmd = base_cmd + [
-                    '--network-caching=3000',
+                # Base performance arguments
+                performance_args = [
+                    # Network optimization for low latency
+                    '--network-caching=500',   # Very low latency (500ms)
+                    '--live-caching=100',      # Minimal live stream buffering
+                    '--clock-jitter=0',        # Reduce audio/video sync issues
+                    '--clock-synchro=0',       # Disable clock synchronization
+                    
+                    # Buffer optimization
+                    '--file-caching=100',      # Minimal file buffer
+                    '--sout-mux-caching=100',  # Minimal output buffer
+                    
+                    # Performance settings
                     '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
                     '--no-video-title-show',
                     '--quiet',
                     '--no-snapshot-preview',
                     '--disable-screensaver',
-                    stream_url
+                    '--no-stats',              # Disable statistics
+                    '--no-sub-autodetect-file', # Don't look for subtitles
                 ]
+                
+                # Add Raspberry Pi specific optimizations
+                if is_raspberry_pi:
+                    performance_args.extend([
+                        '--codec=avcodec',         # Use hardware-accelerated codec
+                        '--avcodec-hw=mmal',       # Pi-specific hardware decode
+                        '--mmal-display=hdmi-1',   # Direct HDMI output
+                        '--no-audio-time-stretch', # Disable audio stretching
+                        '--drop-late-frames',      # Drop frames if behind
+                        '--skip-frames',           # Skip frames to catch up
+                    ])
+                else:
+                    performance_args.extend([
+                        '--codec=avcodec',         # Use hardware-accelerated codec  
+                        '--avcodec-hw=any',        # Try any hardware decoding
+                    ])
+                
+                cmd = base_cmd + performance_args + [stream_url]
                 
                 config_name = "X11" if has_x11 else ("Framebuffer" if i == 1 else "Console")
                 logging.info(f"[VIDEO] Trying VLC config {i}: {config_name}")
