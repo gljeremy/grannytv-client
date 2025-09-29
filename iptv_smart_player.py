@@ -27,9 +27,9 @@ def load_config():
         # Fallback to production config
         return {
             "platform": "raspberry_pi",
-            "base_path": "/home/jeremy/pi",
-            "log_file": "/home/jeremy/pi/iptv_player.log",
-            "working_streams_file": "/home/jeremy/pi/working_streams.json",
+            "base_path": "/home/jeremy/gtv",
+            "log_file": "/home/jeremy/gtv/iptv_player.log",
+            "working_streams_file": "/home/jeremy/gtv/working_streams.json",
             "use_vlc": True,
             "test_mode": False,
             "display": {"setup_display": True, "setup_audio": True},
@@ -244,7 +244,7 @@ class SmartIPTVPlayer:
         
         if not self.working_streams:
             logging.error("❌ No working streams available! Please run the scanner first:")
-            logging.error("   python3 /home/jeremy/pi/iptv_stream_scanner.py")
+            logging.error("   python3 /home/jeremy/gtv/iptv_stream_scanner.py")
             return False
         
         logging.info("⏳ Waiting for system stability...")

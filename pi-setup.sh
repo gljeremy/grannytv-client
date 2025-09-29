@@ -25,7 +25,7 @@ echo "🐍 Installing Python packages..."
 pip3 install --user requests psutil
 
 # Create project directory
-PI_PATH="/home/jeremy/pi"
+PI_PATH="/home/jeremy/gtv"
 mkdir -p "$PI_PATH"
 
 # Enable SSH (if not already enabled)
@@ -53,7 +53,7 @@ unclutter -idle 1 -root &
 xsetroot -solid black
 
 # Start IPTV player
-cd /home/jeremy/pi
+cd /home/jeremy/gtv
 python3 iptv_smart_player.py
 EOF
 
@@ -81,5 +81,5 @@ echo ""
 echo "4. Reboot to test:"
 echo "   sudo reboot"
 echo ""
-echo "📋 Manual clone command (update YOUR_USERNAME):"
-echo "git clone https://github.com/YOUR_USERNAME/grannytv-client.git $PI_PATH"
+echo "📋 Manual clone command:"
+echo "git clone https://github.com/gljeremy/grannytv-client.git $PI_PATH"

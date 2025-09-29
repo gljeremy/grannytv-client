@@ -107,13 +107,13 @@ if (-not $PushOnly) {
     
     # Run update script on Pi
     Write-Step "Running update script on Pi..."
-    ssh "${PiUser}@${PiHost}" "cd /home/jeremy/pi && ./pi-update.sh"
+    ssh "${PiUser}@${PiHost}" "cd /home/jeremy/gtv && ./pi-update.sh"
     
     if ($LASTEXITCODE -eq 0) {
         Write-Success "Deployment complete!"
         Write-Host ""
         Write-Host "🎯 Useful commands:" -ForegroundColor Cyan
-        Write-Host "   Check logs: ssh ${PiUser}@${PiHost} 'tail -f ~/pi/iptv_player.log'"
+        Write-Host "   Check logs: ssh ${PiUser}@${PiHost} 'tail -f ~/gtv/iptv_player.log'"
         Write-Host "   Check status: ssh ${PiUser}@${PiHost} 'sudo systemctl status iptv-player'"
         Write-Host "   Restart: ssh ${PiUser}@${PiHost} 'sudo systemctl restart iptv-player'"
     } else {

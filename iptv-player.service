@@ -7,16 +7,16 @@ Wants=graphical-session.target
 Type=simple
 User=jeremy
 Group=jeremy
-WorkingDirectory=/home/jeremy/pi
-ExecStart=/usr/bin/python3 /home/jeremy/pi/iptv_smart_player.py
+WorkingDirectory=/home/jeremy/gtv
+ExecStart=/usr/bin/python3 /home/jeremy/gtv/iptv_smart_player.py
 Restart=always
 RestartSec=10
 Environment=DISPLAY=:0
 Environment=HOME=/home/jeremy
 
 # Logging
-StandardOutput=append:/home/jeremy/pi/iptv_service.log
-StandardError=append:/home/jeremy/pi/iptv_service.log
+StandardOutput=append:/home/jeremy/gtv/iptv_service.log
+StandardError=append:/home/jeremy/gtv/iptv_service.log
 
 [Install]
 WantedBy=graphical-session.target

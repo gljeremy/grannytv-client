@@ -2,8 +2,8 @@
 # Auto-deployment script for Raspberry Pi
 # Run this script on your Pi to pull latest changes from GitHub
 
-PI_PATH="/home/jeremy/pi"
-REPO_URL="https://github.com/YOUR_USERNAME/grannytv-client.git"  # ⚠️  UPDATE THIS!
+PI_PATH="/home/jeremy/gtv"
+REPO_URL="https://github.com/gljeremy/grannytv-client.git"
 SERVICE_NAME="iptv-player"
 BRANCH="main"
 

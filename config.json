@@ -14,9 +14,9 @@
     },
     "production": {
         "platform": "raspberry_pi",
-        "base_path": "/home/jeremy/pi",
-        "log_file": "/home/jeremy/pi/iptv_player.log",
-        "working_streams_file": "/home/jeremy/pi/working_streams.json",
+        "base_path": "/home/jeremy/gtv",
+        "log_file": "/home/jeremy/gtv/iptv_player.log",
+        "working_streams_file": "/home/jeremy/gtv/working_streams.json",
         "use_vlc": true,
         "test_mode": false,
         "display": {

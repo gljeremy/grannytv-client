@@ -16,8 +16,8 @@
    curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/grannytv-client/main/pi-setup.sh | bash
    
    # Then clone your repository
-   cd /home/jeremy/pi
-   git clone https://github.com/YOUR_USERNAME/grannytv-client.git .
+   cd /home/jeremy/gtv
+   git clone https://github.com/gljeremy/grannytv-client.git .
    ```
 
 ### Daily Development Workflow
@@ -31,7 +31,7 @@
 .\git-deploy.ps1 -Message "Fixed stream selection bug"
 
 # 4. Check Pi remotely
-ssh jeremy@raspberrypi.local "tail -f ~/pi/iptv_player.log"
+ssh jeremy@raspberrypi.local "tail -f ~/gtv/iptv_player.log"
 ```
 
 ### Quick Commands

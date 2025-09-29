@@ -2,7 +2,7 @@
 param(
     [string]$PiHost = "raspberrypi.local",  # or use IP address
     [string]$PiUser = "jeremy",
-    [string]$PiPath = "/home/jeremy/pi"
+    [string]$PiPath = "/home/jeremy/gtv"
 )
 
 Write-Host "🚀 Deploying IPTV Player to Raspberry Pi..." -ForegroundColor Green
