@@ -104,10 +104,16 @@ class SmartIPTVPlayer:
         # Setup audio (only on Pi)
         if self.config['display']['setup_audio']:
             try:
+                # Force HDMI audio output (numid=3: 0=auto, 1=headphones, 2=HDMI)
                 subprocess.run(['sudo', 'amixer', 'cset', 'numid=3', '2'], check=False)
-                subprocess.run(['amixer', 'set', 'Master', '80%', 'unmute'], check=False)
-                logging.info("🔊 Audio configured")
+                # Set reasonable volume
+                subprocess.run(['amixer', 'set', 'Master', '90%', 'unmute'], check=False)
+                # Also try PCM channel
+                subprocess.run(['amixer', 'set', 'PCM', '90%', 'unmute'], check=False, 
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                logging.info("🔊 Audio configured (HDMI output, 90% volume)")
             except Exception:
+                logging.warning("⚠️ Audio setup failed - check alsa-utils installation")
                 pass
         
         # Setup display (only on Pi)
@@ -146,8 +152,8 @@ class SmartIPTVPlayer:
         matching_streams.sort(key=lambda x: x['score'], reverse=True)
         return matching_streams[:limit]
 
-    def launch_mplayer(self, stream_data, env):
-        """Launch MPlayer with a working stream"""
+    def launch_video_player(self, stream_data, env):
+        """Launch video player with a working stream - tries VLC first, then mplayer"""
         try:
             stream_url = stream_data['url']
             stream_name = stream_data['name']
@@ -157,9 +163,73 @@ class SmartIPTVPlayer:
             logging.info(f"📂 Group: {stream_data['group']}")
             
             # Kill existing players
+            subprocess.run(['pkill', '-9', '-f', 'vlc'], check=False)
             subprocess.run(['pkill', '-9', '-f', 'mplayer'], check=False)
-            time.sleep(2)
+            subprocess.run(['pkill', '-9', '-f', 'omxplayer'], check=False)
+            time.sleep(3)
             
+            # Try VLC first (most reliable on Pi)
+            if self.try_vlc_player(stream_url, env):
+                return True
+            
+            # Fall back to mplayer
+            logging.warning("VLC failed, trying mplayer...")
+            return self.try_mplayer(stream_url, env)
+            
+        except Exception as e:
+            logging.error(f"Launch failed: {e}")
+            return False
+
+    def try_vlc_player(self, stream_url, env):
+        """Try to launch VLC player"""
+        try:
+            # VLC command optimized for Raspberry Pi
+            cmd = [
+                'vlc',
+                '--intf', 'dummy',              # No interface
+                '--fullscreen',                 # Full screen
+                '--no-video-title-show',        # Don't show title
+                '--video-on-top',              # Keep video on top
+                '--no-audio-display',          # Don't show audio info
+                '--network-caching=2000',      # Network buffer
+                '--http-user-agent', 'Mozilla/5.0 (compatible; Smart-IPTV-Player/1.0)',
+                stream_url
+            ]
+            
+            env['DISPLAY'] = ':0'
+            
+            self.current_process = subprocess.Popen(
+                cmd,
+                env=env,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                preexec_fn=os.setsid
+            )
+            
+            self.current_stream = stream_url
+            
+            # Monitor startup
+            logging.info("🔄 Monitoring VLC startup...")
+            for i in range(15):
+                if self.current_process.poll() is not None:
+                    logging.warning(f"❌ VLC failed to start (exit code: {self.current_process.returncode})")
+                    return False
+                
+                time.sleep(1)
+                if i % 5 == 0:
+                    logging.info(f"   VLC startup check {i+1}/15...")
+            
+            logging.info(f"✅ SUCCESS! VLC playing stream (PID: {self.current_process.pid})")
+            logging.info("🎬 You should now see and hear video!")
+            return True
+            
+        except Exception as e:
+            logging.error(f"VLC launch failed: {e}")
+            return False
+
+    def try_mplayer(self, stream_url, env):
+        """Try to launch mplayer as fallback"""
+        try:
             # MPlayer command with working configuration
             cmd = [
                 'mplayer',
@@ -183,20 +253,20 @@ class SmartIPTVPlayer:
                 preexec_fn=os.setsid
             )
             
-            self.current_stream = stream_name
+            self.current_stream = stream_url
             
             # Monitor startup
-            logging.info("🔄 Monitoring startup...")
+            logging.info("🔄 Monitoring mplayer startup...")
             for i in range(20):
                 if self.current_process.poll() is not None:
-                    logging.warning(f"❌ Stream failed to start (exit code: {self.current_process.returncode})")
+                    logging.warning(f"❌ mplayer failed to start (exit code: {self.current_process.returncode})")
                     return False
                 
                 time.sleep(1)
                 if i % 5 == 0:
-                    logging.info(f"   Startup check {i+1}/20...")
+                    logging.info(f"   mplayer startup check {i+1}/20...")
             
-            logging.info(f"✅ SUCCESS! Playing: {stream_name} (PID: {self.current_process.pid})")
+            logging.info(f"✅ SUCCESS! mplayer playing stream (PID: {self.current_process.pid})")
             logging.info("🎬 You should now see and hear video!")
             return True
                 
@@ -219,7 +289,7 @@ class SmartIPTVPlayer:
         for i, stream in enumerate(streams):
             logging.info(f"🎯 Attempt {i+1}/{len(streams)}: {stream['name']}")
             
-            if self.launch_mplayer(stream, env):
+            if self.launch_video_player(stream, env):
                 return True
             else:
                 logging.warning(f"❌ Failed: {stream['name']}")
@@ -276,7 +346,7 @@ class SmartIPTVPlayer:
                     'group': 'Local'
                 }
                 
-                if self.launch_mplayer(backup_data, env):
+                if self.launch_video_player(backup_data, env):
                     success = True
                     break
         

@@ -21,7 +21,14 @@
         "test_mode": false,
         "display": {
             "setup_display": true,
-            "setup_audio": true
+            "setup_audio": true,
+            "force_hdmi_audio": true,
+            "gpu_memory_split": 128
+        },
+        "video": {
+            "prefer_vlc": true,
+            "fullscreen": true,
+            "hardware_acceleration": true
         },
         "player_command": "vlc --intf dummy --play-and-exit --no-video-title-show --fullscreen"
     }
