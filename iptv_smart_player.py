@@ -165,6 +165,13 @@ class SmartIPTVPlayer:
     def launch_vlc(self, stream_url, env):
         """Launch VLC with optimal settings for Raspberry Pi"""
         try:
+            # Check VLC availability
+            try:
+                vlc_version = subprocess.run(['vlc', '--version'], capture_output=True, text=True, timeout=5)
+                logging.info(f"   VLC Version: {vlc_version.stdout.split()[2] if vlc_version.stdout else 'Unknown'}")
+            except Exception:
+                logging.warning("   Could not determine VLC version")
+            
             # Detect video output method
             has_x11 = os.environ.get('DISPLAY') and self.check_x11_available()
             
@@ -172,18 +179,18 @@ class SmartIPTVPlayer:
             if has_x11:
                 logging.info("[DISPLAY] X11 detected - using desktop mode")
                 vlc_configs = [
-                    # Best for desktop/X11
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-video-title-show', '--aout', 'alsa'],
-                    # Alternative X11 config
-                    ['vlc', '--intf', 'dummy', '--vout', 'x11', '--fullscreen', '--aout', 'alsa'],
+                    # Stable X11 config for Pi
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-video-title-show', '--no-osd', '--aout', 'alsa', '--vout', 'x11'],
+                    # Alternative with different video output
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'gl'],
                 ]
             else:
                 logging.info("[DISPLAY] No X11 - trying framebuffer/console modes")
                 vlc_configs = [
-                    # Framebuffer output
-                    ['vlc', '--intf', 'dummy', '--vout', 'fb', '--aout', 'alsa'],
+                    # Framebuffer output with stable options
+                    ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', '--no-osd'],
                     # Console output (ASCII art but with audio)
-                    ['vlc', '--intf', 'dummy', '--vout', 'caca', '--aout', 'alsa'],
+                    ['vlc', '--intf', 'dummy', '--vout', 'caca', '--aout', 'alsa', '--no-osd'],
                 ]
             
             # Try each configuration
@@ -191,6 +198,10 @@ class SmartIPTVPlayer:
                 cmd = base_cmd + [
                     '--network-caching=3000',
                     '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
+                    '--no-video-title-show',
+                    '--quiet',
+                    '--no-snapshot-preview',
+                    '--disable-screensaver',
                     stream_url
                 ]
                 
@@ -199,6 +210,10 @@ class SmartIPTVPlayer:
                 
                 if self._start_vlc_process(cmd, env, config_name):
                     return True
+                
+                # Add delay between attempts to prevent rapid cycling
+                logging.info("   Waiting 3 seconds before next config...")
+                time.sleep(3)
             
             logging.error("[FAIL] All VLC configurations failed")
             return False
@@ -212,29 +227,58 @@ class SmartIPTVPlayer:
         try:
             env['DISPLAY'] = ':0'
             
+            # Log the exact command being run for debugging
+            logging.info(f"   Executing: {' '.join(cmd)}")
+            
+            # For debugging, capture stderr to see VLC errors
             self.current_process = subprocess.Popen(
                 cmd,
                 env=env,
                 stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                preexec_fn=os.setsid
+                stderr=subprocess.PIPE,
+                preexec_fn=os.setsid,
+                text=True
             )
             
             self.current_stream = cmd[-1]  # URL is the last argument
             
-            # Monitor startup
+            # Monitor startup with better crash detection
             logging.info(f"[LOADING] Monitoring VLC {config_name} startup...")
-            for i in range(15):  # 15 second timeout
+            
+            # Wait a bit for VLC to initialize
+            time.sleep(2)
+            
+            # Check if VLC crashed immediately
+            if self.current_process.poll() is not None:
+                # Try to get error output
+                try:
+                    _, stderr_output = self.current_process.communicate(timeout=1)
+                    if stderr_output.strip():
+                        logging.error(f"   VLC Error: {stderr_output.strip()[:200]}")
+                except Exception:
+                    pass
+                logging.warning(f"[FAIL] VLC {config_name} crashed immediately (exit code: {self.current_process.returncode})")
+                return False
+            
+            # Monitor for 10 more seconds to ensure stability
+            for i in range(10):
                 if self.current_process.poll() is not None:
-                    logging.warning(f"[FAIL] VLC {config_name} failed (exit code: {self.current_process.returncode})")
+                    # Try to get error output for crashes during monitoring
+                    try:
+                        _, stderr_output = self.current_process.communicate(timeout=0.5)
+                        if stderr_output.strip():
+                            logging.error(f"   VLC Error: {stderr_output.strip()[:200]}")
+                    except Exception:
+                        pass
+                    logging.warning(f"[FAIL] VLC {config_name} crashed after {i+2} seconds (exit code: {self.current_process.returncode})")
                     return False
                 
                 time.sleep(1)
-                if i % 5 == 0:
-                    logging.info(f"   VLC {config_name} check {i+1}/15...")
+                if i % 3 == 0:
+                    logging.info(f"   VLC {config_name} stability check {i+3}/12 seconds...")
             
-            logging.info(f"[OK] SUCCESS! VLC {config_name} started (PID: {self.current_process.pid})")
-            logging.info("[VIDEO] VLC should now be playing video with audio!")
+            logging.info(f"[OK] SUCCESS! VLC {config_name} stable (PID: {self.current_process.pid})")
+            logging.info("[VIDEO] VLC playing video with audio - process is stable!")
             return True
             
         except Exception as e:
@@ -300,6 +344,8 @@ class SmartIPTVPlayer:
         
         logging.info(f"Found {len(streams)} {category_name} streams, trying best ones...")
         
+        failed_attempts = 0
+        
         for i, stream in enumerate(streams):
             logging.info(f"[ATTEMPT] Attempt {i+1}/{len(streams)}: {stream['name']}")
             
@@ -307,7 +353,17 @@ class SmartIPTVPlayer:
                 return True
             else:
                 logging.warning(f"[FAIL] Failed: {stream['name']}")
-                time.sleep(2)
+                failed_attempts += 1
+                
+                # Increase delay after multiple failures to prevent rapid cycling
+                if failed_attempts <= 3:
+                    time.sleep(2)
+                elif failed_attempts <= 6:
+                    logging.info("   Multiple failures - waiting 5 seconds...")
+                    time.sleep(5)
+                else:
+                    logging.info("   Many failures - waiting 10 seconds...")
+                    time.sleep(10)
         
         logging.warning(f"All {category_name} streams failed")
         return False
