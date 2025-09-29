@@ -61,7 +61,8 @@ export DISPLAY=:0
 unclutter -idle 1 -root &
 xsetroot -solid black
 cd /home/jeremy/gtv
-exec python3 iptv_smart_player.py
+source venv/bin/activate
+exec python iptv_smart_player.py
 EOF
         chmod +x ~/.xinitrc
         
@@ -83,7 +84,8 @@ EOF
 # Auto-start IPTV Player (framebuffer mode)
 if [ -t 1 ] && [ "$(tty)" = "/dev/tty1" ] && [ -z "$DISPLAY" ]; then
     cd /home/jeremy/gtv
-    python3 iptv_smart_player.py
+    source venv/bin/activate
+    python iptv_smart_player.py
 fi
 EOF
         fi

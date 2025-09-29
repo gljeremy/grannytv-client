@@ -28,10 +28,20 @@ else
     git reset --hard origin/$BRANCH
 fi
 
+# Setup Python virtual environment
+if [ ! -d "venv" ]; then
+    echo "🐍 Creating Python virtual environment..."
+    python3 -m venv venv
+fi
+
+echo "🐍 Activating virtual environment..."
+source venv/bin/activate
+
 # Install/update dependencies if needed
 if [ -f "requirements.txt" ]; then
     echo "📦 Installing Python dependencies..."
-    pip3 install --user -r requirements.txt
+    pip install --upgrade pip
+    pip install -r requirements.txt
 fi
 
 # Make scripts executable
@@ -56,9 +66,9 @@ if systemctl list-unit-files | grep -q "$SERVICE_NAME"; then
     sleep 2
     sudo systemctl status "$SERVICE_NAME" --no-pager -l
 else
-    echo "🚀 Starting player manually..."
+    echo "🚀 Starting player manually with virtual environment..."
     echo "💡 To install as service: sudo cp iptv-player.service /etc/systemd/system/ && sudo systemctl enable iptv-player"
-    nohup python3 iptv_smart_player.py > iptv_player.log 2>&1 &
+    nohup ./venv/bin/python iptv_smart_player.py > iptv_player.log 2>&1 &
     echo "Process started in background. Check iptv_player.log for output."
 fi
 

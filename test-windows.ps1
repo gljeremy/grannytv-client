@@ -6,6 +6,17 @@ param(
 
 Write-Host "🧪 Testing IPTV Player on Windows..." -ForegroundColor Green
 
+# Check if virtual environment exists
+if (-not (Test-Path "venv\Scripts\python.exe")) {
+    Write-Host "❌ Virtual environment not found!" -ForegroundColor Red
+    Write-Host "💡 Run: .\setup-venv.ps1" -ForegroundColor Yellow
+    exit 1
+}
+
+# Activate virtual environment
+Write-Host "🐍 Activating virtual environment..." -ForegroundColor Yellow
+& "venv\Scripts\Activate.ps1"
+
 # Set environment for development
 $env:IPTV_ENV = "development"
 
@@ -14,9 +25,9 @@ if ($TestMode) {
     
     # Start the player in background
     $job = Start-Job -ScriptBlock {
-        param($scriptPath)
-        python $scriptPath
-    } -ArgumentList "$PWD\iptv_smart_player.py"
+        param($scriptPath, $venvPath)
+        & "$venvPath\Scripts\python.exe" $scriptPath
+    } -ArgumentList "$PWD\iptv_smart_player.py", "$PWD\venv"
     
     # Wait for specified duration
     Start-Sleep -Seconds $Duration

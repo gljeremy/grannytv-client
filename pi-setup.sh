@@ -20,9 +20,9 @@ sudo apt install -y \
     xinit \
     alsa-utils
 
-# Install Python packages
-echo "🐍 Installing Python packages..."
-pip3 install --user requests psutil
+# Install Python packages and venv
+echo "🐍 Installing Python and virtual environment support..."
+sudo apt install -y python3-pip python3-venv
 
 # Create project directory
 PI_PATH="/home/jeremy/gtv"
@@ -54,7 +54,8 @@ xsetroot -solid black
 
 # Start IPTV player
 cd /home/jeremy/gtv
-python3 iptv_smart_player.py
+source venv/bin/activate
+python iptv_smart_player.py
 EOF
 
 chmod +x /home/jeremy/.xinitrc

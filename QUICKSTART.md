@@ -40,7 +40,7 @@ git push -u origin main
 curl -sSL https://raw.githubusercontent.com/gljeremy/grannytv-client/main/pi-setup.sh | bash
 cd /home/jeremy/gtv
 git clone https://github.com/gljeremy/grannytv-client.git .
-./pi-update.sh
+./pi-update.sh  # This will create venv and install dependencies
 ```
 
 **Option B: Manual setup:**
@@ -74,6 +74,12 @@ sudo systemctl start iptv-player
 ## Daily Development Commands
 
 ```powershell
+# First time setup (creates virtual environment):
+.\setup-venv.ps1
+
+# Test locally:
+.\test-windows.ps1 -TestMode -Duration 60
+
 # Quick deploy after making changes:
 .\git-deploy.ps1
 

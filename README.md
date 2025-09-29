@@ -14,15 +14,18 @@ An IPTV player designed for elderly users - just plug in the Raspberry Pi and wa
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/grannytv-client.git
+git clone https://github.com/gljeremy/grannytv-client.git
 cd grannytv-client
 ```
 
-2. Install dependencies:
+2. Install dependencies and setup virtual environment:
 ```bash
 sudo apt update
-sudo apt install python3-pip vlc
-pip3 install --user -r requirements.txt
+sudo apt install python3-pip python3-venv vlc
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
 3. Set up auto-deployment:

@@ -23,14 +23,17 @@
 ### Daily Development Workflow
 
 ```powershell
-# 1. Make your changes in VS Code on Windows
-# 2. Test locally (optional)
+# 1. Setup virtual environment (first time only)
+.\setup-venv.ps1
+
+# 2. Make your changes in VS Code on Windows
+# 3. Test locally (optional)
 .\test-windows.ps1 -TestMode -Duration 60
 
-# 3. Deploy to Pi (commits, pushes, and deploys in one command)
+# 4. Deploy to Pi (commits, pushes, and deploys in one command)
 .\git-deploy.ps1 -Message "Fixed stream selection bug"
 
-# 4. Check Pi remotely
+# 5. Check Pi remotely
 ssh jeremy@raspberrypi.local "tail -f ~/gtv/iptv_player.log"
 ```
 

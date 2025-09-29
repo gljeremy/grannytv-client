@@ -51,4 +51,5 @@ amixer set Master 90% unmute >/dev/null 2>&1
 # Start IPTV player
 echo "📺 Starting IPTV Player..."
 cd /home/jeremy/gtv
-python3 iptv_smart_player.py
+source venv/bin/activate
+python iptv_smart_player.py
