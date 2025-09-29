@@ -67,6 +67,15 @@ class SmartIPTVPlayer:
         logging.info(f"🔧 Running in {self.config['platform']} mode")
         self.load_working_streams()
 
+    def check_x11_available(self):
+        """Check if X11 is available"""
+        try:
+            subprocess.run(['xset', 'q'], check=True, 
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            return False
+
     def load_working_streams(self):
         """Load working streams from local database"""
         try:
@@ -183,18 +192,37 @@ class SmartIPTVPlayer:
     def try_vlc_player(self, stream_url, env):
         """Try to launch VLC player"""
         try:
-            # VLC command optimized for Raspberry Pi
-            cmd = [
-                'vlc',
-                '--intf', 'dummy',              # No interface
-                '--fullscreen',                 # Full screen
-                '--no-video-title-show',        # Don't show title
-                '--video-on-top',              # Keep video on top
-                '--no-audio-display',          # Don't show audio info
-                '--network-caching=2000',      # Network buffer
-                '--http-user-agent', 'Mozilla/5.0 (compatible; Smart-IPTV-Player/1.0)',
-                stream_url
-            ]
+            # Check if X11 is available
+            has_x11 = os.environ.get('DISPLAY') and self.check_x11_available()
+            
+            if has_x11:
+                # VLC command for X11 environment
+                cmd = [
+                    'vlc',
+                    '--intf', 'dummy',              # No interface
+                    '--fullscreen',                 # Full screen
+                    '--no-video-title-show',        # Don't show title
+                    '--video-on-top',              # Keep video on top
+                    '--no-audio-display',          # Don't show audio info
+                    '--network-caching=2000',      # Network buffer
+                    '--http-user-agent', 'Mozilla/5.0 (compatible; Smart-IPTV-Player/1.0)',
+                    stream_url
+                ]
+            else:
+                # VLC command for framebuffer (headless) environment
+                logging.info("🖥️ No X11 detected, using framebuffer output")
+                cmd = [
+                    'vlc',
+                    '--intf', 'dummy',              # No interface
+                    '--vout', 'fb',                 # Framebuffer video output
+                    '--aout', 'alsa',              # ALSA audio output
+                    '--fullscreen',                 # Full screen
+                    '--no-video-title-show',        # Don't show title
+                    '--no-audio-display',          # Don't show audio info
+                    '--network-caching=2000',      # Network buffer
+                    '--http-user-agent', 'Mozilla/5.0 (compatible; Smart-IPTV-Player/1.0)',
+                    stream_url
+                ]
             
             env['DISPLAY'] = ':0'
             
