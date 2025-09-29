@@ -56,13 +56,28 @@ git push origin main
 ./pi-update.sh
 ```
 
-## Files
+## Documentation
+
+📖 **[Copilot Instructions](COPILOT_INSTRUCTIONS.md)** - Comprehensive project context for AI assistants  
+⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Common commands and quick fixes  
+🔧 **[Troubleshooting Guide](TROUBLESHOOTING.md)** - Step-by-step problem solving  
+🚀 **[Development Workflow](DEVELOPMENT.md)** - Git-based development process  
+📋 **[Quick Start Guide](QUICKSTART.md)** - First-time setup instructions  
+
+## Key Files
 
 - `iptv_smart_player.py` - Main application
-- `working_streams.json` - Database of working streams
+- `working_streams.json` - Database of working streams (3000+ tested)
 - `config.json` - Environment configuration
 - `pi-update.sh` - Auto-update script for Pi
 - `iptv-player.service` - Systemd service for auto-start
+- `git-deploy.ps1` - Windows deployment script
+
+## Project Goals
+
+🎯 **For Elderly Users**: Plug-and-play TV experience, zero technical knowledge required  
+🔧 **For Caregivers**: Remote monitoring, easy updates, reliable 24/7 operation  
+🖥️ **System Design**: Raspberry Pi → HDMI TV, auto-start on boot, graceful failure handling  
 
 ## License
 
