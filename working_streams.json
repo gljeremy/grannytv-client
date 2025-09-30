@@ -1,11 +1,11 @@
 {
-  "https://scbhls.wns.live/hls/stream.m3u8": {
-    "url": "https://scbhls.wns.live/hls/stream.m3u8",
-    "name": "Classic TV",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60f85644a9493e0007a1f035/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c271cb6-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=90e515e4-694d-47f7-9f2b-806f0a05d62c": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60f85644a9493e0007a1f035/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c271cb6-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=90e515e4-694d-47f7-9f2b-806f0a05d62c",
+    "name": "Black Classics",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:14.669112",
-    "last_working": "2025-09-29T18:50:14.669139",
-    "test_duration": 1.1541247367858887,
+    "last_tested": "2025-09-30T10:55:17.377202",
+    "last_working": "2025-09-30T10:55:17.377212",
+    "test_duration": 6.0066237449646,
     "test_results": {
       "network": true,
       "http": true,
@@ -19,9 +19,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/61325d18f5166c00081b84e0/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c280710-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=0a788361-db81-4dff-80d0-0f1f0f20dfd7",
     "name": "Classic TV: Families",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:15.206161",
-    "last_working": "2025-09-29T18:50:15.206170",
-    "test_duration": 1.6897249221801758,
+    "last_tested": "2025-09-30T10:55:17.378116",
+    "last_working": "2025-09-30T10:55:17.378124",
+    "test_duration": 3.6469149589538574,
     "test_results": {
       "network": true,
       "http": true,
@@ -31,13 +31,13 @@
     },
     "stream_type": "hls"
   },
-  "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8": {
-    "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-classic/manifest.m3u8",
-    "name": "Bollywood Classic",
-    "group": "Classic;Movies",
-    "last_tested": "2025-09-29T18:50:15.213822",
-    "last_working": "2025-09-29T18:50:15.213831",
-    "test_duration": 1.7009522914886475,
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f15e3cccf49290007053c67/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e006-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bd2170f5-59fe-491d-9d0a-b13b10a8f54e": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f15e3cccf49290007053c67/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e006-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bd2170f5-59fe-491d-9d0a-b13b10a8f54e",
+    "name": "Classic TV Drama",
+    "group": "Classic",
+    "last_tested": "2025-09-30T10:55:17.379328",
+    "last_working": "2025-09-30T10:55:17.379336",
+    "test_duration": 3.7197556495666504,
     "test_results": {
       "network": true,
       "http": true,
@@ -51,201 +51,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f7796e470510900070d4e3d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c271cb4-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=69bf4a83-189f-4b22-bbe6-f2e09a47e049",
     "name": "Beverly Hillbillies",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:17.172308",
-    "last_working": "2025-09-29T18:50:17.172316",
-    "test_duration": 3.661196708679199,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://acesso.ecast.site:3070/live/awtvlive.m3u8": {
-    "url": "https://acesso.ecast.site:3070/live/awtvlive.m3u8",
-    "name": "AWTV (1080p)",
-    "group": "Classic;Series",
-    "last_tested": "2025-09-29T18:50:17.180053",
-    "last_working": "2025-09-29T18:50:17.180061",
-    "test_duration": 3.6706979274749756,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/655ca3d1fbc15b00081f1186/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e4e13-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=157cb33e-83b4-4ce8-ab8f-4d9585e6e0dd": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/655ca3d1fbc15b00081f1186/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e4e13-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=157cb33e-83b4-4ce8-ab8f-4d9585e6e0dd",
-    "name": "Love Boat",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:18.186317",
-    "last_working": "2025-09-29T18:50:18.186329",
-    "test_duration": 2.977254629135132,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e9145ec07f2a00070e68dc/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c2967-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=fbed224a-3b63-4abd-b7a5-8676931b8711": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e9145ec07f2a00070e68dc/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c2967-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=fbed224a-3b63-4abd-b7a5-8676931b8711",
-    "name": "The Andy Griffith Show",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:19.179109",
-    "last_working": "2025-09-29T18:50:19.179121",
-    "test_duration": 0.9882915019989014,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://acceso.radiosportstv.online:3259/live/retroxtvlive.m3u8": {
-    "url": "https://acceso.radiosportstv.online:3259/live/retroxtvlive.m3u8",
-    "name": "Retrox TV (720p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:20.242039",
-    "last_working": "2025-09-29T18:50:20.242051",
-    "test_duration": 3.0599658489227295,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist.m3u8": {
-    "url": "https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist.m3u8",
-    "name": "Dubai Zaman (1080p) [Not 24/7]",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:20.401686",
-    "last_working": "2025-09-29T18:50:20.401695",
-    "test_duration": 5.731543064117432,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://sirius.greenhosting.ru/Pro100tvRu/video.m3u8": {
-    "url": "https://sirius.greenhosting.ru/Pro100tvRu/video.m3u8",
-    "name": "Pro100TV",
-    "group": "Animation;Classic;Entertainment;Family;Movies",
-    "last_tested": "2025-09-29T18:50:21.182155",
-    "last_working": "2025-09-29T18:50:21.182167",
-    "test_duration": 4.008861064910889,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e91c8933682c000754fc45/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c5072-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7d85b7eb-3d33-422e-9445-9473e1d0d141": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e91c8933682c000754fc45/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c5072-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7d85b7eb-3d33-422e-9445-9473e1d0d141",
-    "name": "The Carol Burnett Show",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:21.205933",
-    "last_working": "2025-09-29T18:50:21.205943",
-    "test_duration": 2.0247085094451904,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvsmystery/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsmystery/index.m3u8",
-    "name": "TVS Cipher Network (360p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:26.422298",
-    "last_working": "2025-09-29T18:50:26.422308",
-    "test_duration": 6.177825927734375,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvsclassicmovies/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsclassicmovies/index.m3u8",
-    "name": "TVS Classic Movies (288p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:28.205769",
-    "last_working": "2025-09-29T18:50:28.205781",
-    "test_duration": 7.803144454956055,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvsmainst/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsmainst/index.m3u8",
-    "name": "TVS Mainstreet (360p) [Not 24/7]",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:28.285975",
-    "last_working": "2025-09-29T18:50:28.285988",
-    "test_duration": 7.078954219818115,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvshollywoohistory/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvshollywoohistory/index.m3u8",
-    "name": "TVS Hollywood History (582p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:29.184420",
-    "last_working": "2025-09-29T18:50:29.184429",
-    "test_duration": 8.001132726669312,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvsNostalgiaMovies/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsNostalgiaMovies/index.m3u8",
-    "name": "TVS Nostalgia Movies (480p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:30.172045",
-    "last_working": "2025-09-29T18:50:30.172055",
-    "test_duration": 1.9652435779571533,
+    "last_tested": "2025-09-30T10:55:17.380397",
+    "last_working": "2025-09-30T10:55:17.380404",
+    "test_duration": 6.011935472488403,
     "test_results": {
       "network": true,
       "http": true,
@@ -259,9 +67,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5de802659167b10009e7deba/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=",
     "name": "Pluto TV Series Retro (720p)",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:30.367004",
-    "last_working": "2025-09-29T18:50:30.367013",
-    "test_duration": 15.15124773979187,
+    "last_tested": "2025-09-30T10:55:19.197773",
+    "last_working": "2025-09-30T10:55:19.197782",
+    "test_duration": 1.8141992092132568,
     "test_results": {
       "network": true,
       "http": true,
@@ -271,13 +79,13 @@
     },
     "stream_type": "hls"
   },
-  "https://rpn.bozztv.com/gusa/gusa-tvsgameshow/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsgameshow/index.m3u8",
-    "name": "TVS Quiz Show Network (720p)",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/655ca3d1fbc15b00081f1186/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e4e13-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=157cb33e-83b4-4ce8-ab8f-4d9585e6e0dd": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/655ca3d1fbc15b00081f1186/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e4e13-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=157cb33e-83b4-4ce8-ab8f-4d9585e6e0dd",
+    "name": "Love Boat",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:31.141443",
-    "last_working": "2025-09-29T18:50:31.141451",
-    "test_duration": 1.9559564590454102,
+    "last_tested": "2025-09-30T10:55:19.223336",
+    "last_working": "2025-09-30T10:55:19.223345",
+    "test_duration": 1.8408539295196533,
     "test_results": {
       "network": true,
       "http": true,
@@ -287,13 +95,13 @@
     },
     "stream_type": "hls"
   },
-  "https://rpn.bozztv.com/gusa/gusa-petparadenetwork/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-petparadenetwork/index.m3u8",
-    "name": "TVS Pet Parade Network (360p)",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e9145ec07f2a00070e68dc/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c2967-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=fbed224a-3b63-4abd-b7a5-8676931b8711": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e9145ec07f2a00070e68dc/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c2967-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=fbed224a-3b63-4abd-b7a5-8676931b8711",
+    "name": "The Andy Griffith Show",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:32.234479",
-    "last_working": "2025-09-29T18:50:32.234491",
-    "test_duration": 3.9465534687042236,
+    "last_tested": "2025-09-30T10:55:25.237103",
+    "last_working": "2025-09-30T10:55:25.237113",
+    "test_duration": 2.083683490753174,
     "test_results": {
       "network": true,
       "http": true,
@@ -303,109 +111,13 @@
     },
     "stream_type": "hls"
   },
-  "https://cdn.streamhispanatv.net:3531/live/tvsretrogtlive.m3u8": {
-    "url": "https://cdn.streamhispanatv.net:3531/live/tvsretrogtlive.m3u8",
-    "name": "TVS Retro (720p)",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e91c8933682c000754fc45/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c5072-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7d85b7eb-3d33-422e-9445-9473e1d0d141": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e91c8933682c000754fc45/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7c5072-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7d85b7eb-3d33-422e-9445-9473e1d0d141",
+    "name": "The Carol Burnett Show",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:32.242517",
-    "last_working": "2025-09-29T18:50:32.242529",
-    "test_duration": 2.0693347454071045,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-nostalgia/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-nostalgia/index.m3u8",
-    "name": "TVS Nostalgia (472p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:33.287419",
-    "last_working": "2025-09-29T18:50:33.287432",
-    "test_duration": 6.864015579223633,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvstallyho/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvstallyho/index.m3u8",
-    "name": "TVS Tally Ho (360p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:34.097029",
-    "last_working": "2025-09-29T18:50:34.097070",
-    "test_duration": 2.9545133113861084,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8": {
-    "url": "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8",
-    "name": "Xtrema Cine Clasico",
-    "group": "Classic;Movies",
-    "last_tested": "2025-09-29T18:50:35.222802",
-    "last_working": "2025-09-29T18:50:35.222812",
-    "test_duration": 1.124189853668213,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvswesternmovies/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvswesternmovies/index.m3u8",
-    "name": "TVS Western Movie (270p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:35.223141",
-    "last_working": "2025-09-29T18:50:35.223149",
-    "test_duration": 2.9785242080688477,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tavern/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tavern/index.m3u8",
-    "name": "TVS Tavern (480p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:35.232245",
-    "last_working": "2025-09-29T18:50:35.232254",
-    "test_duration": 2.99554181098938,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-TVStalk/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-TVStalk/index.m3u8",
-    "name": "TVS Talk Network (360p)",
-    "group": "Classic",
-    "last_tested": "2025-09-29T18:50:35.344452",
-    "last_working": "2025-09-29T18:50:35.344463",
-    "test_duration": 4.976412773132324,
+    "last_tested": "2025-09-30T10:55:27.247387",
+    "last_working": "2025-09-30T10:55:27.247395",
+    "test_duration": 2.0092785358428955,
     "test_results": {
       "network": true,
       "http": true,
@@ -419,41 +131,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5e8df4bc16e34700077e77d3/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2d102a-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=b2ed67fd-7088-4b5b-bf24-daa30ff6efdc",
     "name": "Western TV",
     "group": "Classic",
-    "last_tested": "2025-09-29T18:50:36.142329",
-    "last_working": "2025-09-29T18:50:36.142338",
-    "test_duration": 2.8522822856903076,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://server.zillarbarta.com/ZBCINEMA/index.m3u8": {
-    "url": "https://server.zillarbarta.com/ZBCINEMA/index.m3u8",
-    "name": "ZB Cinema (720p)",
-    "group": "Classic;Movies",
-    "last_tested": "2025-09-29T18:50:42.317398",
-    "last_working": "2025-09-29T18:50:42.317406",
-    "test_duration": 7.0924952030181885,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d86f519358a00072b978e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c265961-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=71f86833-3dd6-41ac-a9b8-4a4ec8873306": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d86f519358a00072b978e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c265961-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=71f86833-3dd6-41ac-a9b8-4a4ec8873306",
-    "name": "90s Throwback",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:48.166971",
-    "last_working": "2025-09-29T18:50:48.166983",
-    "test_duration": 2.0511226654052734,
+    "last_tested": "2025-09-30T10:55:35.288510",
+    "last_working": "2025-09-30T10:55:35.288519",
+    "test_duration": 1.6318347454071045,
     "test_results": {
       "network": true,
       "http": true,
@@ -467,25 +147,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ca525b650be2571e3943c63/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c263253-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=b52c759c-a26c-4e65-828b-14277d6117e0",
     "name": "80s Rewind",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:50:48.229041",
-    "last_working": "2025-09-29T18:50:48.229052",
-    "test_duration": 2.1135289669036865,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145.m3u8": {
-    "url": "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145.m3u8",
-    "name": "24 Hour Free Movies (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:48.242894",
-    "last_working": "2025-09-29T18:50:48.242903",
-    "test_duration": 2.1347949504852295,
+    "last_tested": "2025-09-30T10:55:49.283921",
+    "last_working": "2025-09-30T10:55:49.283931",
+    "test_duration": 1.310589075088501,
     "test_results": {
       "network": true,
       "http": true,
@@ -499,41 +163,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d878d3d19b30007d2e782/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c263252-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7c57f1f3-2078-4f92-a4b5-6cd444220a70",
     "name": "70s Cinema",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:50:48.251517",
-    "last_working": "2025-09-29T18:50:48.251527",
-    "test_duration": 2.1365394592285156,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://30a-tv.com/feeds/pzaz/30atvmovies.m3u8": {
-    "url": "https://30a-tv.com/feeds/pzaz/30atvmovies.m3u8",
-    "name": "30A TV Classic Movies",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:49.207635",
-    "last_working": "2025-09-29T18:50:49.207644",
-    "test_duration": 3.0937747955322266,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://amg01117-amg01117c1-amgplt0165.playout.now3.amagi.tv/playlist.m3u8": {
-    "url": "https://amg01117-amg01117c1-amgplt0165.playout.now3.amagi.tv/playlist.m3u8",
-    "name": "&TV (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:50.184275",
-    "last_working": "2025-09-29T18:50:50.184283",
-    "test_duration": 1.9508991241455078,
+    "last_tested": "2025-09-30T10:55:50.260553",
+    "last_working": "2025-09-30T10:55:50.260562",
+    "test_duration": 2.2877490520477295,
     "test_results": {
       "network": true,
       "http": true,
@@ -547,41 +179,9 @@
     "url": "https://mediaserver.abnvideos.com/streams/abnbiblemovies.m3u8",
     "name": "ABN Bible Movies (720p)",
     "group": "Movies;Religious",
-    "last_tested": "2025-09-29T18:50:50.190301",
-    "last_working": "2025-09-29T18:50:50.190308",
-    "test_duration": 1.9441370964050293,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/db8d4eca72d64748a00d0631debf542d/index.m3u8": {
-    "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/db8d4eca72d64748a00d0631debf542d/index.m3u8",
-    "name": "Abzy Movies (480p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:51.520080",
-    "last_working": "2025-09-29T18:50:51.520089",
-    "test_duration": 2.3114585876464844,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://d2lk5u59tns74c.cloudfront.net/out/v1/4fe6ab07a13543d6bdb2ec63b3e2df44/index.m3u8": {
-    "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/4fe6ab07a13543d6bdb2ec63b3e2df44/index.m3u8",
-    "name": "Abzy Dhakad (480p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:52.331725",
-    "last_working": "2025-09-29T18:50:52.331734",
-    "test_duration": 4.0791175365448,
+    "last_tested": "2025-09-30T10:55:55.146006",
+    "last_working": "2025-09-30T10:55:55.146014",
+    "test_duration": 1.1030020713806152,
     "test_results": {
       "network": true,
       "http": true,
@@ -595,121 +195,9 @@
     "url": "http://actionlive.siliconweb.com/actionabr/actiontv/playlist.m3u8",
     "name": "Action 24 (1080p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:50:52.377197",
-    "last_working": "2025-09-29T18:50:52.377207",
-    "test_duration": 2.1919326782226562,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://afrafhls.wns.live/hls/stream.m3u8": {
-    "url": "https://afrafhls.wns.live/hls/stream.m3u8",
-    "name": "Afra Film",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:54.180984",
-    "last_working": "2025-09-29T18:50:54.180993",
-    "test_duration": 2.657726287841797,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.relentlessinnovations.net:1936/afghannobel/afghannobel/playlist.m3u8": {
-    "url": "https://live.relentlessinnovations.net:1936/afghannobel/afghannobel/playlist.m3u8",
-    "name": "Afghan Nobel Movies (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:54.209768",
-    "last_working": "2025-09-29T18:50:54.209777",
-    "test_duration": 4.018460273742676,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://176.126.166.43:1935/live/312kino/playlist.m3u8": {
-    "url": "http://176.126.166.43:1935/live/312kino/playlist.m3u8",
-    "name": "312 Кино (406p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:54.621340",
-    "last_working": "2025-09-29T18:50:54.621348",
-    "test_duration": 6.453142166137695,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://107.167.7.162:8081/playlist/amhor/playlist.m3u8": {
-    "url": "http://107.167.7.162:8081/playlist/amhor/playlist.m3u8",
-    "name": "American Horrors (480p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:56.171884",
-    "last_working": "2025-09-29T18:50:56.171892",
-    "test_duration": 1.9870836734771729,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn.streamhispanatv.net:3417/live/auroramflive.m3u8": {
-    "url": "https://cdn.streamhispanatv.net:3417/live/auroramflive.m3u8",
-    "name": "Aurora Media Films (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:56.179253",
-    "last_working": "2025-09-29T18:50:56.179260",
-    "test_duration": 1.5569326877593994,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://alternatv.ar/stream/hls/live.m3u8": {
-    "url": "https://alternatv.ar/stream/hls/live.m3u8",
-    "name": "Alterna TV (720p)",
-    "group": "Culture;Documentary;Entertainment;General;Movies;Music",
-    "last_tested": "2025-09-29T18:50:56.407625",
-    "last_working": "2025-09-29T18:50:56.407633",
-    "test_duration": 4.072627067565918,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cors.tundracast.com:2000/https://streamer1.nexgen.bz/AMC/index.m3u8": {
-    "url": "http://cors.tundracast.com:2000/https://streamer1.nexgen.bz/AMC/index.m3u8",
-    "name": "AMC",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:57.108109",
-    "last_working": "2025-09-29T18:50:57.108118",
-    "test_duration": 4.7298424243927,
+    "last_tested": "2025-09-30T10:55:58.158213",
+    "last_working": "2025-09-30T10:55:58.158223",
+    "test_duration": 2.575488567352295,
     "test_results": {
       "network": true,
       "http": true,
@@ -723,73 +211,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/58af4c093a41ca9d4ecabe96/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c271cb5-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=93605d96-6c9d-457d-a2b4-d26d07474db9",
     "name": "Black Cinema",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:50:58.171314",
-    "last_working": "2025-09-29T18:50:58.171323",
-    "test_duration": 1.0612950325012207,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8": {
-    "url": "https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8",
-    "name": "B4U Bhojpuri (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:58.487215",
-    "last_working": "2025-09-29T18:50:58.487224",
-    "test_duration": 2.3142154216766357,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdnb4u.wiseplayout.com/B4U_Kadak/master.m3u8": {
-    "url": "https://cdnb4u.wiseplayout.com/B4U_Kadak/master.m3u8",
-    "name": "B4U Kadak (1080p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:50:59.370103",
-    "last_working": "2025-09-29T18:50:59.370111",
-    "test_duration": 3.189923048019409,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8": {
-    "url": "https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8",
-    "name": "Bhojpuri Cinema (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:00.041704",
-    "last_working": "2025-09-29T18:51:00.041713",
-    "test_duration": 3.6321804523468018,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/manifest.m3u8": {
-    "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/manifest.m3u8",
-    "name": "Bollywood HD",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:00.254025",
-    "last_working": "2025-09-29T18:51:00.254034",
-    "test_duration": 2.0806281566619873,
+    "last_tested": "2025-09-30T10:56:09.344527",
+    "last_working": "2025-09-30T10:56:09.344537",
+    "test_duration": 1.5281760692596436,
     "test_results": {
       "network": true,
       "http": true,
@@ -803,9 +227,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5d8d164d92e97a5e107638d2/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&app_name=&architecture=&buildVersion=&deviceDNT=0&deviceId=5d8d164d92e97a5e107638d2&deviceLat=&deviceLon=&deviceMake=web&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&marketingRegion=US&serverSideAds=false&sid=904&terminate=false&userId=",
     "name": "Cine Adrenalina (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:00.254425",
-    "last_working": "2025-09-29T18:51:00.254436",
-    "test_duration": 1.7608098983764648,
+    "last_tested": "2025-09-30T10:56:17.213336",
+    "last_working": "2025-09-30T10:56:17.213345",
+    "test_duration": 1.919297456741333,
     "test_results": {
       "network": true,
       "http": true,
@@ -819,9 +243,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/64b9671cdac71b0008f371df/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27b8f8-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=28fb2aae-fcc1-4b39-a190-1ac70222ae41",
     "name": "Cine Clásico",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:01.160511",
-    "last_working": "2025-09-29T18:51:01.160519",
-    "test_duration": 1.7893712520599365,
+    "last_tested": "2025-09-30T10:56:18.338062",
+    "last_working": "2025-09-30T10:56:18.338071",
+    "test_duration": 1.7111001014709473,
     "test_results": {
       "network": true,
       "http": true,
@@ -835,57 +259,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5cf968040ab7d8f181e6a68b/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
     "name": "Cine Premiere (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:01.363895",
-    "last_working": "2025-09-29T18:51:01.363904",
-    "test_duration": 1.3208789825439453,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5d8d180092e97a5e107638d3/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e001-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0a34186-d9cb-4907-882c-bf61e4d59e0f": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5d8d180092e97a5e107638d3/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e001-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0a34186-d9cb-4907-882c-bf61e4d59e0f",
-    "name": "Cine Terror",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:02.164826",
-    "last_working": "2025-09-29T18:51:02.164835",
-    "test_duration": 1.9069054126739502,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://a-cdn.klowdtv.com/live1/cine_720p/playlist.m3u8": {
-    "url": "https://a-cdn.klowdtv.com/live1/cine_720p/playlist.m3u8",
-    "name": "Cine Sony (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:02.387284",
-    "last_working": "2025-09-29T18:51:02.387292",
-    "test_duration": 2.130674362182617,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/asianetmovieshd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/asianetmovieshd/master.m3u8",
-    "name": "Asianet Movies HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:02.777572",
-    "last_working": "2025-09-29T18:51:02.777580",
-    "test_duration": 8.56670880317688,
+    "last_tested": "2025-09-30T10:56:19.179739",
+    "last_working": "2025-09-30T10:56:19.179751",
+    "test_duration": 1.965324878692627,
     "test_results": {
       "network": true,
       "http": true,
@@ -899,9 +275,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f5136317aedfb0007016f93/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e002-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=308fd9dd-2f8a-441f-b59d-e02f4b0aacd7",
     "name": "Cine XOXO",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:03.201032",
-    "last_working": "2025-09-29T18:51:03.201046",
-    "test_duration": 2.0395498275756836,
+    "last_tested": "2025-09-30T10:56:21.210028",
+    "last_working": "2025-09-30T10:56:21.210037",
+    "test_duration": 1.9755370616912842,
     "test_results": {
       "network": true,
       "http": true,
@@ -911,29 +287,13 @@
     },
     "stream_type": "hls"
   },
-  "https://cors-proxy.cooks.fyi/https://streamer1.nexgen.bz/CINECANAL/index.m3u8": {
-    "url": "https://cors-proxy.cooks.fyi/https://streamer1.nexgen.bz/CINECANAL/index.m3u8",
-    "name": "Cinecanal",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5d8d180092e97a5e107638d3/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e001-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0a34186-d9cb-4907-882c-bf61e4d59e0f": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5d8d180092e97a5e107638d3/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e001-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0a34186-d9cb-4907-882c-bf61e4d59e0f",
+    "name": "Cine Terror",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:03.582234",
-    "last_working": "2025-09-29T18:51:03.582247",
-    "test_duration": 2.217348575592041,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-classiccinema/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-classiccinema/index.m3u8",
-    "name": "Classic Cinema (240p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:04.184502",
-    "last_working": "2025-09-29T18:51:04.184511",
-    "test_duration": 1.4029741287231445,
+    "last_tested": "2025-09-30T10:56:23.205174",
+    "last_working": "2025-09-30T10:56:23.205183",
+    "test_duration": 4.024332523345947,
     "test_results": {
       "network": true,
       "http": true,
@@ -947,233 +307,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/561c5b0dada51f8004c4d855/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c27e003-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7911819c-67eb-4f58-944f-5c6c6d4d937d",
     "name": "Classic Movies Channel",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:05.193769",
-    "last_working": "2025-09-29T18:51:05.193795",
-    "test_duration": 1.9915452003479004,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stmv1.srvif.com/classique/classique/playlist.m3u8": {
-    "url": "https://stmv1.srvif.com/classique/classique/playlist.m3u8",
-    "name": "Classique TV (360p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:05.202332",
-    "last_working": "2025-09-29T18:51:05.202340",
-    "test_duration": 1.6189076900482178,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://catchup.videoline.ru/cinema/playlist.m3u8": {
-    "url": "http://catchup.videoline.ru/cinema/playlist.m3u8",
-    "name": "Cinema",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:06.738230",
-    "last_working": "2025-09-29T18:51:06.738238",
-    "test_duration": 4.3498711585998535,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn4.skygo.mn/live/disk1/CinemaTV/HLSv3-FTA/CinemaTV.m3u8": {
-    "url": "https://cdn4.skygo.mn/live/disk1/CinemaTV/HLSv3-FTA/CinemaTV.m3u8",
-    "name": "Cinema",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:07.624947",
-    "last_working": "2025-09-29T18:51:07.624957",
-    "test_duration": 5.459262847900391,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://tv.mediacp.eu:19360/cosmos/cosmos.m3u8": {
-    "url": "https://tv.mediacp.eu:19360/cosmos/cosmos.m3u8",
-    "name": "Cosmos TV (720p)",
-    "group": "Movies;News",
-    "last_tested": "2025-09-29T18:51:09.139708",
-    "last_working": "2025-09-29T18:51:09.139717",
-    "test_duration": 2.4004781246185303,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexSuperhit/JCHLS/index.m3u8": {
-    "url": "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexSuperhit/JCHLS/index.m3u8",
-    "name": "Colors Cineplex Superhits (576p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:12.136860",
-    "last_working": "2025-09-29T18:51:12.136869",
-    "test_duration": 6.933502197265625,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexBollywood/JCHLS/index.m3u8": {
-    "url": "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexBollywood/JCHLS/index.m3u8",
-    "name": "Colors Cineplex Bollywood (576p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:12.644674",
-    "last_working": "2025-09-29T18:51:12.644683",
-    "test_duration": 7.449908256530762,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/ebstv/ebscinema/index.m3u8": {
-    "url": "https://rpn.bozztv.com/ebstv/ebscinema/index.m3u8",
-    "name": "EBS Cinema (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:14.176152",
-    "last_working": "2025-09-29T18:51:14.176164",
-    "test_duration": 2.038362979888916,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/EkranMovies/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/EkranMovies/index-0.m3u8",
-    "name": "Ekran Movies",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:14.213957",
-    "last_working": "2025-09-29T18:51:14.213965",
-    "test_duration": 1.568160057067871,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://movies.ctbperth.net.au/hls/stream.m3u8": {
-    "url": "https://movies.ctbperth.net.au/hls/stream.m3u8",
-    "name": "CTB Perth Movies (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:14.214332",
-    "last_working": "2025-09-29T18:51:14.214340",
-    "test_duration": 6.57868504524231,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexHD/JCHLS/index.m3u8": {
-    "url": "https://nonprod-sports-cohort.jiocinema.com/bpk-tv/JC_ColorsCineplexHD/JCHLS/index.m3u8",
-    "name": "Colors Cineplex (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:15.838062",
-    "last_working": "2025-09-29T18:51:15.838072",
-    "test_duration": 11.652523756027222,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://livetv-fa.tubi.video/forensic-files/index.m3u8": {
-    "url": "https://livetv-fa.tubi.video/forensic-files/index.m3u8",
-    "name": "Filmrise Forensic Files (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:17.158595",
-    "last_working": "2025-09-29T18:51:17.158604",
-    "test_duration": 1.3189334869384766,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://unifi-live05.secureswiftcontent.com/UnifiHD/live27-1080FHD.m3u8": {
-    "url": "https://unifi-live05.secureswiftcontent.com/UnifiHD/live27-1080FHD.m3u8",
-    "name": "Dunia Sinema (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:17.202307",
-    "last_working": "2025-09-29T18:51:17.202316",
-    "test_duration": 8.057855606079102,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://livetv-fa.tubi.video/filmrise-true-crime/index.m3u8": {
-    "url": "https://livetv-fa.tubi.video/filmrise-true-crime/index.m3u8",
-    "name": "Filmrise True Crime (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:18.201855",
-    "last_working": "2025-09-29T18:51:18.201864",
-    "test_duration": 1.0422046184539795,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://viamotionhsi.netplus.ch/live/eds/film4/browser-HLS8/film4.m3u8": {
-    "url": "https://viamotionhsi.netplus.ch/live/eds/film4/browser-HLS8/film4.m3u8",
-    "name": "Film4 HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:18.620656",
-    "last_working": "2025-09-29T18:51:18.620665",
-    "test_duration": 4.404206037521362,
+    "last_tested": "2025-09-30T10:56:25.354596",
+    "last_working": "2025-09-30T10:56:25.354606",
+    "test_duration": 1.6219854354858398,
     "test_results": {
       "network": true,
       "http": true,
@@ -1187,153 +323,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/58e55b14ad8e9c364d55f717/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c28ca66-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=671a0e89-5b21-406b-95a9-b395c4ef4b07",
     "name": "Flicks of Fury",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:19.172027",
-    "last_working": "2025-09-29T18:51:19.172035",
-    "test_duration": 1.9686975479125977,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemdramaplus/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemdramaplus/index-0.m3u8",
-    "name": "GEM Drama Plus",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:20.438327",
-    "last_working": "2025-09-29T18:51:20.438336",
-    "test_duration": 1.8136086463928223,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemonyx/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemonyx/index-0.m3u8",
-    "name": "GEM Onyx",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:21.177549",
-    "last_working": "2025-09-29T18:51:21.177557",
-    "test_duration": 2.0032598972320557,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://d1q7j6ha51ro6f.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_CINEMA_H264-3_cloud_in/index.m3u8": {
-    "url": "https://d1q7j6ha51ro6f.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_CINEMA_H264-3_cloud_in/index.m3u8",
-    "name": "ETV Cinema HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:21.627360",
-    "last_working": "2025-09-29T18:51:21.627368",
-    "test_duration": 7.450126886367798,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://tvpass.org/live/FXMovieChannel/hd": {
-    "url": "https://tvpass.org/live/FXMovieChannel/hd",
-    "name": "FX Movie Channel (720p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:21.637936",
-    "last_working": "2025-09-29T18:51:21.637951",
-    "test_duration": 3.4327385425567627,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "unknown"
-  },
-  "https://glserver1.tamashaland.com/live/aBCH96886YznRbGOiqTnnQ__/stream_0.m3u8": {
-    "url": "https://glserver1.tamashaland.com/live/aBCH96886YznRbGOiqTnnQ__/stream_0.m3u8",
-    "name": "GEM Pixel",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:22.280551",
-    "last_working": "2025-09-29T18:51:22.280560",
-    "test_duration": 1.8411905765533447,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://epiconvh.akamaized.net/live/filamchi/master.m3u8": {
-    "url": "https://epiconvh.akamaized.net/live/filamchi/master.m3u8",
-    "name": "Filamchi Bhojpuri (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:22.649469",
-    "last_working": "2025-09-29T18:51:22.649477",
-    "test_duration": 8.433293342590332,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemrubixplus/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemrubixplus/index-0.m3u8",
-    "name": "GEM Rubix Plus",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:23.174497",
-    "last_working": "2025-09-29T18:51:23.174506",
-    "test_duration": 1.546051025390625,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemrubix/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/gemrubix/index-0.m3u8",
-    "name": "GEM Rubix",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:23.187110",
-    "last_working": "2025-09-29T18:51:23.187119",
-    "test_duration": 2.0084874629974365,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://moviethls.wns.live/hls/stream.m3u8": {
-    "url": "https://moviethls.wns.live/hls/stream.m3u8",
-    "name": "Gold Star",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:24.306383",
-    "last_working": "2025-09-29T18:51:24.306392",
-    "test_duration": 2.665361166000366,
+    "last_tested": "2025-09-30T10:56:36.260373",
+    "last_working": "2025-09-30T10:56:36.260381",
+    "test_duration": 1.5422217845916748,
     "test_results": {
       "network": true,
       "http": true,
@@ -1347,25 +339,9 @@
     "url": "https://amg01753-narrativeuk-amg01753c3-lg-gb-1833.playouts.now.amagi.tv/playlist/amg01753-narrativeuk-greatmovies-lggb/playlist.m3u8",
     "name": "GREAT! movies (1080p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:24.531661",
-    "last_working": "2025-09-29T18:51:24.531688",
-    "test_duration": 1.8811628818511963,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://gcinemahls.wns.live/hls/stream.m3u8": {
-    "url": "https://gcinemahls.wns.live/hls/stream.m3u8",
-    "name": "Grand Cinema",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:25.199562",
-    "last_working": "2025-09-29T18:51:25.199571",
-    "test_duration": 2.9171111583709717,
+    "last_tested": "2025-09-30T10:56:47.357851",
+    "last_working": "2025-09-30T10:56:47.357861",
+    "test_duration": 2.239429235458374,
     "test_results": {
       "network": true,
       "http": true,
@@ -1379,9 +355,9 @@
     "url": "https://amg01753-narrativeuk-amg01753c2-lg-gb-1832.playouts.now.amagi.tv/playlist/amg01753-narrativeuk-greatchristmas-lggb/playlist.m3u8",
     "name": "GREAT! romance (1080p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:25.475393",
-    "last_working": "2025-09-29T18:51:25.475402",
-    "test_duration": 2.29902982711792,
+    "last_tested": "2025-09-30T10:56:49.301721",
+    "last_working": "2025-09-30T10:56:49.301730",
+    "test_duration": 2.2474098205566406,
     "test_results": {
       "network": true,
       "http": true,
@@ -1395,153 +371,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/628e685ba3811100070551a8/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c291886-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=58dbb587-5d0d-412d-ae10-107ee9caac5a",
     "name": "Hallmark Movies & More",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:27.142681",
-    "last_working": "2025-09-29T18:51:27.142689",
-    "test_duration": 2.835145950317383,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://homeplushls.wns.live/hls/stream.m3u8": {
-    "url": "https://homeplushls.wns.live/hls/stream.m3u8",
-    "name": "Home Plus",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:27.305984",
-    "last_working": "2025-09-29T18:51:27.305995",
-    "test_duration": 2.7682993412017822,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://icchls.wns.live/hls/stream.m3u8": {
-    "url": "https://icchls.wns.live/hls/stream.m3u8",
-    "name": "ICC Plus (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:28.153004",
-    "last_working": "2025-09-29T18:51:28.153013",
-    "test_duration": 2.9524450302124023,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://web.onair-radio.eu:1935/groovytv/groovytv/playlist.m3u8": {
-    "url": "http://web.onair-radio.eu:1935/groovytv/groovytv/playlist.m3u8",
-    "name": "Groovy TV (360p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:28.176149",
-    "last_working": "2025-09-29T18:51:28.176162",
-    "test_duration": 4.988102197647095,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://tvpass.org/live/IFCEast/hd": {
-    "url": "https://tvpass.org/live/IFCEast/hd",
-    "name": "IFC East (720p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:30.169321",
-    "last_working": "2025-09-29T18:51:30.169329",
-    "test_duration": 4.6927809715271,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "unknown"
-  },
-  "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_011/Stream/playlist.m3u8": {
-    "url": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_011/Stream/playlist.m3u8",
-    "name": "Itage TV",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:31.135509",
-    "last_working": "2025-09-29T18:51:31.135517",
-    "test_duration": 2.958281993865967,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8": {
-    "url": "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8",
-    "name": "Indywood TV (720p)",
-    "group": "Movies;News",
-    "last_tested": "2025-09-29T18:51:31.684626",
-    "last_working": "2025-09-29T18:51:31.684635",
-    "test_duration": 3.530433177947998,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.presstv.ir/hls/ifilm2.m3u8": {
-    "url": "https://live.presstv.ir/hls/ifilm2.m3u8",
-    "name": "iFilm 2",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:31.780524",
-    "last_working": "2025-09-29T18:51:31.780533",
-    "test_duration": 4.636801481246948,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.presstv.ir/hls/ifilmen.m3u8": {
-    "url": "https://live.presstv.ir/hls/ifilmen.m3u8",
-    "name": "iFilm English",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:31.883585",
-    "last_working": "2025-09-29T18:51:31.883594",
-    "test_duration": 4.576534271240234,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://sirius.greenhosting.ru/Kino24Ru/video.m3u8": {
-    "url": "http://sirius.greenhosting.ru/Kino24Ru/video.m3u8",
-    "name": "Kino 24",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:34.468972",
-    "last_working": "2025-09-29T18:51:34.468980",
-    "test_duration": 2.781406879425049,
+    "last_tested": "2025-09-30T10:56:51.169640",
+    "last_working": "2025-09-30T10:56:51.169652",
+    "test_duration": 1.8661344051361084,
     "test_results": {
       "network": true,
       "http": true,
@@ -1555,9 +387,9 @@
     "url": "http://83.167.253.107/hdmi1_ext",
     "name": "Kino Barrandov (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:36.995884",
-    "last_working": "2025-09-29T18:51:36.995891",
-    "test_duration": 5.214324474334717,
+    "last_tested": "2025-09-30T10:57:10.777369",
+    "last_working": "2025-09-30T10:57:10.777377",
+    "test_duration": 4.735205411911011,
     "test_results": {
       "network": true,
       "http": true,
@@ -1566,190 +398,14 @@
       "vlc": true
     },
     "stream_type": "unknown"
-  },
-  "http://tv.cootel.com.kh:8077/streams/d/Komsan/playlist.m3u8": {
-    "url": "http://tv.cootel.com.kh:8077/streams/d/Komsan/playlist.m3u8",
-    "name": "Komsan TV [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:38.427856",
-    "last_working": "2025-09-29T18:51:38.427865",
-    "test_duration": 6.53837776184082,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://ktvhdsg.ekantipur.com:8443/ktvmax2025/match1/playlist.m3u8": {
-    "url": "https://ktvhdsg.ekantipur.com:8443/ktvmax2025/match1/playlist.m3u8",
-    "name": "Kantipur Max",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:38.910478",
-    "last_working": "2025-09-29T18:51:38.910486",
-    "test_duration": 7.770135879516602,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8": {
-    "url": "https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8",
-    "name": "Kuriakos Cine (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:40.236838",
-    "last_working": "2025-09-29T18:51:40.236846",
-    "test_duration": 5.766894102096558,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://hls.maahtv.live/hls/stream.m3u8": {
-    "url": "https://hls.maahtv.live/hls/stream.m3u8",
-    "name": "Maah TV (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:41.225304",
-    "last_working": "2025-09-29T18:51:41.225313",
-    "test_duration": 2.795294761657715,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://lenz.splus.ir/PLTV/88888888/224/3221227021/index.m3u8": {
-    "url": "https://lenz.splus.ir/PLTV/88888888/224/3221227021/index.m3u8",
-    "name": "Lenz Film",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:42.180510",
-    "last_working": "2025-09-29T18:51:42.180518",
-    "test_duration": 5.183778524398804,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://maverick-maverick-black-cinema-3-us.roku.wurl.tv/playlist.m3u8": {
-    "url": "https://maverick-maverick-black-cinema-3-us.roku.wurl.tv/playlist.m3u8",
-    "name": "Maverick Black Cinema (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:42.206338",
-    "last_working": "2025-09-29T18:51:42.206346",
-    "test_duration": 0.9798488616943359,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://tgn.bozztv.com/eshgtv-trn09/ga-mchannel2/index.m3u8": {
-    "url": "https://tgn.bozztv.com/eshgtv-trn09/ga-mchannel2/index.m3u8",
-    "name": "MBC 2",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:44.152985",
-    "last_working": "2025-09-29T18:51:44.152995",
-    "test_duration": 1.945434808731079,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn-1.pishow.tv/live/1011/master.m3u8": {
-    "url": "https://cdn-1.pishow.tv/live/1011/master.m3u8",
-    "name": "Manoranjan Grand (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:44.407043",
-    "last_working": "2025-09-29T18:51:44.407066",
-    "test_duration": 5.493750095367432,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn-2.pishow.tv/live/228/master.m3u8": {
-    "url": "https://cdn-2.pishow.tv/live/228/master.m3u8",
-    "name": "Manoranjan Movies (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:45.735424",
-    "last_working": "2025-09-29T18:51:45.735431",
-    "test_duration": 5.497759580612183,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8": {
-    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8",
-    "name": "MBC+ Drama (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:46.194089",
-    "last_working": "2025-09-29T18:51:46.194103",
-    "test_duration": 2.0401318073272705,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://video.ejeserver.com/live/mcitelevision.m3u8": {
-    "url": "https://video.ejeserver.com/live/mcitelevision.m3u8",
-    "name": "MCI Television",
-    "group": "Family;General;Movies",
-    "last_tested": "2025-09-29T18:51:46.215483",
-    "last_working": "2025-09-29T18:51:46.215497",
-    "test_duration": 1.807206630706787,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
   },
   "http://213.57.91.138:8000/play/a05k": {
     "url": "http://213.57.91.138:8000/play/a05k",
     "name": "MBC 2 (576p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:47.027690",
-    "last_working": "2025-09-29T18:51:47.027699",
-    "test_duration": 4.845109462738037,
+    "last_tested": "2025-09-30T10:57:28.921645",
+    "last_working": "2025-09-30T10:57:28.921654",
+    "test_duration": 6.135284662246704,
     "test_results": {
       "network": true,
       "http": true,
@@ -1759,45 +415,13 @@
     },
     "stream_type": "unknown"
   },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e7524-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9855fa27-eb7c-4e5a-852e-4c439515c25d": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e7524-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9855fa27-eb7c-4e5a-852e-4c439515c25d",
-    "name": "MOVIEDOME",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:48.210284",
-    "last_working": "2025-09-29T18:51:48.210293",
-    "test_duration": 1.990344762802124,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://metafilmhls.wns.live/hls/stream.m3u8": {
-    "url": "https://metafilmhls.wns.live/hls/stream.m3u8",
-    "name": "Meta Film TV",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:48.212937",
-    "last_working": "2025-09-29T18:51:48.212944",
-    "test_duration": 2.590888261795044,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
   "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84addd31-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5bdf8fde-2533-4c16-b518-58e9777e93ca": {
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84addd31-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5bdf8fde-2533-4c16-b518-58e9777e93ca",
     "name": "MOVIEDOME",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:49.147781",
-    "last_working": "2025-09-29T18:51:49.147791",
-    "test_duration": 2.1188721656799316,
+    "last_tested": "2025-09-30T10:57:31.158194",
+    "last_working": "2025-09-30T10:57:31.158205",
+    "test_duration": 2.1372294425964355,
     "test_results": {
       "network": true,
       "http": true,
@@ -1807,45 +431,13 @@
     },
     "stream_type": "hls"
   },
-  "https://v2.catcast.tv/content/44051/index.m3u8": {
-    "url": "https://v2.catcast.tv/content/44051/index.m3u8",
-    "name": "MGM HD [Not 24/7]",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e7524-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9855fa27-eb7c-4e5a-852e-4c439515c25d": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/615c1e5ce3039400070a0547/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1e7524-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9855fa27-eb7c-4e5a-852e-4c439515c25d",
+    "name": "MOVIEDOME",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:50.179754",
-    "last_working": "2025-09-29T18:51:50.179764",
-    "test_duration": 4.443371772766113,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://dvrfl03.bozztv.com/hdirect/hdirect-ovair1-movies!/index.m3u8": {
-    "url": "https://dvrfl03.bozztv.com/hdirect/hdirect-ovair1-movies!/index.m3u8",
-    "name": "Movies!",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:50.193358",
-    "last_working": "2025-09-29T18:51:50.193367",
-    "test_duration": 1.9785518646240234,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://mytime-tcl.amagi.tv/playlist.m3u8": {
-    "url": "https://mytime-tcl.amagi.tv/playlist.m3u8",
-    "name": "MyTime Movie Network",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:50.293914",
-    "last_working": "2025-09-29T18:51:50.293922",
-    "test_duration": 1.1436054706573486,
+    "last_tested": "2025-09-30T10:57:32.173306",
+    "last_working": "2025-09-30T10:57:32.173316",
+    "test_duration": 3.2505435943603516,
     "test_results": {
       "network": true,
       "http": true,
@@ -1859,9 +451,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/645e7828e1979c00087b75b4/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2a02e5-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6ee42393-c7a0-4d1d-82c7-0121c35ec03e",
     "name": "MovieSphere by Lionsgate",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:50.295307",
-    "last_working": "2025-09-29T18:51:50.295314",
-    "test_duration": 2.0777292251586914,
+    "last_tested": "2025-09-30T10:57:35.164430",
+    "last_working": "2025-09-30T10:57:35.164440",
+    "test_duration": 1.857987880706787,
     "test_results": {
       "network": true,
       "http": true,
@@ -1871,13 +463,13 @@
     },
     "stream_type": "hls"
   },
-  "https://appletree-mytime-samsungmexico.amagi.tv/playlist.m3u8": {
-    "url": "https://appletree-mytime-samsungmexico.amagi.tv/playlist.m3u8",
-    "name": "MyTime Movie Network Mexico (720p)",
+  "https://mytime-tcl.amagi.tv/playlist.m3u8": {
+    "url": "https://mytime-tcl.amagi.tv/playlist.m3u8",
+    "name": "MyTime Movie Network",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:51.160112",
-    "last_working": "2025-09-29T18:51:51.160121",
-    "test_duration": 0.979149580001831,
+    "last_tested": "2025-09-30T10:57:36.172327",
+    "last_working": "2025-09-30T10:57:36.172336",
+    "test_duration": 1.6867382526397705,
     "test_results": {
       "network": true,
       "http": true,
@@ -1887,13 +479,13 @@
     },
     "stream_type": "hls"
   },
-  "https://cdn4.skygo.mn/live/disk1/Moviebox/HLSv3-FTA/Moviebox.m3u8": {
-    "url": "https://cdn4.skygo.mn/live/disk1/Moviebox/HLSv3-FTA/Moviebox.m3u8",
-    "name": "MovieBox (720p)",
+  "http://playhdnewjj.xyz:8080/recc121412/KVqfhtdJ2nQ7/174": {
+    "url": "http://playhdnewjj.xyz:8080/recc121412/KVqfhtdJ2nQ7/174",
+    "name": "MovieSmart Turk (576p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:51.656957",
-    "last_working": "2025-09-29T18:51:51.656965",
-    "test_duration": 5.458360195159912,
+    "last_tested": "2025-09-30T10:57:37.345079",
+    "last_working": "2025-09-30T10:57:37.345088",
+    "test_duration": 4.367218732833862,
     "test_results": {
       "network": true,
       "http": true,
@@ -1901,63 +493,15 @@
       "mplayer": false,
       "vlc": true
     },
-    "stream_type": "hls"
-  },
-  "https://appletree-mytimespain-rakuten.amagi.tv/playlist.m3u8": {
-    "url": "https://appletree-mytimespain-rakuten.amagi.tv/playlist.m3u8",
-    "name": "MyTime movie network Spain (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:52.136588",
-    "last_working": "2025-09-29T18:51:52.136596",
-    "test_duration": 1.942126989364624,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://newfhls.wns.live/hls/stream.m3u8": {
-    "url": "https://newfhls.wns.live/hls/stream.m3u8",
-    "name": "Newflix",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:53.192885",
-    "last_working": "2025-09-29T18:51:53.192894",
-    "test_duration": 2.8943605422973633,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8": {
-    "url": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8",
-    "name": "Next HD (480p)",
-    "group": "Movies;Music",
-    "last_tested": "2025-09-29T18:51:53.196979",
-    "last_working": "2025-09-29T18:51:53.196987",
-    "test_duration": 2.0357940196990967,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
+    "stream_type": "unknown"
   },
   "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5cb0cae7a461406ffe3f5213/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2a7819-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=8a4a0712-cb24-4d05-b429-1b98c1f73f74": {
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5cb0cae7a461406ffe3f5213/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2a7819-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=8a4a0712-cb24-4d05-b429-1b98c1f73f74",
     "name": "Paramount Movie Channel",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:54.152708",
-    "last_working": "2025-09-29T18:51:54.152716",
-    "test_duration": 2.013174057006836,
+    "last_tested": "2025-09-30T10:57:42.146170",
+    "last_working": "2025-09-30T10:57:42.146178",
+    "test_duration": 1.899097204208374,
     "test_results": {
       "network": true,
       "http": true,
@@ -1971,9 +515,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ff8c708653d080007361b14/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2a9f20-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=86df5336-6268-4928-9b7d-3af618ca807b",
     "name": "Paramount+ Picks",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:55.183724",
-    "last_working": "2025-09-29T18:51:55.183735",
-    "test_duration": 1.9887850284576416,
+    "last_tested": "2025-09-30T10:57:44.164906",
+    "last_working": "2025-09-30T10:57:44.164917",
+    "test_duration": 1.8519163131713867,
     "test_results": {
       "network": true,
       "http": true,
@@ -1987,9 +531,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60fb2f47c133270007327375/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2a9f24-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=8f7b47b7-a2d8-4c61-847a-02818046001b",
     "name": "Pelis y Popcorn",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:55.236656",
-    "last_working": "2025-09-29T18:51:55.236664",
-    "test_duration": 2.038773536682129,
+    "last_tested": "2025-09-30T10:57:44.369169",
+    "last_working": "2025-09-30T10:57:44.369179",
+    "test_duration": 1.3010954856872559,
     "test_results": {
       "network": true,
       "http": true,
@@ -2003,57 +547,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/561d7d484dc7c8770484914a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2ac632-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9bd2e9c0-393b-484b-b5bc-b1869a276513",
     "name": "Pluto TV Action",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:55.237622",
-    "last_working": "2025-09-29T18:51:55.237629",
-    "test_duration": 1.0838897228240967,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://eu1.vectromdigital.com:1936/netvtoronto/netvtoronto/playlist.m3u8": {
-    "url": "https://eu1.vectromdigital.com:1936/netvtoronto/netvtoronto/playlist.m3u8",
-    "name": "NETV Toronto (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:56.938536",
-    "last_working": "2025-09-29T18:51:56.938545",
-    "test_duration": 6.641436338424683,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed1ff5c39700007e2204a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055171-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c3b67254-4628-4f0e-8164-5a50e8969a42": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed1ff5c39700007e2204a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055171-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c3b67254-4628-4f0e-8164-5a50e8969a42",
-    "name": "Pluto TV Action",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:57.173117",
-    "last_working": "2025-09-29T18:51:57.173128",
-    "test_duration": 1.9885344505310059,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ac2591dd8880007bb7d6d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS": {
-    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ac2591dd8880007bb7d6d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
-    "name": "Pluto TV Cine Acción (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:57.189620",
-    "last_working": "2025-09-29T18:51:57.189630",
-    "test_duration": 1.9499173164367676,
+    "last_tested": "2025-09-30T10:57:45.310426",
+    "last_working": "2025-09-30T10:57:45.310435",
+    "test_duration": 1.5453858375549316,
     "test_results": {
       "network": true,
       "http": true,
@@ -2067,9 +563,9 @@
     "url": "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dcb62e63d4d8f0009f36881/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=bfef8b40-6307-11eb-b3fa-019cb96f121b&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=787d09fb-c219-46d0-b022-07fb4d7f7395&userId=",
     "name": "Pluto TV Cine Accion",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:57.319512",
-    "last_working": "2025-09-29T18:51:57.319525",
-    "test_duration": 2.080833911895752,
+    "last_tested": "2025-09-30T10:57:46.177440",
+    "last_working": "2025-09-30T10:57:46.177449",
+    "test_duration": 1.80678391456604,
     "test_results": {
       "network": true,
       "http": true,
@@ -2079,13 +575,29 @@
     },
     "stream_type": "hls"
   },
-  "https://cdn-4.pishow.tv/live/233/master.m3u8": {
-    "url": "https://cdn-4.pishow.tv/live/233/master.m3u8",
-    "name": "Oscar Movies Bhojpuri (720p)",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed1ff5c39700007e2204a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055171-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c3b67254-4628-4f0e-8164-5a50e8969a42": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed1ff5c39700007e2204a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055171-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c3b67254-4628-4f0e-8164-5a50e8969a42",
+    "name": "Pluto TV Action",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:57.321821",
-    "last_working": "2025-09-29T18:51:57.321829",
-    "test_duration": 5.662645101547241,
+    "last_tested": "2025-09-30T10:57:46.179561",
+    "last_working": "2025-09-30T10:57:46.179568",
+    "test_duration": 2.0137059688568115,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ac2591dd8880007bb7d6d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS": {
+    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ac2591dd8880007bb7d6d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
+    "name": "Pluto TV Cine Acción (720p)",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:46.346679",
+    "last_working": "2025-09-30T10:57:46.346688",
+    "test_duration": 1.7563261985778809,
     "test_results": {
       "network": true,
       "http": true,
@@ -2099,25 +611,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/61373bb45168fe000773eecd/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
     "name": "Pluto TV Cine Clásico (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:58.214570",
-    "last_working": "2025-09-29T18:51:58.214578",
-    "test_duration": 1.2750513553619385,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dcde437229eff00091b6c30/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=bff0c3c1-6307-11eb-b3fa-019cb96f121b&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=20f53e04-9cb8-454e-ad8b-838686c353e7&userId=": {
-    "url": "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dcde437229eff00091b6c30/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=bff0c3c1-6307-11eb-b3fa-019cb96f121b&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=20f53e04-9cb8-454e-ad8b-838686c353e7&userId=",
-    "name": "Pluto TV Cine Estelar",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:51:59.187503",
-    "last_working": "2025-09-29T18:51:59.187512",
-    "test_duration": 1.8668715953826904,
+    "last_tested": "2025-09-30T10:57:47.157613",
+    "last_working": "2025-09-30T10:57:47.157622",
+    "test_duration": 1.8461875915527344,
     "test_results": {
       "network": true,
       "http": true,
@@ -2131,9 +627,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ac1f1b66c76000790ef27/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
     "name": "Pluto TV Cine Estelar (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:59.204253",
-    "last_working": "2025-09-29T18:51:59.204265",
-    "test_duration": 2.013357639312744,
+    "last_tested": "2025-09-30T10:57:49.226607",
+    "last_working": "2025-09-30T10:57:49.226616",
+    "test_duration": 3.0460822582244873,
     "test_results": {
       "network": true,
       "http": true,
@@ -2147,9 +643,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1210d14ae1f80007bafb1d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
     "name": "Pluto TV Cine Drama (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:59.212719",
-    "last_working": "2025-09-29T18:51:59.212730",
-    "test_duration": 2.038498640060425,
+    "last_tested": "2025-09-30T10:57:49.238808",
+    "last_working": "2025-09-30T10:57:49.238820",
+    "test_duration": 3.060434103012085,
     "test_results": {
       "network": true,
       "http": true,
@@ -2159,13 +655,13 @@
     },
     "stream_type": "hls"
   },
-  "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f59f50cc36a94000749fd3f/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS": {
-    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f59f50cc36a94000749fd3f/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
-    "name": "Pluto TV Cine Estelar Spain+",
+  "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dcde437229eff00091b6c30/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=bff0c3c1-6307-11eb-b3fa-019cb96f121b&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=20f53e04-9cb8-454e-ad8b-838686c353e7&userId=": {
+    "url": "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dcde437229eff00091b6c30/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=bff0c3c1-6307-11eb-b3fa-019cb96f121b&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=20f53e04-9cb8-454e-ad8b-838686c353e7&userId=",
+    "name": "Pluto TV Cine Estelar",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:51:59.234255",
-    "last_working": "2025-09-29T18:51:59.234264",
-    "test_duration": 1.9112093448638916,
+    "last_tested": "2025-09-30T10:57:49.254707",
+    "last_working": "2025-09-30T10:57:49.254717",
+    "test_duration": 2.906700849533081,
     "test_results": {
       "network": true,
       "http": true,
@@ -2175,29 +671,13 @@
     },
     "stream_type": "hls"
   },
-  "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f171f032cd22e0007f17f3d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS": {
-    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f171f032cd22e0007f17f3d/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
-    "name": "Pluto TV Cine Família (720p) [Not 24/7]",
+  "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5ddc4e8bcbb9010009b4e84f/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=": {
+    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5ddc4e8bcbb9010009b4e84f/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=",
+    "name": "Pluto TV Cine Suspenso (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:00.185932",
-    "last_working": "2025-09-29T18:52:00.185941",
-    "test_duration": 1.9704365730285645,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed168f72fcd0007e56269/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055170-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=16087aae-45a5-4664-9dd5-7ba7c4fa78cf": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed168f72fcd0007e56269/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055170-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=16087aae-45a5-4664-9dd5-7ba7c4fa78cf",
-    "name": "Pluto TV Ciné Rétro",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:00.197427",
-    "last_working": "2025-09-29T18:52:00.197436",
-    "test_duration": 1.0087170600891113,
+    "last_tested": "2025-09-30T10:57:50.538413",
+    "last_working": "2025-09-30T10:57:50.538421",
+    "test_duration": 1.2966992855072021,
     "test_results": {
       "network": true,
       "http": true,
@@ -2211,9 +691,41 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e92708a7ce600007b2676a/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7b8d26-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=59a15527-cb90-4bf4-90ab-ec456c5d2df2",
     "name": "Pluto TV Crime Drama",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:00.288802",
-    "last_working": "2025-09-29T18:52:00.288811",
-    "test_duration": 1.0821805000305176,
+    "last_tested": "2025-09-30T10:57:51.188713",
+    "last_working": "2025-09-30T10:57:51.188722",
+    "test_duration": 1.9317667484283447,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f59f50cc36a94000749fd3f/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS": {
+    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f59f50cc36a94000749fd3f/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&is_lat=1&platform=web&rdid=channel&tags=ROKU_CONTENT_TAGS",
+    "name": "Pluto TV Cine Estelar Spain+",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:51.250875",
+    "last_working": "2025-09-30T10:57:51.250883",
+    "test_duration": 4.0920703411102295,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed168f72fcd0007e56269/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055170-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=16087aae-45a5-4664-9dd5-7ba7c4fa78cf": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f8ed168f72fcd0007e56269/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e055170-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=16087aae-45a5-4664-9dd5-7ba7c4fa78cf",
+    "name": "Pluto TV Ciné Rétro",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:51.251796",
+    "last_working": "2025-09-30T10:57:51.251803",
+    "test_duration": 2.0241942405700684,
     "test_results": {
       "network": true,
       "http": true,
@@ -2227,9 +739,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d8594eb979c0007706de7/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2aed41-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=e4d2554e-9b84-4086-8e1d-07f64310a23b",
     "name": "Pluto TV Crime Movies",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:00.392087",
-    "last_working": "2025-09-29T18:52:00.392099",
-    "test_duration": 1.1776361465454102,
+    "last_tested": "2025-09-30T10:57:52.164003",
+    "last_working": "2025-09-30T10:57:52.164013",
+    "test_duration": 1.9547290802001953,
     "test_results": {
       "network": true,
       "http": true,
@@ -2243,41 +755,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c665db3e6c01b72c4977bc2/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2aed42-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6c2ff9f4-514d-4e8c-b1c7-b4c048053a69",
     "name": "Pluto TV Cult Films",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:01.108291",
-    "last_working": "2025-09-29T18:52:01.108301",
-    "test_duration": 1.872734546661377,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5e972a21ad709d00074195ba/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=": {
-    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5e972a21ad709d00074195ba/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=",
-    "name": "Pluto TV Estrellas de Acción (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:01.339512",
-    "last_working": "2025-09-29T18:52:01.339521",
-    "test_duration": 1.1410505771636963,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa3c446d73500075f0e24/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
-    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa3c446d73500075f0e24/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
-    "name": "Pluto TV Film Classici Italy (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:02.157465",
-    "last_working": "2025-09-29T18:52:02.157473",
-    "test_duration": 1.763777256011963,
+    "last_tested": "2025-09-30T10:57:52.516188",
+    "last_working": "2025-09-30T10:57:52.516199",
+    "test_duration": 1.9769699573516846,
     "test_results": {
       "network": true,
       "http": true,
@@ -2291,9 +771,9 @@
     "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa17fb9f4490007e6419a/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
     "name": "Pluto TV Film Azione Italy (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:02.262118",
-    "last_working": "2025-09-29T18:52:02.262132",
-    "test_duration": 1.9722912311553955,
+    "last_tested": "2025-09-30T10:57:53.257238",
+    "last_working": "2025-09-30T10:57:53.257247",
+    "test_duration": 2.0034656524658203,
     "test_results": {
       "network": true,
       "http": true,
@@ -2307,9 +787,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e92e4694c027be6ecece1/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2aed44-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=01b9b883-5344-4e99-81f9-dc1d9942ca58",
     "name": "Pluto TV Drama",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:03.190053",
-    "last_working": "2025-09-29T18:52:03.190061",
-    "test_duration": 3.0031068325042725,
+    "last_tested": "2025-09-30T10:57:53.552966",
+    "last_working": "2025-09-30T10:57:53.552980",
+    "test_duration": 2.363276958465576,
     "test_results": {
       "network": true,
       "http": true,
@@ -2319,13 +799,29 @@
     },
     "stream_type": "hls"
   },
-  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa512d67fd900072323db/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
-    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa512d67fd900072323db/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
-    "name": "Pluto TV Film Commedia Italy (720p)",
+  "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5e972a21ad709d00074195ba/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=": {
+    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5e972a21ad709d00074195ba/master.m3u8?advertisingId=&appName=web&appVersion=5.14.0-0f5ca04c21649b8c8aad4e56266a23b96d73b83a&app_name=web&clientDeviceType=0&clientID=6fbead95-26b1-415d-998f-1bdef62d10be&clientModelNumber=na&deviceDNT=false&deviceId=6fbead95-26b1-415d-998f-1bdef62d10be&deviceLat=19.4358&deviceLon=-99.1441&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=88.0.4324.150&marketingRegion=VE&serverSideAds=false&sessionID=b8e5a857-714a-11eb-b532-0242ac110002&sid=b8e5a857-714a-11eb-b532-0242ac110002&userId=",
+    "name": "Pluto TV Estrellas de Acción (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:03.228375",
-    "last_working": "2025-09-29T18:52:03.228384",
-    "test_duration": 2.119096517562866,
+    "last_tested": "2025-09-30T10:57:53.760888",
+    "last_working": "2025-09-30T10:57:53.760899",
+    "test_duration": 2.507969379425049,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa3c446d73500075f0e24/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
+    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa3c446d73500075f0e24/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
+    "name": "Pluto TV Film Classici Italy (720p)",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:55.186829",
+    "last_working": "2025-09-30T10:57:55.186838",
+    "test_duration": 3.0219173431396484,
     "test_results": {
       "network": true,
       "http": true,
@@ -2339,9 +835,9 @@
     "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa20a2e7f270007c4878d/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
     "name": "Pluto TV Film Italy (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:04.195032",
-    "last_working": "2025-09-29T18:52:04.195041",
-    "test_duration": 2.0366241931915283,
+    "last_tested": "2025-09-30T10:57:56.175259",
+    "last_working": "2025-09-30T10:57:56.175269",
+    "test_duration": 2.6211695671081543,
     "test_results": {
       "network": true,
       "http": true,
@@ -2355,41 +851,9 @@
     "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa42b5c2b8f0007197529/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
     "name": "Pluto TV Film Drama Italy (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:04.196832",
-    "last_working": "2025-09-29T18:52:04.196840",
-    "test_duration": 2.8562064170837402,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa4a4cc92820007b663af/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
-    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa4a4cc92820007b663af/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
-    "name": "Pluto TV Film Romantici Italy (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:05.217589",
-    "last_working": "2025-09-29T18:52:05.217598",
-    "test_duration": 2.9529688358306885,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62f4f4b88157cf00075c22db/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fada1-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=98b1a14f-8335-48c9-a8f3-2e1926d24a7e": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62f4f4b88157cf00075c22db/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fada1-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=98b1a14f-8335-48c9-a8f3-2e1926d24a7e",
-    "name": "Pluto TV Horror",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:05.233667",
-    "last_working": "2025-09-29T18:52:05.233675",
-    "test_duration": 1.0376336574554443,
+    "last_tested": "2025-09-30T10:57:56.208982",
+    "last_working": "2025-09-30T10:57:56.208994",
+    "test_duration": 2.95060133934021,
     "test_results": {
       "network": true,
       "http": true,
@@ -2403,9 +867,25 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/569546031a619b8f07ce6e25/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b1450-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=3f8b9bca-2807-48aa-a7cc-8513d68f8d92",
     "name": "Pluto TV Horror",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:05.234936",
-    "last_working": "2025-09-29T18:52:05.234945",
-    "test_duration": 2.0056521892547607,
+    "last_tested": "2025-09-30T10:57:57.160674",
+    "last_working": "2025-09-30T10:57:57.160683",
+    "test_duration": 1.9727067947387695,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa4a4cc92820007b663af/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
+    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa4a4cc92820007b663af/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
+    "name": "Pluto TV Film Romantici Italy (720p)",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:57.463461",
+    "last_working": "2025-09-30T10:57:57.463473",
+    "test_duration": 3.701211929321289,
     "test_results": {
       "network": true,
       "http": true,
@@ -2419,9 +899,9 @@
     "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/608aa5e995132a00075f7005/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
     "name": "Pluto TV Film Thriller Italy (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:05.236249",
-    "last_working": "2025-09-29T18:52:05.236257",
-    "test_duration": 2.0450527667999268,
+    "last_tested": "2025-09-30T10:57:57.465961",
+    "last_working": "2025-09-30T10:57:57.465969",
+    "test_duration": 2.3988420963287354,
     "test_results": {
       "network": true,
       "http": true,
@@ -2431,45 +911,13 @@
     },
     "stream_type": "hls"
   },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62ea3f8a38acc80007072d26/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7b8d29-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=198d34d5-3dfc-40a4-8f5e-7aecb91ced74": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62ea3f8a38acc80007072d26/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7b8d29-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=198d34d5-3dfc-40a4-8f5e-7aecb91ced74",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62f4f4b88157cf00075c22db/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fada1-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=98b1a14f-8335-48c9-a8f3-2e1926d24a7e": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62f4f4b88157cf00075c22db/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fada1-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=98b1a14f-8335-48c9-a8f3-2e1926d24a7e",
     "name": "Pluto TV Horror",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:06.157355",
-    "last_working": "2025-09-29T18:52:06.157367",
-    "test_duration": 1.9595670700073242,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5dde47b63585b500099f74ec/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aea088-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=3418c444-a5b9-456d-9d11-e4e9c7b5eec0": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5dde47b63585b500099f74ec/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aea088-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=3418c444-a5b9-456d-9d11-e4e9c7b5eec0",
-    "name": "Pluto TV Kultfilme",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:06.216926",
-    "last_working": "2025-09-29T18:52:06.216937",
-    "test_duration": 0.9792613983154297,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fd4b4-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0b9dcc7-8579-47a9-a718-88e7ec066b8a": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fd4b4-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0b9dcc7-8579-47a9-a718-88e7ec066b8a",
-    "name": "Pluto TV Movies",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:06.259478",
-    "last_working": "2025-09-29T18:52:06.259488",
-    "test_duration": 1.0208609104156494,
+    "last_tested": "2025-09-30T10:57:58.390407",
+    "last_working": "2025-09-30T10:57:58.390416",
+    "test_duration": 2.214221954345703,
     "test_results": {
       "network": true,
       "http": true,
@@ -2483,25 +931,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5dde47b63585b500099f74ec/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fd4b0-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=03130bd3-7919-4831-bc2e-4f5c3b202f88",
     "name": "Pluto TV Kultfilme",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:06.267917",
-    "last_working": "2025-09-29T18:52:06.267926",
-    "test_duration": 1.0324974060058594,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aec791-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5500aa67-c527-4db6-868b-d37341c34286": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aec791-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5500aa67-c527-4db6-868b-d37341c34286",
-    "name": "Pluto TV Movies",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:07.143600",
-    "last_working": "2025-09-29T18:52:07.143609",
-    "test_duration": 0.9852688312530518,
+    "last_tested": "2025-09-30T10:57:59.298989",
+    "last_working": "2025-09-30T10:57:59.298999",
+    "test_duration": 1.8346381187438965,
     "test_results": {
       "network": true,
       "http": true,
@@ -2515,9 +947,57 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62f4f4b88157cf00075c22db/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aea083-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=67746cb2-93c1-4a0a-874d-a4043328cb08",
     "name": "Pluto TV Horror",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:07.224980",
-    "last_working": "2025-09-29T18:52:07.224989",
-    "test_duration": 2.0064425468444824,
+    "last_tested": "2025-09-30T10:57:59.372957",
+    "last_working": "2025-09-30T10:57:59.372966",
+    "test_duration": 2.2109763622283936,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5dde47b63585b500099f74ec/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aea088-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=3418c444-a5b9-456d-9d11-e4e9c7b5eec0": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5dde47b63585b500099f74ec/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aea088-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=3418c444-a5b9-456d-9d11-e4e9c7b5eec0",
+    "name": "Pluto TV Kultfilme",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:59.373238",
+    "last_working": "2025-09-30T10:57:59.373244",
+    "test_duration": 1.9062902927398682,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62ea3f8a38acc80007072d26/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7b8d29-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=198d34d5-3dfc-40a4-8f5e-7aecb91ced74": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62ea3f8a38acc80007072d26/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7b8d29-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=198d34d5-3dfc-40a4-8f5e-7aecb91ced74",
+    "name": "Pluto TV Horror",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:57:59.643897",
+    "last_working": "2025-09-30T10:57:59.643906",
+    "test_duration": 3.433759927749634,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fd4b4-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0b9dcc7-8579-47a9-a718-88e7ec066b8a": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1fd4b4-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c0b9dcc7-8579-47a9-a718-88e7ec066b8a",
+    "name": "Pluto TV Movies",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:00.313553",
+    "last_working": "2025-09-30T10:58:00.313562",
+    "test_duration": 1.922025442123413,
     "test_results": {
       "network": true,
       "http": true,
@@ -2531,9 +1011,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/617b37b361e0fd0008cfd8c5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b1457-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=32aea123-3ab5-4713-944a-87ebeb334781",
     "name": "Pluto TV Reaction",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:07.225299",
-    "last_working": "2025-09-29T18:52:07.225306",
-    "test_duration": 1.0061159133911133,
+    "last_tested": "2025-09-30T10:58:01.142620",
+    "last_working": "2025-09-30T10:58:01.142629",
+    "test_duration": 1.7675449848175049,
     "test_results": {
       "network": true,
       "http": true,
@@ -2547,9 +1027,25 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5a66795ef91fef2c7031c599/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b1459-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=195653a1-6a75-4cb6-b94d-0fe4a7594dba",
     "name": "Pluto TV Romance",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:08.201582",
-    "last_working": "2025-09-29T18:52:08.201592",
-    "test_duration": 1.9408938884735107,
+    "last_tested": "2025-09-30T10:58:01.263679",
+    "last_working": "2025-09-30T10:58:01.263689",
+    "test_duration": 1.6187357902526855,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aec791-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5500aa67-c527-4db6-868b-d37341c34286": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c5c3b948002db3c3e0b262e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aec791-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5500aa67-c527-4db6-868b-d37341c34286",
+    "name": "Pluto TV Movies",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:02.183246",
+    "last_working": "2025-09-30T10:58:02.183266",
+    "test_duration": 2.8834259510040283,
     "test_results": {
       "network": true,
       "http": true,
@@ -2563,9 +1059,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60812fc8539963000707d1e1/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e05c6a4-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=d84357a9-e5ec-4c91-a037-9a426fa2cdff",
     "name": "Pluto TV Romance",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:08.210217",
-    "last_working": "2025-09-29T18:52:08.210246",
-    "test_duration": 1.9401664733886719,
+    "last_tested": "2025-09-30T10:58:03.179490",
+    "last_working": "2025-09-30T10:58:03.179500",
+    "test_duration": 2.035942316055298,
     "test_results": {
       "network": true,
       "http": true,
@@ -2579,73 +1075,9 @@
     "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/60812fc8539963000707d1e1/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c8bf321-e98a-11eb-a932-2f3c780ff9ff&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7ebb5004-1cd6-44bb-990a-082fdcdcba6d",
     "name": "Pluto TV Romance (720p)",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:09.204247",
-    "last_working": "2025-09-29T18:52:09.204256",
-    "test_duration": 2.0589287281036377,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60ed498c4248a400077c0b9d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aeeea0-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=91571e99-b22e-454e-9622-6abd1ff79fd1": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60ed498c4248a400077c0b9d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aeeea0-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=91571e99-b22e-454e-9622-6abd1ff79fd1",
-    "name": "Pluto TV Sci-Fi",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:09.209871",
-    "last_working": "2025-09-29T18:52:09.209883",
-    "test_duration": 0.9984605312347412,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4fc274694c027be6ed3eea/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b60-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=ed62db1c-5556-4fa7-b231-9514fcc69832": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4fc274694c027be6ed3eea/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b60-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=ed62db1c-5556-4fa7-b231-9514fcc69832",
-    "name": "Pluto TV Sci-Fi",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:09.234404",
-    "last_working": "2025-09-29T18:52:09.234414",
-    "test_duration": 2.007469892501831,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60c34592c911890007f29a73/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c1-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6b2680c6-291b-492d-a7cf-589b55d330d2": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60c34592c911890007f29a73/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c1-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6b2680c6-291b-492d-a7cf-589b55d330d2",
-    "name": "Pluto TV Sci-Fi",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:10.219062",
-    "last_working": "2025-09-29T18:52:10.219071",
-    "test_duration": 2.0165345668792725,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ba3fb9c4b078e0f37ad34e8/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b64-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=a26dc013-1780-409c-9a56-09ae4538fe40": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ba3fb9c4b078e0f37ad34e8/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b64-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=a26dc013-1780-409c-9a56-09ae4538fe40",
-    "name": "Pluto TV Spotlight",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:10.300145",
-    "last_working": "2025-09-29T18:52:10.300154",
-    "test_duration": 1.0893349647521973,
+    "last_tested": "2025-09-30T10:58:05.275162",
+    "last_working": "2025-09-30T10:58:05.275171",
+    "test_duration": 3.090855598449707,
     "test_results": {
       "network": true,
       "http": true,
@@ -2659,9 +1091,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60ed498c4248a400077c0b9d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b2022d0-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=7622190c-0c5d-4225-bfd1-46b7e034e788",
     "name": "Pluto TV Sci-Fi",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:11.178759",
-    "last_working": "2025-09-29T18:52:11.178768",
-    "test_duration": 3.951467275619507,
+    "last_tested": "2025-09-30T10:58:06.140628",
+    "last_working": "2025-09-30T10:58:06.140637",
+    "test_duration": 2.4323582649230957,
     "test_results": {
       "network": true,
       "http": true,
@@ -2671,13 +1103,13 @@
     },
     "stream_type": "hls"
   },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d863b98b41000076cd061/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b65-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c2fde2b7-d78e-4906-abf2-3c433f73ec5b": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d863b98b41000076cd061/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b65-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c2fde2b7-d78e-4906-abf2-3c433f73ec5b",
-    "name": "Pluto TV Staff Picks",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4fc274694c027be6ed3eea/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b60-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=ed62db1c-5556-4fa7-b231-9514fcc69832": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4fc274694c027be6ed3eea/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b60-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=ed62db1c-5556-4fa7-b231-9514fcc69832",
+    "name": "Pluto TV Sci-Fi",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:11.232202",
-    "last_working": "2025-09-29T18:52:11.232215",
-    "test_duration": 1.9968900680541992,
+    "last_tested": "2025-09-30T10:58:07.183560",
+    "last_working": "2025-09-30T10:58:07.183572",
+    "test_duration": 4.003009796142578,
     "test_results": {
       "network": true,
       "http": true,
@@ -2687,13 +1119,45 @@
     },
     "stream_type": "hls"
   },
-  "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/61728bb9ee3773000840c1fa/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY": {
-    "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/61728bb9ee3773000840c1fa/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
-    "name": "Pluto TV Sci-Fi Italy (720p)",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60c34592c911890007f29a73/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c1-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6b2680c6-291b-492d-a7cf-589b55d330d2": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60c34592c911890007f29a73/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c1-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=6b2680c6-291b-492d-a7cf-589b55d330d2",
+    "name": "Pluto TV Sci-Fi",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:11.234130",
-    "last_working": "2025-09-29T18:52:11.234139",
-    "test_duration": 2.0290160179138184,
+    "last_tested": "2025-09-30T10:58:07.216347",
+    "last_working": "2025-09-30T10:58:07.216360",
+    "test_duration": 2.5852317810058594,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60ed498c4248a400077c0b9d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aeeea0-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=91571e99-b22e-454e-9622-6abd1ff79fd1": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60ed498c4248a400077c0b9d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aeeea0-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=91571e99-b22e-454e-9622-6abd1ff79fd1",
+    "name": "Pluto TV Sci-Fi",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:07.321278",
+    "last_working": "2025-09-30T10:58:07.321293",
+    "test_duration": 2.6184799671173096,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ba3fb9c4b078e0f37ad34e8/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b64-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=a26dc013-1780-409c-9a56-09ae4538fe40": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5ba3fb9c4b078e0f37ad34e8/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b64-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=a26dc013-1780-409c-9a56-09ae4538fe40",
+    "name": "Pluto TV Spotlight",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:08.167193",
+    "last_working": "2025-09-30T10:58:08.167201",
+    "test_duration": 2.025442361831665,
     "test_results": {
       "network": true,
       "http": true,
@@ -2707,9 +1171,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5c6dc88fcd232425a6e0f06e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b67-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bbd5d7ff-a6cc-4ad9-bb5f-d0f36c75fc29",
     "name": "Pluto TV Terror",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:11.244830",
-    "last_working": "2025-09-29T18:52:11.244838",
-    "test_duration": 1.024669885635376,
+    "last_tested": "2025-09-30T10:58:09.139669",
+    "last_working": "2025-09-30T10:58:09.139677",
+    "test_duration": 1.922062873840332,
     "test_results": {
       "network": true,
       "http": true,
@@ -2723,9 +1187,25 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e69e08291147bd04a9fd7/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b68-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=2bd17736-43bd-4c5d-aaa9-c3cdc2c77562",
     "name": "Pluto TV Thrillers",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:12.170938",
-    "last_working": "2025-09-29T18:52:12.170946",
-    "test_duration": 1.868927240371704,
+    "last_tested": "2025-09-30T10:58:09.200534",
+    "last_working": "2025-09-30T10:58:09.200545",
+    "test_duration": 1.8776447772979736,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d863b98b41000076cd061/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b65-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c2fde2b7-d78e-4906-abf2-3c433f73ec5b": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5f4d863b98b41000076cd061/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b3b65-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=c2fde2b7-d78e-4906-abf2-3c433f73ec5b",
+    "name": "Pluto TV Staff Picks",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:09.512883",
+    "last_working": "2025-09-30T10:58:09.512892",
+    "test_duration": 2.328235626220703,
     "test_results": {
       "network": true,
       "http": true,
@@ -2739,41 +1219,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60c3472a51a2050008dad272/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c2-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=b27ed94e-1347-4dd0-af99-b2e901fd5e71",
     "name": "Pluto TV Thrillers",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:12.286274",
-    "last_working": "2025-09-29T18:52:12.286282",
-    "test_duration": 1.1064209938049316,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cca3e2ec452d0008af3a65/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e074d44-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bae761e4-0e1a-4102-8f5e-fa657934946c": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cca3e2ec452d0008af3a65/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e074d44-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bae761e4-0e1a-4102-8f5e-fa657934946c",
-    "name": "Pluto TV Western",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:13.144982",
-    "last_working": "2025-09-29T18:52:13.144990",
-    "test_duration": 1.8990774154663086,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/630dd3b2605f140007e002f5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b2049e2-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=59d31236-c94c-43d9-a034-2227dea980c8": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/630dd3b2605f140007e002f5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b2049e2-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=59d31236-c94c-43d9-a034-2227dea980c8",
-    "name": "Pluto TV Western",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:13.205108",
-    "last_working": "2025-09-29T18:52:13.205118",
-    "test_duration": 1.9694719314575195,
+    "last_tested": "2025-09-30T10:58:09.873468",
+    "last_working": "2025-09-30T10:58:09.873477",
+    "test_duration": 2.3825814723968506,
     "test_results": {
       "network": true,
       "http": true,
@@ -2787,9 +1235,9 @@
     "url": "http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5f1ac8a87cd38d000745d7cf/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=unknown&architecture=&buildVersion=&clientTime=0&deviceDNT=0&deviceId=b44a3bb2-778d-11eb-9fe3-3bf7f4412392&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bec2cd61-c8bf-4269-8475-9b5cdf24d1f0&userId=",
     "name": "Pluto TV Thrillers Spain",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:13.212548",
-    "last_working": "2025-09-29T18:52:13.212556",
-    "test_duration": 1.9788696765899658,
+    "last_tested": "2025-09-30T10:58:10.163317",
+    "last_working": "2025-09-30T10:58:10.163326",
+    "test_duration": 1.9951248168945312,
     "test_results": {
       "network": true,
       "http": true,
@@ -2799,13 +1247,13 @@
     },
     "stream_type": "hls"
   },
-  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e94282d4ec87bdcbb87cd/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b6272-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5e8336d8-e46b-4f0f-86ff-ba6f9678d77a": {
-    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e94282d4ec87bdcbb87cd/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b6272-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5e8336d8-e46b-4f0f-86ff-ba6f9678d77a",
-    "name": "Pluto TV Westerns",
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cca3e2ec452d0008af3a65/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e074d44-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bae761e4-0e1a-4102-8f5e-fa657934946c": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65cca3e2ec452d0008af3a65/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e074d44-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=bae761e4-0e1a-4102-8f5e-fa657934946c",
+    "name": "Pluto TV Western",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:14.175842",
-    "last_working": "2025-09-29T18:52:14.175851",
-    "test_duration": 1.8881936073303223,
+    "last_tested": "2025-09-30T10:58:11.162203",
+    "last_working": "2025-09-30T10:58:11.162211",
+    "test_duration": 1.960587978363037,
     "test_results": {
       "network": true,
       "http": true,
@@ -2819,9 +1267,41 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/630dd3b2605f140007e002f5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=84aeeea9-4b92-11ef-aece-533610f1ea34&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=0f9be2fb-9bfd-4c1e-8963-ba4370795ff3",
     "name": "Pluto TV Western",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:14.180417",
-    "last_working": "2025-09-29T18:52:14.180425",
-    "test_duration": 2.008467674255371,
+    "last_tested": "2025-09-30T10:58:11.650689",
+    "last_working": "2025-09-30T10:58:11.650697",
+    "test_duration": 2.1368677616119385,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e94282d4ec87bdcbb87cd/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b6272-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5e8336d8-e46b-4f0f-86ff-ba6f9678d77a": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5b4e94282d4ec87bdcbb87cd/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2b6272-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5e8336d8-e46b-4f0f-86ff-ba6f9678d77a",
+    "name": "Pluto TV Westerns",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:12.172793",
+    "last_working": "2025-09-30T10:58:12.172801",
+    "test_duration": 2.298201084136963,
+    "test_results": {
+      "network": true,
+      "http": true,
+      "ffmpeg": false,
+      "mplayer": false,
+      "vlc": true
+    },
+    "stream_type": "hls"
+  },
+  "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/630dd3b2605f140007e002f5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b2049e2-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=59d31236-c94c-43d9-a034-2227dea980c8": {
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/630dd3b2605f140007e002f5/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b2049e2-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=59d31236-c94c-43d9-a034-2227dea980c8",
+    "name": "Pluto TV Western",
+    "group": "Movies",
+    "last_tested": "2025-09-30T10:58:12.174420",
+    "last_working": "2025-09-30T10:58:12.174427",
+    "test_duration": 3.0336968898773193,
     "test_results": {
       "network": true,
       "http": true,
@@ -2835,345 +1315,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62bdacc96a3751000811842d/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=2c7bb435-35fc-11ef-a031-2b5d494037a2&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=8d87a47e-6b0e-40e2-88e1-8631bfba1316",
     "name": "Pluto TV Westerns",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:15.164572",
-    "last_working": "2025-09-29T18:52:15.164580",
-    "test_duration": 2.018481969833374,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://9be783d652cd4b099cf63e1dc134c4a3.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6181/master.m3u8": {
-    "url": "https://9be783d652cd4b099cf63e1dc134c4a3.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6181/master.m3u8",
-    "name": "Rakuten TV Comedy Movies UK (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:15.985290",
-    "last_working": "2025-09-29T18:52:15.985299",
-    "test_duration": 2.760732889175415,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://e3207568b726401995c25670faaf32e4.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6203/master.m3u8": {
-    "url": "https://e3207568b726401995c25670faaf32e4.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6203/master.m3u8",
-    "name": "Rakuten TV Family Movies UK (1080p)",
-    "group": "Family;Movies",
-    "last_tested": "2025-09-29T18:52:16.955784",
-    "last_working": "2025-09-29T18:52:16.955793",
-    "test_duration": 2.7618913650512695,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://a7089c89d85f453d850c4a1518b43076.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6092/master.m3u8": {
-    "url": "https://a7089c89d85f453d850c4a1518b43076.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6092/master.m3u8",
-    "name": "Rakuten TV Drama Movies Spain (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:16.979325",
-    "last_working": "2025-09-29T18:52:16.979338",
-    "test_duration": 2.799687147140503,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://run-rt-uh-roku.otteravision.com/run/rt_uh/rt_uh.m3u8": {
-    "url": "https://run-rt-uh-roku.otteravision.com/run/rt_uh/rt_uh.m3u8",
-    "name": "Runtime Espanol (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:17.174316",
-    "last_working": "2025-09-29T18:52:17.174326",
-    "test_duration": 1.1834073066711426,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://slonehls.wns.live/hls/stream.m3u8": {
-    "url": "https://slonehls.wns.live/hls/stream.m3u8",
-    "name": "SL 1",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:20.170300",
-    "last_working": "2025-09-29T18:52:20.170308",
-    "test_duration": 2.9940764904022217,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://viamotionhsi.netplus.ch/live/eds/servustvhd/browser-HLS8/servustvhd.m3u8": {
-    "url": "https://viamotionhsi.netplus.ch/live/eds/servustvhd/browser-HLS8/servustvhd.m3u8",
-    "name": "ServusTV HD",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:20.470216",
-    "last_working": "2025-09-29T18:52:20.470224",
-    "test_duration": 3.4898695945739746,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://sltwohls.wns.live/hls/stream.m3u8": {
-    "url": "https://sltwohls.wns.live/hls/stream.m3u8",
-    "name": "SL 2",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:23.161767",
-    "last_working": "2025-09-29T18:52:23.161775",
-    "test_duration": 2.9904322624206543,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/starpravahpicturehd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/starpravahpicturehd/master.m3u8",
-    "name": "Pravah Picture HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:26.189556",
-    "last_working": "2025-09-29T18:52:26.189564",
-    "test_duration": 12.983351469039917,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://31.148.48.15/Russkiy_Detektiv/index.m3u8": {
-    "url": "http://31.148.48.15/Russkiy_Detektiv/index.m3u8",
-    "name": "Russkiy Detektiv",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:27.333347",
-    "last_working": "2025-09-29T18:52:27.333355",
-    "test_duration": 10.37654733657837,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/stargoldromance/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargoldromance/master.m3u8",
-    "name": "Star Gold Romance (576p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:29.383930",
-    "last_working": "2025-09-29T18:52:29.383939",
-    "test_duration": 6.221148729324341,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/stargoldhd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargoldhd/master.m3u8",
-    "name": "Star Gold HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:29.892760",
-    "last_working": "2025-09-29T18:52:29.892768",
-    "test_duration": 9.414600133895874,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/starmovieshd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/starmovieshd/master.m3u8",
-    "name": "Star Movies HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:31.653069",
-    "last_working": "2025-09-29T18:52:31.653078",
-    "test_duration": 1.759343147277832,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/maamovieshd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/maamovieshd/master.m3u8",
-    "name": "Star Maa Movies HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:32.347656",
-    "last_working": "2025-09-29T18:52:32.347664",
-    "test_duration": 2.9627652168273926,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/starmoviesselecthd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/starmoviesselecthd/master.m3u8",
-    "name": "Star Movies Select HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:32.537976",
-    "last_working": "2025-09-29T18:52:32.537984",
-    "test_duration": 1.6459777355194092,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/maagold/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/maagold/master.m3u8",
-    "name": "Star Maa Gold (576p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:33.894597",
-    "last_working": "2025-09-29T18:52:33.894605",
-    "test_duration": 6.5591044425964355,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/starutsavmovies/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/starutsavmovies/master.m3u8",
-    "name": "Star Utsav Movies (576p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:33.916315",
-    "last_working": "2025-09-29T18:52:33.916324",
-    "test_duration": 1.5678493976593018,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/stargold2hd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargold2hd/master.m3u8",
-    "name": "Star Gold Select HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:34.079093",
-    "last_working": "2025-09-29T18:52:34.079102",
-    "test_duration": 7.888556241989136,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/T2Movies/index-0.m3u8": {
-    "url": "https://still-mud-3642.nqanzvyuupxwcahtfq.workers.dev/?url=https://ca-rt.onetv.app/T2Movies/index-0.m3u8",
-    "name": "T2 Movies",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:35.348364",
-    "last_working": "2025-09-29T18:52:35.348372",
-    "test_duration": 1.2651982307434082,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://livetv.mylifeisgood.net.ru/channels/strwc.m3u8": {
-    "url": "https://livetv.mylifeisgood.net.ru/channels/strwc.m3u8",
-    "name": "START Air",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:36.545583",
-    "last_working": "2025-09-29T18:52:36.545591",
-    "test_duration": 4.006523609161377,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://livetv.mylifeisgood.net.ru/channels/strvf.m3u8": {
-    "url": "https://livetv.mylifeisgood.net.ru/channels/strvf.m3u8",
-    "name": "START World",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:38.326481",
-    "last_working": "2025-09-29T18:52:38.326490",
-    "test_duration": 4.4306640625,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn-1.pishow.tv/live/276/master.m3u8": {
-    "url": "https://cdn-1.pishow.tv/live/276/master.m3u8",
-    "name": "Studio One + (720p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:39.362463",
-    "last_working": "2025-09-29T18:52:39.362472",
-    "test_duration": 5.445115327835083,
+    "last_tested": "2025-09-30T10:58:12.377383",
+    "last_working": "2025-09-30T10:58:12.377391",
+    "test_duration": 2.2129693031311035,
     "test_results": {
       "network": true,
       "http": true,
@@ -3187,121 +1331,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5d40bebc5e3d2750a2239d7e/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c2c9af3-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=5e762bb7-572b-4470-87fd-b3b4bb48462e",
     "name": "TV Land Drama",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:40.152490",
-    "last_working": "2025-09-29T18:52:40.152498",
-    "test_duration": 1.8238880634307861,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8?dvr=": {
-    "url": "https://edge4-moblive.yuppcdn.net/trans1sd/smil:strtml19.smil/playlist.m3u8?dvr=",
-    "name": "Star Tamil Television (360p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:40.211193",
-    "last_working": "2025-09-29T18:52:40.211201",
-    "test_duration": 8.556966543197632,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://viamotionhsi.netplus.ch/live/eds/hd1/browser-HLS8/hd1.m3u8": {
-    "url": "https://viamotionhsi.netplus.ch/live/eds/hd1/browser-HLS8/hd1.m3u8",
-    "name": "TF1 Series Films (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:40.434248",
-    "last_working": "2025-09-29T18:52:40.434256",
-    "test_duration": 3.8870859146118164,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cdn.mycloudstream.io/hls/live/broadcast/l3vslw4i/index.m3u8": {
-    "url": "https://cdn.mycloudstream.io/hls/live/broadcast/l3vslw4i/index.m3u8",
-    "name": "TVCARiB Cinema (720p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:41.143854",
-    "last_working": "2025-09-29T18:52:41.143863",
-    "test_duration": 1.7804996967315674,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://lenz.splus.ir/PLTV/88888888/224/3221226879/index.m3u8": {
-    "url": "https://lenz.splus.ir/PLTV/88888888/224/3221226879/index.m3u8",
-    "name": "Tamasha",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:41.228876",
-    "last_working": "2025-09-29T18:52:41.228889",
-    "test_duration": 5.879499912261963,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://2-fss-2.streamhoster.com/pl_138/201950-5317556-1/playlist.m3u8": {
-    "url": "https://2-fss-2.streamhoster.com/pl_138/201950-5317556-1/playlist.m3u8",
-    "name": "Victor Valley Movies (1080p) [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:42.189053",
-    "last_working": "2025-09-29T18:52:42.189065",
-    "test_duration": 1.7518315315246582,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://rpn.bozztv.com/gusa/gusa-tvsdriveinmovie/index.m3u8": {
-    "url": "https://rpn.bozztv.com/gusa/gusa-tvsdriveinmovie/index.m3u8",
-    "name": "TVS Drive In Movie (360p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:42.191069",
-    "last_working": "2025-09-29T18:52:42.191076",
-    "test_duration": 2.037536144256592,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stmv6.voxtvhd.com.br/cineterror/cineterror/playlist.m3u8": {
-    "url": "https://stmv6.voxtvhd.com.br/cineterror/cineterror/playlist.m3u8",
-    "name": "Xtrema Terror",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:43.143384",
-    "last_working": "2025-09-29T18:52:43.143392",
-    "test_duration": 0.9514753818511963,
+    "last_tested": "2025-09-30T10:58:59.220122",
+    "last_working": "2025-09-30T10:58:59.220129",
+    "test_duration": 2.8886427879333496,
     "test_results": {
       "network": true,
       "http": true,
@@ -3315,249 +1347,9 @@
     "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/60b4d6c806ad2a00073b3108/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=8e0614c0-1f2c-11ef-86d8-5d587df108c6&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=d329ef28-8c5a-4451-bc8a-ab7d7083f320",
     "name": "Wild Side TV",
     "group": "Movies",
-    "last_tested": "2025-09-29T18:52:43.163631",
-    "last_working": "2025-09-29T18:52:43.163640",
-    "test_duration": 1.9335217475891113,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://stmv6.voxtvhd.com.br/cineaccion/cineaccion/playlist.m3u8": {
-    "url": "https://stmv6.voxtvhd.com.br/cineaccion/cineaccion/playlist.m3u8",
-    "name": "Xtrema Accion",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:43.266048",
-    "last_working": "2025-09-29T18:52:43.266059",
-    "test_duration": 1.0759375095367432,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://amg17931-zee-amg17931c8-samsung-th-6526.playouts.now.amagi.tv/playlist.m3u8": {
-    "url": "https://amg17931-zee-amg17931c8-samsung-th-6526.playouts.now.amagi.tv/playlist.m3u8",
-    "name": "Zee Bollymovies (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:44.183818",
-    "last_working": "2025-09-29T18:52:44.183831",
-    "test_duration": 1.0392277240753174,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://v2.catcast.tv/content/47609/index.m3u8": {
-    "url": "https://v2.catcast.tv/content/47609/index.m3u8",
-    "name": "VHS TV [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:45.213541",
-    "last_working": "2025-09-29T18:52:45.213553",
-    "test_duration": 4.997496843338013,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://autopilot.catcast.tv/content/38720/index.m3u8": {
-    "url": "https://autopilot.catcast.tv/content/38720/index.m3u8",
-    "name": "Детское кино International [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:48.180387",
-    "last_working": "2025-09-29T18:52:48.180395",
-    "test_duration": 5.014727830886841,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://streaming.thestream.cyou/live/44.m3u8": {
-    "url": "https://streaming.thestream.cyou/live/44.m3u8",
-    "name": "Дом Кино",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:48.666018",
-    "last_working": "2025-09-29T18:52:48.666027",
-    "test_duration": 5.398338317871094,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://live.dinesh29.com.np/stream/jiotvplus/vijaysuperhd/master.m3u8": {
-    "url": "https://live.dinesh29.com.np/stream/jiotvplus/vijaysuperhd/master.m3u8",
-    "name": "Vijay Super HD (1080p)",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:49.127612",
-    "last_working": "2025-09-29T18:52:49.127621",
-    "test_duration": 7.982706785202026,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://31.148.48.15/Illusion_plus/index.m3u8": {
-    "url": "http://31.148.48.15/Illusion_plus/index.m3u8",
-    "name": "Иллюзион+",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:50.280134",
-    "last_working": "2025-09-29T18:52:50.280143",
-    "test_duration": 5.065476417541504,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://kino-1.catcast.tv/content/38617/index.m3u8": {
-    "url": "http://kino-1.catcast.tv/content/38617/index.m3u8",
-    "name": "Кино 1 International [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:52.135565",
-    "last_working": "2025-09-29T18:52:52.135573",
-    "test_duration": 3.953341245651245,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://v2.catcast.tv/content/41596/index.m3u8": {
-    "url": "https://v2.catcast.tv/content/41596/index.m3u8",
-    "name": "Любимое Индийское Кино [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:54.137782",
-    "last_working": "2025-09-29T18:52:54.137790",
-    "test_duration": 5.009072542190552,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://vod.tuva.ru/kinotv/index.m3u8": {
-    "url": "https://vod.tuva.ru/kinotv/index.m3u8",
-    "name": "КИНОТВ",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:54.741196",
-    "last_working": "2025-09-29T18:52:54.741204",
-    "test_duration": 6.073171138763428,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://31.148.48.15/Evrokino/index.m3u8": {
-    "url": "http://31.148.48.15/Evrokino/index.m3u8",
-    "name": "Еврокино",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:52:57.700139",
-    "last_working": "2025-09-29T18:52:57.700147",
-    "test_duration": 13.513433694839478,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "http://31.148.48.15/Russkiy_Bestseller/index.m3u8": {
-    "url": "http://31.148.48.15/Russkiy_Bestseller/index.m3u8",
-    "name": "Русский Бестселлер",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:53:04.565906",
-    "last_working": "2025-09-29T18:53:04.565916",
-    "test_duration": 14.282418727874756,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://v2.catcast.tv/content/38128/index.m3u8": {
-    "url": "https://v2.catcast.tv/content/38128/index.m3u8",
-    "name": "Сити Эдем КиноСемья [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:53:15.139573",
-    "last_working": "2025-09-29T18:53:15.139582",
-    "test_duration": 4.782656908035278,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cityeden.catcast.tv/content/34185/index.m3u8": {
-    "url": "https://cityeden.catcast.tv/content/34185/index.m3u8",
-    "name": "Сити Эдем КиноКлассика [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:53:33.055953",
-    "last_working": "2025-09-29T18:53:33.055961",
-    "test_duration": 28.48914647102356,
-    "test_results": {
-      "network": true,
-      "http": true,
-      "ffmpeg": false,
-      "mplayer": false,
-      "vlc": true
-    },
-    "stream_type": "hls"
-  },
-  "https://cityeden.catcast.tv/content/45268/index.m3u8": {
-    "url": "https://cityeden.catcast.tv/content/45268/index.m3u8",
-    "name": "Сити Эдем КиноФантастика [Not 24/7]",
-    "group": "Movies",
-    "last_tested": "2025-09-29T18:53:35.776857",
-    "last_working": "2025-09-29T18:53:35.776864",
-    "test_duration": 22.491456508636475,
+    "last_tested": "2025-09-30T10:59:12.177664",
+    "last_working": "2025-09-30T10:59:12.177674",
+    "test_duration": 2.1428306102752686,
     "test_results": {
       "network": true,
       "http": true,
