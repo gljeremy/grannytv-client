@@ -20,6 +20,34 @@ sudo apt install -y \
     xinit \
     alsa-utils
 
+# Check and log VLC version for compatibility
+echo "🎬 Checking VLC compatibility..."
+if command -v vlc >/dev/null 2>&1; then
+    VLC_VERSION=$(vlc --version 2>/dev/null | head -n1 || echo "Unknown")
+    echo "   Installed VLC: $VLC_VERSION"
+    
+    # Log for future reference
+    mkdir -p "$PI_PATH"
+    echo "$(date): Setup - $VLC_VERSION" >> "$PI_PATH/vlc_version_history.log"
+    
+    # Provide version-specific guidance
+    case "$VLC_VERSION" in
+        *"3.0."*)
+            echo "   ✅ VLC 3.0.x - Full optimization support enabled"
+            ;;
+        *"2."*)
+            echo "   ⚠️  VLC 2.x - Some optimizations will be limited"
+            echo "   💡 Consider upgrading: sudo apt install vlc/stable"
+            ;;
+        *)
+            echo "   ⚠️  Unknown VLC version - Will use conservative settings"
+            ;;
+    esac
+else
+    echo "   ❌ VLC installation failed!"
+    exit 1
+fi
+
 # Install Python packages and venv
 echo "🐍 Installing Python and virtual environment support..."
 sudo apt install -y python3-pip python3-venv

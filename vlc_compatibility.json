@@ -1,0 +1,62 @@
+{
+    "vlc_compatibility": {
+        "description": "VLC version compatibility database for GrannyTV IPTV Player",
+        "last_updated": "2025-09-30",
+        "known_versions": {
+            "3.0.18": {
+                "supports_modern_hw_decode": true,
+                "supports_mmal": true,
+                "supports_advanced_caching": true,
+                "problematic_options": [
+                    "--no-hw-decode",
+                    "--mmal-display=hdmi-1",
+                    "--sout-mux-caching",
+                    "--prefetch-buffer-size"
+                ],
+                "recommended_options": [
+                    "--avcodec-hw=none",
+                    "--video-on-top",
+                    "--avcodec-fast",
+                    "--avcodec-skiploopfilter=all"
+                ]
+            },
+            "3.0.x": {
+                "supports_modern_hw_decode": true,
+                "supports_mmal": true,
+                "supports_advanced_caching": true,
+                "notes": "Generally stable with modern options"
+            },
+            "2.2.x": {
+                "supports_modern_hw_decode": false,
+                "supports_mmal": true,
+                "supports_advanced_caching": false,
+                "notes": "Older version, limited optimization support"
+            }
+        },
+        "option_compatibility": {
+            "modern_options": {
+                "min_version": "3.0.0",
+                "options": [
+                    "--avcodec-hw=any",
+                    "--avcodec-hw=none",
+                    "--avcodec-fast",
+                    "--avcodec-skiploopfilter=all",
+                    "--no-metadata-network-access",
+                    "--live-caching",
+                    "--file-caching"
+                ]
+            },
+            "deprecated_options": {
+                "removed_in": "3.0.0",
+                "options": [
+                    "--no-hw-decode",
+                    "--mmal-display"
+                ],
+                "replacements": {
+                    "--no-hw-decode": "--avcodec-hw=none",
+                    "--mmal-display=hdmi-1": "--video-on-top"
+                }
+            }
+        }
+    }
+}

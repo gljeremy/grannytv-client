@@ -6,6 +6,8 @@ Advanced diagnostic and optimization utilities for ultra-low latency IPTV stream
 
 ### Core Tools
 - **`vlc-setup.sh`** - Comprehensive VLC diagnostic and configuration tool
+- **`vlc-option-validator.sh`** ⚡ **NEW** - Tests which VLC options are supported
+- **`vlc-compatibility-check.py`** ⚡ **NEW** - VLC version compatibility analyzer
 - **`network-optimize.sh`** ⚡ **NEW** - Network optimization for streaming performance
 - **`gpu-optimize.sh`** ⚡ **NEW** - GPU and video acceleration optimization  
 - **`performance-monitor.py`** ⚡ **NEW** - Real-time system performance monitoring
@@ -28,6 +30,22 @@ sudo ./tools/gpu-optimize.sh
 python3 ./tools/performance-monitor.py --check-only
 ```
 
+## 🎬 VLC Compatibility System ⚡ NEW
+
+**Automatic VLC version detection and optimization:**
+
+The player now automatically detects your VLC version and applies compatible optimizations:
+
+**Version-Specific Features:**
+- **VLC 3.0.x:** Full optimization support with modern hardware decode
+- **VLC 2.2.x:** Limited optimizations, MMAL support on Pi  
+- **Unknown versions:** Conservative fallback mode
+
+**Automatic Problem Prevention:**
+- Deprecated options (like `--no-hw-decode`) are automatically avoided
+- Invalid options (like `--mmal-display=hdmi-1`) are replaced with working alternatives
+- Version history is logged for troubleshooting: `vlc_version_history.log`
+
 ## 🔧 Individual Tool Usage
 
 ### VLC Diagnostics
@@ -35,6 +53,12 @@ python3 ./tools/performance-monitor.py --check-only
 ./tools/vlc-setup.sh --test
 ./tools/vlc-setup.sh --framebuffer  
 ./tools/vlc-setup.sh --desktop
+
+# Test VLC option compatibility
+./tools/vlc-option-validator.sh
+
+# Check VLC version compatibility
+python3 ./tools/vlc-compatibility-check.py --report
 ```
 
 ### Performance Monitoring

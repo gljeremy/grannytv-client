@@ -57,6 +57,7 @@ class SmartIPTVPlayer:
         self.current_stream = None
         self.running = True
         self.stream_start_time = None  # Track performance metrics
+        self.vlc_version_info = None  # VLC version and compatibility info
         
         # Backup streams if no working streams found
         self.backup_streams = [
@@ -65,6 +66,7 @@ class SmartIPTVPlayer:
         ]
         
         logging.info(f"🔧 Running in {self.config['platform']} mode")
+        self.detect_vlc_version()
         self.load_working_streams()
 
     def check_x11_available(self):
@@ -75,6 +77,99 @@ class SmartIPTVPlayer:
             return True
         except (subprocess.CalledProcessError, FileNotFoundError):
             return False
+
+    def detect_vlc_version(self):
+        """Detect VLC version and set compatibility flags"""
+        try:
+            result = subprocess.run(['vlc', '--version'], capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                version_output = result.stdout.strip()
+                version_line = version_output.split('\n')[0] if version_output else ""
+                
+                # Extract version number (e.g., "VLC media player 3.0.18")
+                import re
+                version_match = re.search(r'VLC.*?(\d+\.\d+\.\d+)', version_line)
+                if version_match:
+                    version_str = version_match.group(1)
+                    version_parts = [int(x) for x in version_str.split('.')]
+                    
+                    # Try to load compatibility data from JSON
+                    compatibility_data = self.load_vlc_compatibility_data(version_str)
+                    
+                    self.vlc_version_info = {
+                        'version_string': version_line,
+                        'version_number': version_str,
+                        'major': version_parts[0],
+                        'minor': version_parts[1],
+                        'patch': version_parts[2],
+                        'supports_modern_hw_decode': compatibility_data.get('supports_modern_hw_decode', version_parts >= [3, 0, 0]),
+                        'supports_mmal': compatibility_data.get('supports_mmal', version_parts >= [2, 2, 0]),
+                        'supports_advanced_caching': compatibility_data.get('supports_advanced_caching', version_parts >= [3, 0, 0]),
+                        'problematic_options': compatibility_data.get('problematic_options', []),
+                    }
+                    
+                    logging.info(f"🎬 VLC Version: {version_line}")
+                    if version_parts < [3, 0, 0]:
+                        logging.warning(f"⚠️  VLC {version_str} is older - some optimizations may be disabled")
+                    
+                    # Log version for future compatibility tracking
+                    self.log_vlc_version()
+                    
+                    return True
+                else:
+                    logging.warning("⚠️  Could not parse VLC version number")
+            else:
+                logging.warning("⚠️  VLC version check failed")
+        except (subprocess.TimeoutExpired, FileNotFoundError, Exception) as e:
+            logging.error(f"❌ VLC not found or not working: {e}")
+            logging.error("   Please install VLC: sudo apt install vlc")
+            
+        # Fallback for unknown VLC version
+        self.vlc_version_info = {
+            'version_string': 'Unknown',
+            'version_number': '0.0.0',
+            'major': 0, 'minor': 0, 'patch': 0,
+            'supports_modern_hw_decode': False,
+            'supports_mmal': False,
+            'supports_advanced_caching': False,
+            'problematic_options': [],
+        }
+        return False
+
+    def load_vlc_compatibility_data(self, version_str):
+        """Load VLC compatibility data from JSON file"""
+        try:
+            compatibility_file = os.path.join(os.path.dirname(__file__), 'vlc_compatibility.json')
+            with open(compatibility_file, 'r') as f:
+                data = json.load(f)
+            
+            known_versions = data['vlc_compatibility']['known_versions']
+            
+            # Check for exact version match first
+            if version_str in known_versions:
+                return known_versions[version_str]
+            
+            # Check for major.minor.x pattern
+            major_minor = '.'.join(version_str.split('.')[:2]) + '.x'
+            if major_minor in known_versions:
+                return known_versions[major_minor]
+            
+        except Exception as e:
+            logging.debug(f"Could not load VLC compatibility data: {e}")
+        
+        return {}
+
+    def log_vlc_version(self):
+        """Log VLC version for compatibility tracking"""
+        try:
+            log_file = os.path.join(self.config['base_path'], 'vlc_version_history.log')
+            from datetime import datetime
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            with open(log_file, 'a') as f:
+                f.write(f"{timestamp}: Player startup - {self.vlc_version_info['version_string']}\n")
+        except Exception:
+            pass  # Don't fail if logging doesn't work
 
     def load_working_streams(self):
         """Load working streams from local database"""
@@ -239,9 +334,9 @@ class SmartIPTVPlayer:
                     # X11 with performance tweaks
                     ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11',
                      '--no-video-title-show'],
-                    # Software fallback if hardware fails
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11',
-                     '--no-hw-decode'],
+                    # Software fallback if hardware fails (version-aware)
+                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11'] + 
+                    (['--avcodec-hw=none'] if self.vlc_version_info['supports_modern_hw_decode'] else []),
                 ]
             else:
                 logging.info("[DISPLAY] No X11 - using performance-optimized framebuffer mode")
@@ -253,46 +348,12 @@ class SmartIPTVPlayer:
                     ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', '--no-osd'],
                 ]
             
-            # Try each configuration with ULTRA performance improvements
+            # Try each configuration with ULTRA performance improvements (version-aware)
             for i, base_cmd in enumerate(vlc_configs, 1):
                 if i == 1:
                     # First attempt: Ultra low-latency optimization
                     performance_args = [
                         '--network-caching=500',   # Ultra low latency (was 800)
-                        '--live-caching=100',      # Minimal live buffering (was 200)
-                        '--file-caching=100',      # Minimal file buffering (was 200)
-                        '--clock-jitter=0',        # Reduce A/V sync issues
-                        '--clock-synchro=0',       # Disable sync delays
-                        '--no-audio-time-stretch', # Prevent audio lag
-                        '--audio-time-stretch',    # Better A/V sync
-                        '--intf-change-vout',      # Optimize video output changes
-                        '--avcodec-fast',          # Fast decoding
-                        '--avcodec-skiploopfilter=all', # Skip post-processing
-                        '--avcodec-skip-frame=0',  # Don't skip frames
-                        '--avcodec-threads=0',     # Auto-detect CPU threads
-                        '--sout-mux-caching=50',   # Minimal output caching
-                        '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
-                        '--no-video-title-show',
-                        '--quiet',
-                        '--no-snapshot-preview',
-                        '--disable-screensaver',
-                        '--no-stats',              # Disable statistics overhead
-                        '--no-sub-autodetect-file', # Skip subtitle detection
-                        '--no-metadata-network-access', # Skip online metadata
-                        '--prefetch-buffer-size=1024', # Small prefetch buffer
-                        stream_url
-                    ]
-                elif i == 2:
-                    # Second attempt: Hardware decode + frame management
-                    hw_decode = 'mmal' if is_raspberry_pi else 'any'
-                    performance_args = [
-                        '--network-caching=1000',  # Moderate latency
-                        '--live-caching=300',      # Low live buffering
-                        '--file-caching=300',      # Low file buffering
-                        '--codec=avcodec',         # Hardware acceleration
-                        f'--avcodec-hw={hw_decode}', # Pi-optimized decode
-                        '--drop-late-frames',      # Drop frames if behind
-                        '--skip-frames',           # Skip frames to catch up
                         '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
                         '--no-video-title-show',
                         '--quiet',
@@ -300,13 +361,70 @@ class SmartIPTVPlayer:
                         '--disable-screensaver',
                     ]
                     
-                    # Add Raspberry Pi specific optimizations
-                    if is_raspberry_pi:
+                    # Add version-specific options
+                    if self.vlc_version_info['supports_advanced_caching']:
                         performance_args.extend([
-                            '--mmal-display=hdmi-1',   # Direct HDMI output
-                            '--no-audio-time-stretch', # Prevent audio lag
-                            '--avcodec-skiploopfilter=all', # Skip post-processing for speed
+                            '--live-caching=100',      # Minimal live buffering
+                            '--file-caching=100',      # Minimal file buffering
+                            '--clock-jitter=0',        # Reduce A/V sync issues
+                            '--clock-synchro=0',       # Disable sync delays
                         ])
+                    
+                    # Add performance options if supported
+                    if self.vlc_version_info['major'] >= 3:
+                        performance_args.extend([
+                            '--avcodec-fast',          # Fast decoding
+                            '--avcodec-skiploopfilter=all', # Skip post-processing
+                            '--avcodec-threads=0',     # Auto-detect CPU threads
+                            '--no-stats',              # Disable statistics overhead
+                            '--no-sub-autodetect-file', # Skip subtitle detection
+                            '--no-metadata-network-access', # Skip online metadata
+                        ])
+                    
+                    performance_args.append(stream_url)
+                elif i == 2:
+                    # Second attempt: Hardware decode + frame management (version-aware)
+                    performance_args = [
+                        '--network-caching=1000',  # Moderate latency
+                        '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
+                        '--no-video-title-show',
+                        '--quiet',
+                        '--no-snapshot-preview',
+                        '--disable-screensaver',
+                    ]
+                    
+                    # Add caching options if supported
+                    if self.vlc_version_info['supports_advanced_caching']:
+                        performance_args.extend([
+                            '--live-caching=300',      # Low live buffering
+                            '--file-caching=300',      # Low file buffering
+                        ])
+                    
+                    # Add modern hardware decode options
+                    if self.vlc_version_info['supports_modern_hw_decode']:
+                        hw_decode = 'mmal' if (is_raspberry_pi and self.vlc_version_info['supports_mmal']) else 'any'
+                        performance_args.extend([
+                            '--codec=avcodec',         # Hardware acceleration
+                            f'--avcodec-hw={hw_decode}', # Hardware decode
+                        ])
+                    
+                    # Add frame management if supported
+                    if self.vlc_version_info['major'] >= 3:
+                        performance_args.extend([
+                            '--drop-late-frames',      # Drop frames if behind
+                            '--skip-frames',           # Skip frames to catch up
+                        ])
+                    
+                    # Add Raspberry Pi specific optimizations
+                    if is_raspberry_pi and self.vlc_version_info['major'] >= 2:
+                        pi_options = ['--video-on-top']  # Keep video on top for direct output
+                        
+                        if self.vlc_version_info['major'] >= 3:
+                            pi_options.extend([
+                                '--avcodec-skiploopfilter=all', # Skip post-processing for speed
+                            ])
+                        
+                        performance_args.extend(pi_options)
                     
                     performance_args.append(stream_url)
                 else:
@@ -381,7 +499,14 @@ class SmartIPTVPlayer:
                 try:
                     _, stderr_output = self.current_process.communicate(timeout=1)
                     if stderr_output.strip():
-                        logging.error(f"   VLC Error: {stderr_output.strip()[:200]}")
+                        error_msg = stderr_output.strip()[:300]  # Show more error detail
+                        logging.error(f"   VLC Error: {error_msg}")
+                        
+                        # Check for specific known issues
+                        if "unknown option" in error_msg.lower():
+                            logging.error("   💡 TIP: Run './tools/vlc-option-validator.sh' to check supported options")
+                        elif "missing mandatory argument" in error_msg.lower():
+                            logging.error("   💡 TIP: Some VLC options may be deprecated in your VLC version")
                 except Exception:
                     pass
                 logging.warning(f"[FAIL] VLC {config_name} crashed immediately (exit code: {self.current_process.returncode})")

@@ -73,6 +73,28 @@ if [ "$INSTALL_VLC" = true ]; then
     sudo apt update
     sudo apt install -y vlc alsa-utils
     log_success "VLC installation complete"
+    
+    # Check and log VLC version for compatibility tracking
+    if command -v vlc >/dev/null 2>&1; then
+        VLC_VERSION=$(vlc --version 2>/dev/null | head -n1 || echo "Unknown")
+        log_info "Installed VLC Version: $VLC_VERSION"
+        
+        # Log to compatibility file for future reference
+        echo "$(date): $VLC_VERSION" >> /tmp/vlc_version_history.log
+        
+        # Check for known problematic versions
+        case "$VLC_VERSION" in
+            *"3.0."*)
+                log_success "VLC 3.0.x detected - Full optimization support"
+                ;;
+            *"2."*)
+                log_warning "VLC 2.x detected - Some optimizations may be limited"
+                ;;
+            *)
+                log_warning "Unknown VLC version - Basic compatibility mode will be used"
+                ;;
+        esac
+    fi
 fi
 
 # 3. Fix permissions if requested  

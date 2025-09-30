@@ -151,6 +151,13 @@ if [ -f "tools/vlc-setup.sh" ]; then
         ./tools/vlc-setup.sh --install-vlc
     fi
     
+    # Run VLC compatibility check
+    if [ -f "tools/vlc-compatibility-check.py" ]; then
+        log_info "Running VLC compatibility check..."
+        python3 tools/vlc-compatibility-check.py --report
+        echo ""
+    fi
+    
     # Fix permissions and test
     ./tools/vlc-setup.sh --fix-permissions --test-only
     log_success "VLC configuration complete"
