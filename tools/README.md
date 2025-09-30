@@ -12,11 +12,21 @@ Advanced diagnostic and optimization utilities for ultra-low latency IPTV stream
 - **`gpu-optimize.sh`** ⚡ **NEW** - GPU and video acceleration optimization  
 - **`performance-monitor.py`** ⚡ **NEW** - Real-time system performance monitoring
 
+### HLS & Protocol Optimization ⚡ **NEW**
+- **`iptv-protocol-optimizer.py`** - Universal IPTV protocol detection & optimization
+- **`stream-performance-analyzer.py`** - Stream latency testing & database optimization
+- **`create-hls-profiles.sh`** - Creates optimized VLC profiles for different HLS scenarios
+- **`setup-hls-optimization.sh`** - One-command HLS optimization setup
+
 ## 🚀 Quick Performance Setup
 
 For maximum streaming performance, run in this order:
 
 ```bash
+# 🚀 QUICK START: HLS Optimization (recommended first)
+./tools/setup-hls-optimization.sh
+
+# OR manual setup:
 # 1. Network optimization (requires sudo)
 sudo ./tools/network-optimize.sh
 
@@ -26,7 +36,10 @@ sudo ./tools/gpu-optimize.sh
 # 3. VLC configuration and testing
 ./tools/vlc-setup.sh --install-vlc --fix-permissions
 
-# 4. Monitor system performance
+# 4. Analyze and optimize stream performance
+python3 ./tools/stream-performance-analyzer.py
+
+# 5. Monitor system performance
 python3 ./tools/performance-monitor.py --check-only
 ```
 
@@ -59,6 +72,24 @@ The player now automatically detects your VLC version and applies compatible opt
 
 # Check VLC version compatibility
 python3 ./tools/vlc-compatibility-check.py --report
+
+# Test protocol detection
+python3 ./tools/iptv-protocol-optimizer.py
+```
+
+### HLS & Stream Optimization ⚡ NEW
+```bash
+# One-command HLS optimization
+./tools/setup-hls-optimization.sh
+
+# Manual stream analysis and optimization
+python3 ./tools/stream-performance-analyzer.py
+
+# Create HLS performance profiles
+./tools/create-hls-profiles.sh
+
+# Test protocol detection
+python3 ./tools/iptv-protocol-optimizer.py
 ```
 
 ### Performance Monitoring
@@ -71,6 +102,13 @@ python3 ./tools/performance-monitor.py --duration 60
 ```
 
 ## ⚡ Performance Optimizations
+
+### HLS Protocol Optimizations ⚡ NEW
+- **Protocol detection:** Automatic detection of HLS, DASH, RTMP, RTSP, UDP streams
+- **HLS ultra-low latency:** <200ms for live streams (Pluto TV optimized)
+- **Adaptive bitrate:** Smart quality adjustment for network conditions
+- **Stream ranking:** Performance-based stream selection (fastest first)
+- **CDN optimization:** Provider-specific optimizations (Pluto, Cloudflare, etc.)
 
 ### Ultra Low-Latency Features
 - **Stream latency:** Reduced to <1 second end-to-end

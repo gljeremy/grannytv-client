@@ -9,6 +9,26 @@ import json
 from datetime import datetime
 import platform
 
+# Import protocol optimizer
+tools_path = os.path.join(os.path.dirname(__file__), 'tools')
+if tools_path not in sys.path:
+    sys.path.append(tools_path)
+
+try:
+    from iptv_protocol_optimizer import IPTVProtocolOptimizer  # noqa: F401
+except ImportError:
+    # Fallback if optimizer not available
+    class IPTVProtocolOptimizer:
+        def detect_protocol(self, url): return 'unknown'
+        def get_optimized_vlc_args(self, url, vlc_info): return []
+        def get_protocol_info(self, url): return {
+            'name': 'Unknown Protocol',
+            'description': 'Protocol not recognized',
+            'latency': 'Unknown',
+            'reliability': 'Unknown',
+            'adaptive': False,
+        }
+
 def load_config():
     """Load configuration based on environment"""
     config_file = os.path.join(os.path.dirname(__file__), 'config.json')
@@ -38,14 +58,18 @@ def load_config():
 # Load configuration
 CONFIG = load_config()
 
-# Configure logging
+# Configure logging with Windows-safe encoding
+log_handlers = [logging.StreamHandler(sys.stdout)]
+try:
+    log_handlers.append(logging.FileHandler(CONFIG['log_file'], encoding='utf-8'))
+except Exception:
+    # Fallback for Windows
+    log_handlers.append(logging.FileHandler(CONFIG['log_file']))
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(CONFIG['log_file']),
-        logging.StreamHandler(sys.stdout)
-    ]
+    handlers=log_handlers
 )
 
 class SmartIPTVPlayer:
@@ -58,6 +82,7 @@ class SmartIPTVPlayer:
         self.running = True
         self.stream_start_time = None  # Track performance metrics
         self.vlc_version_info = None  # VLC version and compatibility info
+        self.protocol_optimizer = IPTVProtocolOptimizer()  # Protocol optimization engine
         
         # Backup streams if no working streams found
         self.backup_streams = [
@@ -65,7 +90,7 @@ class SmartIPTVPlayer:
             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
         ]
         
-        logging.info(f"🔧 Running in {self.config['platform']} mode")
+        logging.info(f"[SETUP] Running in {self.config['platform']} mode")
         self.detect_vlc_version()
         self.load_working_streams()
 
@@ -78,10 +103,27 @@ class SmartIPTVPlayer:
         except (subprocess.CalledProcessError, FileNotFoundError):
             return False
 
+    def find_vlc_executable(self):
+        """Find VLC executable path for the current platform"""
+        if platform.system() == 'Windows':
+            # Common Windows VLC installation paths
+            windows_paths = [
+                r"C:\Program Files\VideoLAN\VLC\vlc.exe",
+                r"C:\Program Files (x86)\VideoLAN\VLC\vlc.exe",
+                "vlc"  # Fallback to PATH
+            ]
+            for path in windows_paths:
+                if os.path.exists(path):
+                    return path
+            return "vlc"  # Final fallback
+        else:
+            return "vlc"  # Linux/Mac use PATH
+
     def detect_vlc_version(self):
         """Detect VLC version and set compatibility flags"""
+        vlc_cmd = self.find_vlc_executable()
         try:
-            result = subprocess.run(['vlc', '--version'], capture_output=True, text=True, timeout=10)
+            result = subprocess.run([vlc_cmd, '--version'], capture_output=True, text=True, timeout=10)
             if result.returncode == 0:
                 version_output = result.stdout.strip()
                 version_line = version_output.split('\n')[0] if version_output else ""
@@ -108,20 +150,20 @@ class SmartIPTVPlayer:
                         'problematic_options': compatibility_data.get('problematic_options', []),
                     }
                     
-                    logging.info(f"🎬 VLC Version: {version_line}")
+                    logging.info(f"[VLC] Version: {version_line}")
                     if version_parts < [3, 0, 0]:
-                        logging.warning(f"⚠️  VLC {version_str} is older - some optimizations may be disabled")
+                        logging.warning(f"[WARNING] VLC {version_str} is older - some optimizations may be disabled")
                     
                     # Log version for future compatibility tracking
                     self.log_vlc_version()
                     
                     return True
                 else:
-                    logging.warning("⚠️  Could not parse VLC version number")
+                    logging.warning("[WARNING] Could not parse VLC version number")
             else:
-                logging.warning("⚠️  VLC version check failed")
+                logging.warning("[WARNING] VLC version check failed")
         except (subprocess.TimeoutExpired, FileNotFoundError, Exception) as e:
-            logging.error(f"❌ VLC not found or not working: {e}")
+            logging.error(f"[ERROR] VLC not found or not working: {e}")
             logging.error("   Please install VLC: sudo apt install vlc")
             
         # Fallback for unknown VLC version
@@ -172,12 +214,26 @@ class SmartIPTVPlayer:
             pass  # Don't fail if logging doesn't work
 
     def load_working_streams(self):
-        """Load working streams from local database"""
+        """Load working streams from local database, prefer optimized version"""
+        # Try optimized database first
+        optimized_file = os.path.join(self.config['base_path'], 'working_streams_optimized.json')
+        
+        try:
+            if os.path.exists(optimized_file):
+                with open(optimized_file, 'r') as f:
+                    self.working_streams = json.load(f)
+                logging.info(f"[OK] Loaded {len(self.working_streams)} performance-optimized streams")
+                return
+        except Exception as e:
+            logging.warning(f"Could not load optimized streams: {e}")
+        
+        # Fallback to original database
         try:
             if os.path.exists(self.working_streams_file):
                 with open(self.working_streams_file, 'r') as f:
                     self.working_streams = json.load(f)
                 logging.info(f"[OK] Loaded {len(self.working_streams)} working streams from database")
+                logging.info("[HINT] Run 'python3 tools/stream-performance-analyzer.py' to optimize performance")
             else:
                 logging.warning("[FAIL] No working streams database found! Run iptv_stream_scanner.py first")
         except Exception as e:
@@ -185,7 +241,7 @@ class SmartIPTVPlayer:
 
     def setup_environment(self):
         """Setup audio/video environment"""
-        logging.info("🔧 Setting up environment...")
+        logging.info("[SETUP] Setting up environment...")
         
         if self.config['platform'] == 'windows':
             # Windows environment
@@ -208,9 +264,9 @@ class SmartIPTVPlayer:
                 subprocess.run(['sudo', 'amixer', 'cset', 'numid=3', '2'], check=False)
                 # Set reasonable volume
                 subprocess.run(['amixer', 'set', 'Master', '90%', 'unmute'], check=False)
-                logging.info("🔊 Audio configured (HDMI output, 90% volume)")
+                logging.info("[AUDIO] Audio configured (HDMI output, 90% volume)")
             except Exception:
-                logging.warning("⚠️ Audio setup failed - check alsa-utils installation")
+                logging.warning("[WARNING] Audio setup failed - check alsa-utils installation")
         
         return env
 
@@ -248,8 +304,9 @@ class SmartIPTVPlayer:
             logging.info(f"URL: {stream_url[:100]}...")
             logging.info(f"Group: {stream_data['group']}")
             
-            # Kill existing VLC processes
-            subprocess.run(['pkill', '-9', '-f', 'vlc'], check=False)
+            # Kill existing VLC processes (Linux only)
+            if platform.system() != 'Windows':
+                subprocess.run(['pkill', '-9', '-f', 'vlc'], check=False)
             time.sleep(2)
             
             return self.launch_vlc(stream_url, env)
@@ -263,7 +320,8 @@ class SmartIPTVPlayer:
         try:
             # Check VLC availability and Pi hardware
             try:
-                vlc_version = subprocess.run(['vlc', '--version'], capture_output=True, text=True, timeout=5)
+                vlc_cmd = self.find_vlc_executable()
+                vlc_version = subprocess.run([vlc_cmd, '--version'], capture_output=True, text=True, timeout=5)
                 logging.info(f"   VLC Version: {vlc_version.stdout.split()[2] if vlc_version.stdout else 'Unknown'}")
             except Exception:
                 logging.warning("   Could not determine VLC version")
@@ -325,35 +383,57 @@ class SmartIPTVPlayer:
             has_x11 = os.environ.get('DISPLAY') and self.check_x11_available()
             
             # VLC configurations optimized for performance now that stability is proven
-            if has_x11:
-                logging.info("[DISPLAY] X11 detected - using performance-optimized desktop mode")
+            vlc_cmd = self.find_vlc_executable()
+            
+            # Platform-specific audio output
+            if platform.system() == 'Windows':
+                audio_out = 'directsound'  # Windows DirectSound
+                video_out = 'directx'      # Windows DirectX
+                logging.info("[DISPLAY] Windows detected - using DirectX output")
+            else:
+                audio_out = 'alsa'         # Linux ALSA
+                video_out = 'x11'          # Linux X11
+            
+            if has_x11 or platform.system() == 'Windows':
+                if platform.system() == 'Windows':
+                    logging.info("[DISPLAY] Windows detected - using DirectX output")
+                else:
+                    logging.info("[DISPLAY] X11 detected - using performance-optimized desktop mode")
                 vlc_configs = [
                     # GPU-accelerated for best performance
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'gl',
-                     '--deinterlace-mode', 'linear'],  # Smooth deinterlacing
-                    # X11 with performance tweaks
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11',
+                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'gl'],
+                    # Standard video output with performance tweaks
+                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out,
                      '--no-video-title-show'],
                     # Software fallback if hardware fails (version-aware)
-                    ['vlc', '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', 'alsa', '--vout', 'x11'] + 
+                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out] + 
                     (['--avcodec-hw=none'] if self.vlc_version_info['supports_modern_hw_decode'] else []),
                 ]
             else:
                 logging.info("[DISPLAY] No X11 - using performance-optimized framebuffer mode")
                 vlc_configs = [
-                    # Optimized framebuffer with deinterlacing
-                    ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', 
+                    # Optimized framebuffer with deinterlacing (Linux only)
+                    [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, 
                      '--no-osd', '--deinterlace-mode', 'linear'],
-                    # Basic framebuffer fallback
-                    ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', '--no-osd'],
+                    # Basic framebuffer fallback (Linux only)
+                    [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, '--no-osd'],
                 ]
             
-            # Try each configuration with ULTRA performance improvements (version-aware)
+            # Try each configuration with PROTOCOL-AWARE optimizations
             for i, base_cmd in enumerate(vlc_configs, 1):
                 if i == 1:
-                    # First attempt: Ultra low-latency optimization
+                    # First attempt: Protocol-optimized ultra low-latency
+                    
+                    # Detect protocol and get optimized args
+                    protocol = self.protocol_optimizer.detect_protocol(stream_url)
+                    protocol_info = self.protocol_optimizer.get_protocol_info(stream_url)
+                    protocol_args = self.protocol_optimizer.get_optimized_vlc_args(stream_url, self.vlc_version_info)
+                    
+                    logging.info(f"   Protocol: {protocol.upper()} - {protocol_info['name']}")
+                    logging.info(f"   Expected latency: {protocol_info['latency']}")
+                    
+                    # Base performance args
                     performance_args = [
-                        '--network-caching=500',   # Ultra low latency (was 800)
                         '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
                         '--no-video-title-show',
                         '--quiet',
@@ -361,21 +441,12 @@ class SmartIPTVPlayer:
                         '--disable-screensaver',
                     ]
                     
-                    # Add version-specific options
-                    if self.vlc_version_info['supports_advanced_caching']:
-                        performance_args.extend([
-                            '--live-caching=100',      # Minimal live buffering
-                            '--file-caching=100',      # Minimal file buffering
-                            '--clock-jitter=0',        # Reduce A/V sync issues
-                            '--clock-synchro=0',       # Disable sync delays
-                        ])
+                    # Add protocol-specific optimizations
+                    performance_args.extend(protocol_args)
                     
-                    # Add performance options if supported
+                    # Add general performance options if supported
                     if self.vlc_version_info['major'] >= 3:
                         performance_args.extend([
-                            '--avcodec-fast',          # Fast decoding
-                            '--avcodec-skiploopfilter=all', # Skip post-processing
-                            '--avcodec-threads=0',     # Auto-detect CPU threads
                             '--no-stats',              # Disable statistics overhead
                             '--no-sub-autodetect-file', # Skip subtitle detection
                             '--no-metadata-network-access', # Skip online metadata
@@ -461,29 +532,34 @@ class SmartIPTVPlayer:
     def _start_vlc_process(self, cmd, env, config_name):
         """Start VLC process and monitor startup"""
         try:
-            env['DISPLAY'] = ':0'
+            # Platform-specific environment setup
+            if platform.system() != 'Windows':
+                env['DISPLAY'] = ':0'
             
             # Log the exact command being run for debugging
             logging.info(f"   Executing: {' '.join(cmd)}")
             
-            # Start VLC with high priority for better performance
-            def setup_process():
-                os.setsid()
-                # Set high priority (lower nice value = higher priority)
-                try:
-                    os.nice(-10)  # High priority for streaming
-                except OSError:
-                    pass  # Not running as root, ignore
+            # Platform-specific process setup
+            popen_kwargs = {
+                'env': env,
+                'stdout': subprocess.DEVNULL,
+                'stderr': subprocess.PIPE,
+                'text': True
+            }
+            
+            if platform.system() != 'Windows':
+                # Linux-specific: Start VLC with high priority for better performance
+                def setup_process():
+                    os.setsid()
+                    # Set high priority (lower nice value = higher priority)
+                    try:
+                        os.nice(-10)  # High priority for streaming
+                    except OSError:
+                        pass  # Not running as root, ignore
+                popen_kwargs['preexec_fn'] = setup_process
             
             # For debugging, capture stderr to see VLC errors
-            self.current_process = subprocess.Popen(
-                cmd,
-                env=env,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.PIPE,
-                preexec_fn=setup_process,
-                text=True
-            )
+            self.current_process = subprocess.Popen(cmd, **popen_kwargs)
             
             self.current_stream = cmd[-1]  # URL is the last argument
             
@@ -504,9 +580,9 @@ class SmartIPTVPlayer:
                         
                         # Check for specific known issues
                         if "unknown option" in error_msg.lower():
-                            logging.error("   💡 TIP: Run './tools/vlc-option-validator.sh' to check supported options")
+                            logging.error("   [TIP] Run './tools/vlc-option-validator.sh' to check supported options")
                         elif "missing mandatory argument" in error_msg.lower():
-                            logging.error("   💡 TIP: Some VLC options may be deprecated in your VLC version")
+                            logging.error("   [TIP] Some VLC options may be deprecated in your VLC version")
                 except Exception:
                     pass
                 logging.warning(f"[FAIL] VLC {config_name} crashed immediately (exit code: {self.current_process.returncode})")
@@ -627,7 +703,7 @@ class SmartIPTVPlayer:
 
     def start_smart_player(self):
         """Start the smart IPTV player"""
-        logging.info("🚀 === SMART IPTV PLAYER STARTING ===")
+        logging.info("[START] === SMART IPTV PLAYER STARTING ===")
         
         def signal_handler(signum, frame):
             logging.info(f"Received signal {signum}, shutting down...")
@@ -644,7 +720,7 @@ class SmartIPTVPlayer:
             logging.error("   python3 /home/jeremy/gtv/iptv_stream_scanner.py")
             return False
         
-        logging.info("⏳ Waiting for system stability...")
+        logging.info("[INIT] Waiting for system stability...")
         time.sleep(5)
         
         # Try categories in order of preference
@@ -686,7 +762,7 @@ class SmartIPTVPlayer:
         try:
             while self.running:
                 if self.current_process and self.current_process.poll() is not None:
-                    logging.warning("⚠️ Player ended unexpectedly")
+                    logging.warning("[WARNING] Player ended unexpectedly")
                     break
                 
                 time.sleep(60)  # Check every minute
@@ -700,7 +776,7 @@ class SmartIPTVPlayer:
 
     def shutdown(self):
         """Clean shutdown"""
-        logging.info("🛑 Shutting down...")
+        logging.info("[STOP] Shutting down...")
         self.running = False
         
         if self.current_process:
@@ -710,7 +786,9 @@ class SmartIPTVPlayer:
             except Exception:
                 self.current_process.kill()
         
-        subprocess.run(['pkill', '-9', '-f', 'mplayer'], check=False)
+        # Kill any remaining media player processes (Linux only)
+        if platform.system() != 'Windows':
+            subprocess.run(['pkill', '-9', '-f', 'mplayer'], check=False)
         logging.info("Shutdown complete")
 
 def main():
