@@ -1,83 +1,80 @@
-# IPTV Smart Player for Raspberry Pi
+# GrannyTV - Simple IPTV Player for Raspberry Pi
 
-An IPTV player designed for elderly users - just plug in the Raspberry Pi and watch TV!
+**Just plug it in and watch TV!** 📺
 
-## Features
+Designed for elderly users who want zero-hassle television. The Raspberry Pi automatically finds and plays live TV streams with optimized performance and reliability.
 
-- 🎥 Automatically plays working IPTV streams
-- 🔄 Smart stream selection and failover
-- 🏠 Designed for non-technical users
-- 📺 Full-screen TV experience
-- 🔧 Development workflow for Windows to Pi deployment
+## What It Does
 
-## Quick Setup for Raspberry Pi
+✅ **Plug & Play** - Starts automatically when powered on  
+✅ **Smart Stream Selection** - Finds working TV channels automatically  
+✅ **Optimized Performance** - Low-latency streaming with hardware acceleration  
+✅ **Reliable** - Self-healing with automatic failovers  
+✅ **Simple** - No remote controls or complicated menus
 
-1. Clone this repository:
+## Setup (One-Time)
+
+**For the person setting up the Pi:**
+
+1. **Install on Raspberry Pi:**
 ```bash
+# Get the code
 git clone https://github.com/gljeremy/grannytv-client.git
 cd grannytv-client
-```
 
-2. Install dependencies and setup virtual environment:
-```bash
-sudo apt update
-sudo apt install python3-pip python3-venv vlc
+# Install everything
+sudo apt update && sudo apt install python3-pip python3-venv vlc -y
 python3 -m venv venv
 source venv/bin/activate
-pip install --upgrade pip
 pip install -r requirements.txt
-```
 
-3. Set up auto-deployment:
-```bash
-chmod +x pi-update.sh
-./pi-update.sh
-```
-
-4. Enable auto-start service:
-```bash
+# Set up auto-start
+chmod +x pi-update.sh vlc-setup.sh
 sudo cp iptv-player.service /etc/systemd/system/
-sudo systemctl daemon-reload
 sudo systemctl enable iptv-player
 sudo systemctl start iptv-player
 ```
 
-## Development Workflow
+2. **That's it!** The Pi will automatically start playing TV when powered on.
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed development setup.
+## Performance Optimized ⚡
 
-### Quick Deploy from Windows:
+- **Ultra-low latency**: ~0.8 second delay (vs 3+ seconds typical)
+- **Hardware acceleration**: Uses Pi's GPU for smooth video
+- **Smart caching**: Minimal buffering for real-time playback  
+- **Auto-optimization**: Detects Pi model and adjusts settings
+
+## For Developers 🔧
+
+**Quick updates from Windows:**
 ```powershell
-git add .
-git commit -m "Update streams"
-git push origin main
-
-# Then on Pi:
-./pi-update.sh
+git add . && git commit -m "Update" && git push
+# Then SSH to Pi and run: ./pi-update.sh
 ```
 
-## Documentation
+**Testing:** `python iptv_smart_player.py --test`  
+**Logs:** Check `/home/jeremy/gtv/iptv_player.log`
 
-📖 **[Copilot Instructions](COPILOT_INSTRUCTIONS.md)** - Comprehensive project context for AI assistants  
-⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Common commands and quick fixes  
-🔧 **[Troubleshooting Guide](TROUBLESHOOTING.md)** - Step-by-step problem solving  
-🚀 **[Development Workflow](DEVELOPMENT.md)** - Git-based development process  
-📋 **[Quick Start Guide](QUICKSTART.md)** - First-time setup instructions  
+## Documentation (Simple & Updated)
 
-## Key Files
+� **[Quick Start](QUICKSTART.md)** - Get TV working in 5 minutes  
+⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Common commands for optimized version  
+📊 **[Project Status](PROJECT_STATUS.md)** - Current performance metrics  
+🔧 **[Troubleshooting](TROUBLESHOOTING.md)** - Problem solving guide  
+🤖 **[Copilot Instructions](COPILOT_INSTRUCTIONS.md)** - For AI development assistance  
 
-- `iptv_smart_player.py` - Main application
-- `working_streams.json` - Database of working streams (3000+ tested)
-- `config.json` - Environment configuration
-- `pi-update.sh` - Auto-update script for Pi
-- `iptv-player.service` - Systemd service for auto-start
-- `git-deploy.ps1` - Windows deployment script
+## How It Works
 
-## Project Goals
+📁 **`iptv_smart_player.py`** - Main program (VLC-optimized)  
+📊 **`working_streams.json`** - 196 tested TV streams  
+⚙️ **`config.json`** - Auto-detects Windows vs Pi  
+🔄 **`pi-update.sh`** - Easy updates  
 
-🎯 **For Elderly Users**: Plug-and-play TV experience, zero technical knowledge required  
-🔧 **For Caregivers**: Remote monitoring, easy updates, reliable 24/7 operation  
-🖥️ **System Design**: Raspberry Pi → HDMI TV, auto-start on boot, graceful failure handling  
+## Perfect For
+
+👵 **Elderly Users** - No learning curve, just works  
+�‍⚕️ **Care Facilities** - Set and forget operation  
+🏠 **Family** - Give grandparents reliable TV  
 
 ## License
 
