@@ -253,16 +253,24 @@ class SmartIPTVPlayer:
                     ['vlc', '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', 'alsa', '--no-osd'],
                 ]
             
-            # Try each configuration with AGGRESSIVE performance improvements
+            # Try each configuration with ULTRA performance improvements
             for i, base_cmd in enumerate(vlc_configs, 1):
                 if i == 1:
-                    # First attempt: Aggressive low-latency optimization
+                    # First attempt: Ultra low-latency optimization
                     performance_args = [
-                        '--network-caching=800',   # Much lower latency
-                        '--live-caching=200',      # Minimal live buffering
-                        '--file-caching=200',      # Minimal file buffering
+                        '--network-caching=500',   # Ultra low latency (was 800)
+                        '--live-caching=100',      # Minimal live buffering (was 200)
+                        '--file-caching=100',      # Minimal file buffering (was 200)
                         '--clock-jitter=0',        # Reduce A/V sync issues
                         '--clock-synchro=0',       # Disable sync delays
+                        '--no-audio-time-stretch', # Prevent audio lag
+                        '--audio-time-stretch',    # Better A/V sync
+                        '--intf-change-vout',      # Optimize video output changes
+                        '--avcodec-fast',          # Fast decoding
+                        '--avcodec-skiploopfilter=all', # Skip post-processing
+                        '--avcodec-skip-frame=0',  # Don't skip frames
+                        '--avcodec-threads=0',     # Auto-detect CPU threads
+                        '--sout-mux-caching=50',   # Minimal output caching
                         '--http-user-agent', 'Mozilla/5.0 (Smart-IPTV-Player)',
                         '--no-video-title-show',
                         '--quiet',
@@ -270,6 +278,8 @@ class SmartIPTVPlayer:
                         '--disable-screensaver',
                         '--no-stats',              # Disable statistics overhead
                         '--no-sub-autodetect-file', # Skip subtitle detection
+                        '--no-metadata-network-access', # Skip online metadata
+                        '--prefetch-buffer-size=1024', # Small prefetch buffer
                         stream_url
                     ]
                 elif i == 2:
@@ -338,13 +348,22 @@ class SmartIPTVPlayer:
             # Log the exact command being run for debugging
             logging.info(f"   Executing: {' '.join(cmd)}")
             
+            # Start VLC with high priority for better performance
+            def setup_process():
+                os.setsid()
+                # Set high priority (lower nice value = higher priority)
+                try:
+                    os.nice(-10)  # High priority for streaming
+                except OSError:
+                    pass  # Not running as root, ignore
+            
             # For debugging, capture stderr to see VLC errors
             self.current_process = subprocess.Popen(
                 cmd,
                 env=env,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.PIPE,
-                preexec_fn=os.setsid,
+                preexec_fn=setup_process,
                 text=True
             )
             
