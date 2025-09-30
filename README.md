@@ -1,6 +1,19 @@
 # GrannyTV - Simple IPTV Player for Raspberry Pi
 
-**Just plug it in and watch TV!** 📺
+**Jus## 🚀 Quick Commands
+
+```bash
+# Windows development
+.\platforms\windows\setup-venv.ps1    # Setup environment
+.\platforms\windows\test-windows.ps1  # Test locally
+
+# Pi deployment  
+./platforms/linux/pi-update.sh        # Update from Git
+./tools/vlc-setup.sh                  # Diagnose VLC issues
+
+# Testing
+python iptv_smart_player.py --test    # Test with performance monitoring
+```it in and watch TV!** 📺
 
 Designed for elderly users who want zero-hassle television. The Raspberry Pi automatically finds and plays live TV streams with optimized performance and reliability.
 
@@ -29,8 +42,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Set up auto-start
-chmod +x pi-update.sh vlc-setup.sh
-sudo cp iptv-player.service /etc/systemd/system/
+chmod +x platforms/linux/pi-update.sh tools/vlc-setup.sh
+sudo cp platforms/linux/iptv-player.service /etc/systemd/system/
 sudo systemctl enable iptv-player
 sudo systemctl start iptv-player
 ```
@@ -49,7 +62,7 @@ sudo systemctl start iptv-player
 **Quick updates from Windows:**
 ```powershell
 git add . && git commit -m "Update" && git push
-# Then SSH to Pi and run: ./pi-update.sh
+# Then SSH to Pi and run: ./platforms/linux/pi-update.sh
 ```
 
 **Testing:** `python iptv_smart_player.py --test`  
@@ -65,10 +78,19 @@ git add . && git commit -m "Update" && git push
 
 ## How It Works
 
-📁 **`iptv_smart_player.py`** - Main program (VLC-optimized)  
-📊 **`working_streams.json`** - 196 tested TV streams  
-⚙️ **`config.json`** - Auto-detects Windows vs Pi  
-🔄 **`pi-update.sh`** - Easy updates  
+## 📁 Project Structure
+
+```
+grannytv-client/
+├── iptv_smart_player.py      # Main application (VLC-optimized)
+├── working_streams.json      # 196 tested TV streams  
+├── config.json              # Auto-detects Windows vs Pi
+├── platforms/
+│   ├── windows/             # Windows development tools
+│   └── linux/               # Pi deployment scripts & service
+├── tools/                   # Diagnostic utilities
+└── docs/                    # Future documentation location
+```  
 
 ## Perfect For
 

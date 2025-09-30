@@ -67,7 +67,7 @@ if systemctl list-unit-files | grep -q "$SERVICE_NAME"; then
     sudo systemctl status "$SERVICE_NAME" --no-pager -l
 else
     echo "🚀 Starting player manually with virtual environment..."
-    echo "💡 To install as service: sudo cp iptv-player.service /etc/systemd/system/ && sudo systemctl enable iptv-player"
+    echo "💡 To install as service: sudo cp platforms/linux/iptv-player.service /etc/systemd/system/ && sudo systemctl enable iptv-player"
     nohup ./venv/bin/python iptv_smart_player.py > iptv_player.log 2>&1 &
     echo "Process started in background. Check iptv_player.log for output."
 fi
