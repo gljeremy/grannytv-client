@@ -44,8 +44,9 @@ if [ -d "$SETUP_DIR" ]; then
     cd "$WORK_DIR"
     echo "   Setup files copied to: $WORK_DIR"
     
-    # Make startup script executable
+    # Make scripts executable
     chmod +x "$WORK_DIR/start-setup-wizard.sh"
+    chmod +x "$WORK_DIR/prepare-hotspot.sh"
 else
     echo "❌ Setup files not found at: $SETUP_DIR"
     echo "💡 Make sure you're running from the grannytv-client directory"
@@ -133,7 +134,8 @@ echo "🔧 Creating setup service..."
 sudo tee /etc/systemd/system/grannytv-setup.service > /dev/null << EOF
 [Unit]
 Description=GrannyTV Smartphone Setup Wizard
-After=network.target
+After=grannytv-prepare.service
+Requires=grannytv-prepare.service
 
 [Service]
 Type=simple
@@ -153,9 +155,32 @@ EOF
 # Install Python dependencies (Flask already installed via apt)
 echo "🐍 Python dependencies already installed via apt..."
 
+# Create WiFi preparation service (runs early)
+echo "🔧 Creating WiFi preparation service..."
+sudo tee /etc/systemd/system/grannytv-prepare.service > /dev/null << EOF
+[Unit]
+Description=GrannyTV WiFi Hotspot Preparation
+DefaultDependencies=false
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=$WORK_DIR/prepare-hotspot.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target
+EOF
+
+# Create setup mode flag
+echo "🏷️ Creating setup mode flag..."
+sudo touch /tmp/grannytv-setup-mode
+
 # Enable and start services
 echo "🚀 Enabling setup services..."
 sudo systemctl daemon-reload
+sudo systemctl enable grannytv-prepare
 sudo systemctl enable hostapd
 sudo systemctl enable dnsmasq
 sudo systemctl enable grannytv-setup
@@ -168,7 +193,12 @@ tee "$SETUP_DIR/restore-normal-wifi.sh" > /dev/null << 'EOF'
 
 echo "🔄 Restoring normal WiFi operation..."
 
+# Remove setup mode flag
+sudo rm -f /tmp/grannytv-setup-mode
+
 # Disable setup services
+sudo systemctl disable grannytv-prepare
+sudo systemctl stop grannytv-prepare
 sudo systemctl disable grannytv-setup
 sudo systemctl stop grannytv-setup
 sudo systemctl disable hostapd
@@ -181,8 +211,10 @@ if [ -f /etc/dhcpcd.conf.backup ]; then
     sudo cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
 fi
 
-# Enable normal WiFi
-sudo systemctl enable wpa_supplicant
+# Re-enable normal WiFi services
+sudo systemctl enable NetworkManager 2>/dev/null || true
+sudo systemctl start NetworkManager 2>/dev/null || true
+sudo systemctl enable wpa_supplicant 2>/dev/null || true
 
 echo "✅ Normal WiFi operation restored"
 echo "🔄 Rebooting to apply changes..."
