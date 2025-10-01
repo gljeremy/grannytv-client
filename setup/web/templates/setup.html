@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>📺 GrannyTV Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .step {
+            display: none;
+            animation: slideIn 0.3s ease-in-out;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background: white;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .status.loading {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+        
+        .status.success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .wifi-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .wifi-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        .wifi-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .wifi-item:last-child {
+            border-bottom: none;
+        }
+        
+        .wifi-item.selected {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .wifi-strength {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #e0e0e0;
+        }
+        
+        .wifi-strength.excellent { background: #4caf50; color: white; }
+        .wifi-strength.good { background: #8bc34a; color: white; }
+        .wifi-strength.fair { background: #ff9800; color: white; }
+        .wifi-strength.poor { background: #f44336; color: white; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 6px;
+            transition: background-color 0.3s;
+        }
+        
+        .step-dot.active {
+            background: #4facfe;
+        }
+        
+        .step-dot.completed {
+            background: #4caf50;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .info-card h4 {
+            margin-bottom: 8px;
+            color: #4facfe;
+        }
+        
+        .info-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 4px 0;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📺 GrannyTV Setup</h1>
+            <p>Configure your Raspberry Pi TV device</p>
+        </div>
+        
+        <div class="content">
+            <div class="step-indicator">
+                <div class="step-dot active" id="dot-0"></div>
+                <div class="step-dot" id="dot-1"></div>
+                <div class="step-dot" id="dot-2"></div>
+                <div class="step-dot" id="dot-3"></div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 25%"></div>
+            </div>
+            
+            <!-- Step 1: Device Detection -->
+            <div class="step active" id="step-0">
+                <h3>🔍 Device Detection</h3>
+                <div class="info-card" id="device-info">
+                    <h4>Detecting Hardware...</h4>
+                    <div class="loading-spinner"></div>
+                    <span>Please wait...</span>
+                </div>
+                <button class="btn" onclick="nextStep()" id="continue-btn" disabled>Continue</button>
+            </div>
+            
+            <!-- Step 2: WiFi Setup -->
+            <div class="step" id="step-1">
+                <h3>📶 WiFi Setup</h3>
+                <div class="form-group">
+                    <label>Available Networks:</label>
+                    <div id="wifi-list" class="wifi-list">
+                        <div style="padding: 20px; text-align: center;">
+                            <div class="loading-spinner"></div>
+                            Scanning networks...
+                        </div>
+                    </div>
+                    <input type="text" id="manual-ssid" placeholder="Or enter network name manually" style="margin-top: 10px;">
+                </div>
+                
+                <div class="form-group">
+                    <label>WiFi Password:</label>
+                    <input type="password" id="wifi-password" placeholder="Enter WiFi password">
+                </div>
+                
+                <div class="form-group">
+                    <label>Country:</label>
+                    <select id="wifi-country">
+                        <option value="US">🇺🇸 United States</option>
+                        <option value="GB">🇬🇧 United Kingdom</option>
+                        <option value="CA">🇨🇦 Canada</option>
+                        <option value="AU">🇦🇺 Australia</option>
+                        <option value="DE">🇩🇪 Germany</option>
+                        <option value="FR">🇫🇷 France</option>
+                        <option value="ES">🇪🇸 Spain</option>
+                        <option value="IT">🇮🇹 Italy</option>
+                        <option value="NL">🇳🇱 Netherlands</option>
+                        <option value="JP">🇯🇵 Japan</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="nextStep()">Continue</button>
+                <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+            </div>
+            
+            <!-- Step 3: User Configuration -->
+            <div class="step" id="step-2">
+                <h3>👤 User Configuration</h3>
+                
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="username" value="jeremy" placeholder="Enter username">
+                </div>
+                
+                <div class="form-group">
+                    <label>Installation Path:</label>
+                    <input type="text" id="install-path" placeholder="/home/jeremy/gtv">
+                </div>
+                
+                <div class="form-group">
+                    <label>Stream Source (Optional):</label>
+                    <input type="url" id="stream-source" placeholder="https://example.com/streams.json">
+                    <small style="color: #666; font-size: 12px;">Custom IPTV stream list URL</small>
+                </div>
+                
+                <button class="btn" onclick="nextStep()">Continue</button>
+                <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+            </div>
+            
+            <!-- Step 4: Final Configuration -->
+            <div class="step" id="step-3">
+                <h3>🚀 Final Setup</h3>
+                <div class="info-card" id="config-summary">
+                    <h4>Configuration Summary</h4>
+                    <p><strong>WiFi:</strong> <span id="summary-wifi">-</span></p>
+                    <p><strong>User:</strong> <span id="summary-user">-</span></p>
+                    <p><strong>Path:</strong> <span id="summary-path">-</span></p>
+                </div>
+                
+                <button class="btn btn-success" onclick="finalizeSetup()" id="finalize-btn">
+                    🎬 Start My TV!
+                </button>
+                <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                
+                <div id="final-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let deviceInfo = {};
+        let selectedWifi = '';
+        
+        // Initialize setup
+        window.onload = function() {
+            detectDevice();
+            scanWifi();
+        };
+        
+        function detectDevice() {
+            fetch('/detect_pi')
+                .then(response => response.json())
+                .then(data => {
+                    deviceInfo = data;
+                    
+                    const infoCard = document.getElementById('device-info');
+                    if (data.error) {
+                        infoCard.innerHTML = `
+                            <h4>❌ Detection Error</h4>
+                            <p>${data.error}</p>
+                        `;
+                    } else {
+                        infoCard.innerHTML = `
+                            <h4>✅ Device Detected</h4>
+                            <p><strong>Model:</strong> ${data.model}</p>
+                            <p><strong>Memory:</strong> ${data.memory}</p>
+                            <p><strong>GPU:</strong> ${data.gpu_memory}</p>
+                            <p><strong>User:</strong> ${data.current_user}</p>
+                        `;
+                        
+                        // Auto-fill user info
+                        document.getElementById('username').value = data.current_user;
+                        document.getElementById('install-path').value = `${data.home_dir}/gtv`;
+                    }
+                    
+                    document.getElementById('continue-btn').disabled = false;
+                })
+                .catch(error => {
+                    document.getElementById('device-info').innerHTML = `
+                        <h4>❌ Detection Failed</h4>
+                        <p>${error}</p>
+                    `;
+                });
+        }
+        
+        function scanWifi() {
+            const wifiList = document.getElementById('wifi-list');
+            wifiList.innerHTML = '<div style="padding: 20px; text-align: center;"><div class="loading-spinner"></div>Scanning networks...</div>';
+            
+            fetch('/scan_wifi')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.networks && data.networks.length > 0) {
+                        wifiList.innerHTML = '';
+                        data.networks.forEach(network => {
+                            const item = document.createElement('div');
+                            item.className = 'wifi-item';
+                            item.onclick = () => selectWifi(network.ssid, item);
+                            
+                            let strengthClass = 'poor';
+                            let strengthText = 'Poor';
+                            if (network.quality > 80) { strengthClass = 'excellent'; strengthText = 'Excellent'; }
+                            else if (network.quality > 60) { strengthClass = 'good'; strengthText = 'Good'; }
+                            else if (network.quality > 40) { strengthClass = 'fair'; strengthText = 'Fair'; }
+                            
+                            item.innerHTML = `
+                                <span>${network.ssid} ${network.encrypted ? '🔒' : '🔓'}</span>
+                                <span class="wifi-strength ${strengthClass}">${strengthText}</span>
+                            `;
+                            wifiList.appendChild(item);
+                        });
+                    } else {
+                        wifiList.innerHTML = '<div style="padding: 20px; text-align: center; color: #666;">No networks found. Enter manually below.</div>';
+                    }
+                })
+                .catch(error => {
+                    wifiList.innerHTML = '<div style="padding: 20px; text-align: center; color: #f44336;">Scan failed. Enter network manually.</div>';
+                });
+        }
+        
+        function selectWifi(ssid, element) {
+            selectedWifi = ssid;
+            document.getElementById('manual-ssid').value = ssid;
+            
+            // Update UI
+            document.querySelectorAll('.wifi-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        function nextStep() {
+            if (currentStep === 1) {
+                // Validate WiFi step
+                const ssid = document.getElementById('manual-ssid').value || selectedWifi;
+                const password = document.getElementById('wifi-password').value;
+                
+                if (!ssid) {
+                    showStatus('error', 'Please select or enter a WiFi network');
+                    return;
+                }
+                if (!password) {
+                    showStatus('error', 'Please enter the WiFi password');
+                    return;
+                }
+            }
+            
+            if (currentStep === 2) {
+                // Validate user step
+                const username = document.getElementById('username').value;
+                const installPath = document.getElementById('install-path').value;
+                
+                if (!username) {
+                    showStatus('error', 'Please enter a username');
+                    return;
+                }
+                if (!installPath) {
+                    showStatus('error', 'Please enter an installation path');
+                    return;
+                }
+                
+                // Update summary
+                updateSummary();
+            }
+            
+            currentStep++;
+            showStep(currentStep);
+        }
+        
+        function prevStep() {
+            currentStep--;
+            showStep(currentStep);
+        }
+        
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-dot').forEach(dot => dot.classList.remove('active'));
+            
+            // Show current step
+            document.getElementById(`step-${step}`).classList.add('active');
+            document.getElementById(`dot-${step}`).classList.add('active');
+            
+            // Mark completed steps
+            for (let i = 0; i < step; i++) {
+                document.getElementById(`dot-${i}`).classList.add('completed');
+            }
+            
+            // Update progress bar
+            const progress = ((step + 1) / 4) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+        
+        function updateSummary() {
+            const ssid = document.getElementById('manual-ssid').value || selectedWifi;
+            const username = document.getElementById('username').value;
+            const installPath = document.getElementById('install-path').value;
+            
+            document.getElementById('summary-wifi').textContent = ssid;
+            document.getElementById('summary-user').textContent = username;
+            document.getElementById('summary-path').textContent = installPath;
+        }
+        
+        function finalizeSetup() {
+            const config = {
+                wifi_ssid: document.getElementById('manual-ssid').value || selectedWifi,
+                wifi_password: document.getElementById('wifi-password').value,
+                wifi_country: document.getElementById('wifi-country').value,
+                username: document.getElementById('username').value,
+                install_path: document.getElementById('install-path').value,
+                stream_source: document.getElementById('stream-source').value
+            };
+            
+            const finalBtn = document.getElementById('finalize-btn');
+            const statusDiv = document.getElementById('final-status');
+            
+            finalBtn.disabled = true;
+            finalBtn.innerHTML = '<div class="loading-spinner"></div>Configuring...';
+            
+            statusDiv.innerHTML = '<div class="status loading">💾 Saving configuration...</div>';
+            
+            fetch('/configure', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(config)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusDiv.innerHTML = '<div class="status success">✅ Configuration saved!</div>';
+                    
+                    setTimeout(() => {
+                        statusDiv.innerHTML = '<div class="status loading">🔄 Applying settings and rebooting...</div>';
+                        
+                        fetch('/finalize', {method: 'POST'})
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    statusDiv.innerHTML = '<div class="status success">🎉 Setup complete! Rebooting device...</div>';
+                                    
+                                    setTimeout(() => {
+                                        fetch('/reboot', {method: 'POST'});
+                                        statusDiv.innerHTML = `
+                                            <div class="status success">
+                                                <h4>🎬 Setup Complete!</h4>
+                                                <p>Your Raspberry Pi is rebooting and will automatically:</p>
+                                                <ul style="text-align: left; margin: 10px 0;">
+                                                    <li>Connect to your WiFi network</li>
+                                                    <li>Install the TV player</li>
+                                                    <li>Start playing live TV</li>
+                                                </ul>
+                                                <p><strong>You can now disconnect your phone and enjoy your TV!</strong></p>
+                                            </div>
+                                        `;
+                                    }, 2000);
+                                } else {
+                                    statusDiv.innerHTML = `<div class="status error">❌ Finalization error: ${data.error}</div>`;
+                                    finalBtn.disabled = false;
+                                    finalBtn.innerHTML = '🎬 Start My TV!';
+                                }
+                            });
+                    }, 2000);
+                } else {
+                    statusDiv.innerHTML = `<div class="status error">❌ Configuration error: ${data.error}</div>`;
+                    finalBtn.disabled = false;
+                    finalBtn.innerHTML = '🎬 Start My TV!';
+                }
+            })
+            .catch(error => {
+                statusDiv.innerHTML = `<div class="status error">❌ Setup failed: ${error}</div>`;
+                finalBtn.disabled = false;
+                finalBtn.innerHTML = '🎬 Start My TV!';
+            });
+        }
+        
+        function showStatus(type, message) {
+            // Implementation for inline status messages
+            const status = document.createElement('div');
+            status.className = `status ${type}`;
+            status.textContent = message;
+            
+            // Find current step and show status
+            const currentStepElement = document.querySelector('.step.active');
+            currentStepElement.appendChild(status);
+            
+            setTimeout(() => status.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

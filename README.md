@@ -13,7 +13,8 @@ Designed for elderly users who want zero-hassle television. The Raspberry Pi aut
 .\platforms\windows\test-windows.ps1    # Test locally
 
 # Pi deployment  
-./platforms/linux/pi-setup.sh           # Complete Pi setup - does everything!
+./setup/setup-wizard.sh                 # Smartphone-based setup wizard
+./setup/pi-setup.sh                     # Traditional setup (if no smartphone)
 ./platforms/linux/pi-update.sh          # Update from Git
 
 # Performance analysis
@@ -39,19 +40,25 @@ sudo ./tools/gpu-optimize.sh           # GPU acceleration for Pi
 
 **For the person setting up the Pi:**
 
-### **🚀 Quick Setup (Recommended)**
+### **🚀 Smartphone Setup (Recommended)**
 ```bash
 # Get the code
 git clone https://github.com/gljeremy/grannytv-client.git
 cd grannytv-client
 
-# ONE script does everything!
-chmod +x platforms/linux/*.sh
-./platforms/linux/pi-setup.sh
+# Start smartphone setup wizard
+chmod +x setup/*.sh
+./setup/setup-wizard.sh
 
-# Reboot - TV will start automatically!
+# Reboot - creates WiFi hotspot for phone setup
 sudo reboot
 ```
+
+**Then on your smartphone:**
+1. Connect to WiFi: `GrannyTV-Setup` (password: `SetupMe123`)
+2. Browser opens setup page automatically
+3. Configure WiFi, user, streams via phone
+4. Pi installs and starts TV automatically!
 
 ### **👥 End User Experience**
 After setup, the experience is completely plug-and-play:

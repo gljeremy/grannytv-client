@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        h1 { color: #333; text-align: center; }
+        .config-item { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px; }
+        .btn { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Setup Status</h1>
+        
+        {% if config %}
+            <div class="config-item">
+                <strong>WiFi Network:</strong> {{ config.get('wifi_ssid', 'Not configured') }}
+            </div>
+            <div class="config-item">
+                <strong>Username:</strong> {{ config.get('username', 'Not configured') }}
+            </div>
+            <div class="config-item">
+                <strong>Install Path:</strong> {{ config.get('install_path', 'Not configured') }}
+            </div>
+            <div class="config-item">
+                <strong>Stream Source:</strong> {{ config.get('stream_source', 'Default') }}
+            </div>
+        {% else %}
+            <p>No configuration found.</p>
+        {% endif %}
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn" onclick="window.location.href='/'">Back to Setup</button>
+        </div>
+    </div>
+</body>
+</html>
