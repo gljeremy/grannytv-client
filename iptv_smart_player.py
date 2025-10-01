@@ -397,27 +397,57 @@ class SmartIPTVPlayer:
             if has_x11 or platform.system() == 'Windows':
                 if platform.system() == 'Windows':
                     logging.info("[DISPLAY] Windows detected - using DirectX output")
+                    vlc_configs = [
+                        # GPU-accelerated for best performance
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'gl'],
+                        # Standard video output with performance tweaks
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out,
+                         '--no-video-title-show'],
+                        # Software fallback if hardware fails
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out],
+                    ]
+                elif is_raspberry_pi:
+                    logging.info("[DISPLAY] Raspberry Pi X11 detected - using Pi-optimized settings")
+                    vlc_configs = [
+                        # Pi-optimized X11 with conservative settings
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'x11',
+                         '--no-video-title-show', '--no-embedded-video'],
+                        # Software fallback for Pi (no GPU acceleration that might cause issues)
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'x11',
+                         '--avcodec-hw=none'],
+                        # Basic X11 fallback
+                        [vlc_cmd, '--intf', 'dummy', '--no-osd', '--aout', audio_out, '--vout', 'x11'],
+                    ]
                 else:
                     logging.info("[DISPLAY] X11 detected - using performance-optimized desktop mode")
-                vlc_configs = [
-                    # GPU-accelerated for best performance
-                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'gl'],
-                    # Standard video output with performance tweaks
-                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out,
-                     '--no-video-title-show'],
-                    # Software fallback if hardware fails (version-aware)
-                    [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out] + 
-                    (['--avcodec-hw=none'] if self.vlc_version_info['supports_modern_hw_decode'] else []),
-                ]
+                    vlc_configs = [
+                        # GPU-accelerated for best performance (non-Pi Linux)
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', 'gl'],
+                        # Standard video output with performance tweaks
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out,
+                         '--no-video-title-show'],
+                        # Software fallback if hardware fails
+                        [vlc_cmd, '--intf', 'dummy', '--fullscreen', '--no-osd', '--aout', audio_out, '--vout', video_out],
+                    ]
             else:
                 logging.info("[DISPLAY] No X11 - using performance-optimized framebuffer mode")
-                vlc_configs = [
-                    # Optimized framebuffer with deinterlacing (Linux only)
-                    [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, 
-                     '--no-osd', '--deinterlace-mode', 'linear'],
-                    # Basic framebuffer fallback (Linux only)
-                    [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, '--no-osd'],
-                ]
+                if is_raspberry_pi:
+                    # Pi-specific framebuffer optimizations
+                    vlc_configs = [
+                        # Conservative Pi framebuffer (no deinterlacing to save CPU)
+                        [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, '--no-osd'],
+                        # Basic Pi framebuffer with minimal options
+                        [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--aout', audio_out],
+                    ]
+                else:
+                    # Standard Linux framebuffer
+                    vlc_configs = [
+                        # Optimized framebuffer with deinterlacing (Linux only)
+                        [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, 
+                         '--no-osd', '--deinterlace-mode', 'linear'],
+                        # Basic framebuffer fallback (Linux only)
+                        [vlc_cmd, '--intf', 'dummy', '--vout', 'fb', '--fbdev', '/dev/fb0', '--aout', audio_out, '--no-osd'],
+                    ]
             
             # Try each configuration with PROTOCOL-AWARE optimizations
             for i, base_cmd in enumerate(vlc_configs, 1):
@@ -441,7 +471,7 @@ class SmartIPTVPlayer:
                         '--disable-screensaver',
                     ]
                     
-                    # Add protocol-specific optimizations with Windows compatibility
+                    # Add protocol-specific optimizations with platform compatibility
                     if platform.system() == 'Windows':
                         # Windows: Use VLC defaults for most stable playback
                         # Only add essential Windows-specific settings
@@ -451,17 +481,61 @@ class SmartIPTVPlayer:
                         ]
                         performance_args.extend(windows_args)
                         logging.info("   Applied Windows default VLC settings (no custom caching)")
+                    elif is_raspberry_pi:
+                        # Raspberry Pi: Hardware-optimized settings for smooth playback
+                        pi_args = [
+                            '--network-caching=2000',    # Generous caching for Pi's slower processing
+                            '--live-caching=300',        # Good live buffer to prevent stutters
+                            '--file-caching=300',        # Smooth file segment loading
+                            '--clock-jitter=0',          # Eliminate timing jitter on Pi
+                            '--adaptive-logic=1',        # Conservative adaptive bitrate
+                            '--no-audio-time-stretch',   # Prevent audio lag on Pi
+                            '--threads=2',               # Limit threads for Pi CPU
+                        ]
+                        # Add hardware decode only if GPU memory is sufficient
+                        try:
+                            gpu_mem = subprocess.run(['vcgencmd', 'get_mem', 'gpu'], 
+                                                   capture_output=True, text=True, timeout=3)
+                            if gpu_mem.returncode == 0 and 'gpu=' in gpu_mem.stdout:
+                                mem_value = int(gpu_mem.stdout.split('=')[1].replace('M', ''))
+                                if mem_value >= 128:
+                                    pi_args.extend(['--avcodec-hw=mmal'])  # Use MMAL hardware decode
+                                    logging.info("   Using MMAL hardware decode")
+                                else:
+                                    logging.info("   Using software decode (low GPU memory)")
+                        except Exception:
+                            pass
+                        
+                        performance_args.extend(pi_args)
+                        logging.info("   Applied Raspberry Pi hardware-optimized settings")
                     else:
-                        # Use protocol optimizer on Linux/Pi
+                        # Generic Linux: Use protocol optimizer
                         performance_args.extend(protocol_args)
+                        logging.info("   Applied protocol-specific optimizations")
                     
                     # Add general performance options if supported
                     if self.vlc_version_info['major'] >= 3:
-                        performance_args.extend([
+                        general_args = [
                             '--no-stats',              # Disable statistics overhead
                             '--no-sub-autodetect-file', # Skip subtitle detection
                             '--no-metadata-network-access', # Skip online metadata
-                        ])
+                        ]
+                        
+                        # Add platform-specific frame management
+                        if is_raspberry_pi:
+                            # Pi: Conservative frame management to prevent stutters
+                            general_args.extend([
+                                '--avcodec-skiploopfilter=nonkey',  # Skip some post-processing
+                                '--avcodec-threads=2',              # Limit threads for Pi
+                            ])
+                        elif platform.system() != 'Windows':
+                            # Other Linux: More aggressive frame management
+                            general_args.extend([
+                                '--drop-late-frames',      # Drop frames if behind
+                                '--skip-frames',           # Skip frames to catch up
+                            ])
+                        
+                        performance_args.extend(general_args)
                     
                     performance_args.append(stream_url)
                 elif i == 2:
