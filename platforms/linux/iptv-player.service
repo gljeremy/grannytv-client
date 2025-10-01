@@ -1,5 +1,5 @@
 [Unit]
-Description=IPTV Smart Player for Granny TV
+Description=MPV-based IPTV Smart Player for Granny TV
 After=network.target graphical-session.target
 Wants=graphical-session.target
 

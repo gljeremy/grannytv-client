@@ -4,20 +4,20 @@
         "base_path": "c:\\Users\\fivek\\source\\repos\\grannytv-client",
         "log_file": "iptv_player.log",
         "working_streams_file": "working_streams.json",
-        "use_vlc": true,
+        "use_vlc": false,
         "test_mode": true,
         "display": {
             "setup_display": false,
             "setup_audio": false
         },
-        "player_command": "vlc --intf dummy --play-and-exit --no-video-title-show"
+        "player_command": "mpv"
     },
     "production": {
         "platform": "raspberry_pi",
         "base_path": "/home/jeremy/gtv",
-        "log_file": "/home/jeremy/gtv/iptv_player.log",
+        "log_file": "/home/jeremy/gtv/iptv_player_mpv.log",
         "working_streams_file": "/home/jeremy/gtv/working_streams.json",
-        "use_vlc": true,
+        "use_vlc": false,
         "test_mode": false,
         "display": {
             "setup_display": true,
@@ -26,10 +26,10 @@
             "gpu_memory_split": 128
         },
         "video": {
-            "prefer_vlc": true,
+            "prefer_mpv": true,
             "fullscreen": true,
             "hardware_acceleration": true
         },
-        "player_command": "vlc --intf dummy --play-and-exit --no-video-title-show --fullscreen"
+        "player_command": "mpv"
     }
 }

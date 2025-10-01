@@ -1,63 +1,58 @@
 # Performance Tools & System Optimization ⚡
 
-Advanced diagnostic and optimization utilities for ultra-low latency IPTV streaming.
+Advanced diagnostic and optimization utilities for MPV-based ultra-low latency IPTV streaming.
 
 ## 📄 Files
 
-### Core Tools
-- **`vlc-setup.sh`** - Comprehensive VLC diagnostic and configuration tool
-- **`vlc-option-validator.sh`** ⚡ **NEW** - Tests which VLC options are supported
-- **`vlc-compatibility-check.py`** ⚡ **NEW** - VLC version compatibility analyzer
-- **`network-optimize.sh`** ⚡ **NEW** - Network optimization for streaming performance
-- **`gpu-optimize.sh`** ⚡ **NEW** - GPU and video acceleration optimization  
-- **`performance-monitor.py`** ⚡ **NEW** - Real-time system performance monitoring
+### Core Analysis Tools
+- **`iptv_protocol_optimizer.py`** ✅ - Universal IPTV protocol detection & optimization
+- **`stream_performance_analyzer.py`** ✅ - Stream latency testing & database optimization  
+- **`performance-monitor.py`** ✅ - Real-time system performance monitoring
 
-### HLS & Protocol Optimization ⚡ **NEW**
-- **`iptv-protocol-optimizer.py`** - Universal IPTV protocol detection & optimization
-- **`stream-performance-analyzer.py`** - Stream latency testing & database optimization
-- **`create-hls-profiles.sh`** - Creates optimized VLC profiles for different HLS scenarios
-- **`setup-hls-optimization.sh`** - One-command HLS optimization setup
+### System Optimization
+- **`network-optimize.sh`** ✅ - Network optimization for streaming performance
+- **`gpu-optimize.sh`** ✅ - GPU and video acceleration optimization for Pi
+
+### Legacy Tools (Deprecated)
+- ~~`vlc-setup.sh`~~ - Removed (replaced by MPV-based system)
+- ~~`vlc-option-validator.sh`~~ - Removed (VLC no longer used)
+- ~~`vlc-compatibility-check.py`~~ - Removed (VLC no longer used)
 
 ## 🚀 Quick Performance Setup
 
-For maximum streaming performance, run in this order:
+For maximum MPV-based streaming performance, run in this order:
 
 ```bash
-# 🚀 QUICK START: HLS Optimization (recommended first)
-./tools/setup-hls-optimization.sh
-
-# OR manual setup:
-# 1. Network optimization (requires sudo)
+# 1. System optimization (requires sudo)
 sudo ./tools/network-optimize.sh
-
-# 2. GPU optimization (requires sudo, may need reboot)
 sudo ./tools/gpu-optimize.sh
 
-# 3. VLC configuration and testing
-./tools/vlc-setup.sh --install-vlc --fix-permissions
+# 2. Analyze and optimize stream performance  
+python3 ./tools/stream_performance_analyzer.py
 
-# 4. Analyze and optimize stream performance
-python3 ./tools/stream-performance-analyzer.py
+# 3. Optimize protocol configurations
+python3 ./tools/iptv_protocol_optimizer.py
 
-# 5. Monitor system performance
+# 4. Monitor system performance
 python3 ./tools/performance-monitor.py --check-only
 ```
 
-## 🎬 VLC Compatibility System ⚡ NEW
+## 🎬 MPV Performance System ✅
 
-**Automatic VLC version detection and optimization:**
+**Platform-Aware MPV Optimization:**
 
-The player now automatically detects your VLC version and applies compatible optimizations:
+The player automatically detects your platform and applies optimized MPV configurations:
 
-**Version-Specific Features:**
-- **VLC 3.0.x:** Full optimization support with modern hardware decode
-- **VLC 2.2.x:** Limited optimizations, MMAL support on Pi  
-- **Unknown versions:** Conservative fallback mode
+**Platform-Specific Features:**
+- **Windows:** Hardware decode enabled (`--hwdec=auto`), 3-second cache
+- **Raspberry Pi:** Conservative settings, 2-second cache, software decode
+- **Desktop Linux:** Standard configurations with hardware acceleration
 
-**Automatic Problem Prevention:**
-- Deprecated options (like `--no-hw-decode`) are automatically avoided
-- Invalid options (like `--mmal-display=hdmi-1`) are replaced with working alternatives
-- Version history is logged for troubleshooting: `vlc_version_history.log`
+**Smart Performance Adaptation:**
+- Pi hardware detection with GPU memory checking
+- Automatic fallback configurations (Performance → Lighter → Minimal)
+- Cross-platform consistency with platform-specific optimizations
+- MPV process monitoring with automatic restart on failure
 
 ## 🔧 Individual Tool Usage
 

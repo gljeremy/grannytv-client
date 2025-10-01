@@ -1,10 +1,22 @@
-# Windows test script
+# Windows test script for MPV-based IPTV Player
 param(
     [switch]$TestMode,
     [int]$Duration = 30
 )
 
-Write-Host "🧪 Testing IPTV Player on Windows..." -ForegroundColor Green
+Write-Host "🧪 Testing MPV-based IPTV Player on Windows..." -ForegroundColor Green
+
+# Check if MPV is installed
+try {
+    $mpvVersion = & mpv --version 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "✅ MPV found: $($mpvVersion.Split("`n")[0])" -ForegroundColor Green
+    }
+} catch {
+    Write-Host "❌ MPV not found!" -ForegroundColor Red
+    Write-Host "💡 Run: .\install-mpv.ps1" -ForegroundColor Yellow
+    exit 1
+}
 
 # Check if virtual environment exists
 if (-not (Test-Path "venv\Scripts\python.exe")) {
