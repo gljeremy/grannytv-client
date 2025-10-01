@@ -10,7 +10,9 @@ SETUP_SSID="GrannyTV-Setup"
 SETUP_PASSWORD="SetupMe123"
 SETUP_IP="192.168.4.1"
 CURRENT_USER=$(whoami)
-SETUP_DIR="/home/$CURRENT_USER/gtv-setup"
+PROJECT_DIR="/home/$CURRENT_USER/grannytv-client"  # Repository location
+SETUP_DIR="$PROJECT_DIR/setup"                      # Setup wizard files
+WORK_DIR="/tmp/grannytv-setup"                      # Temporary working directory
 
 # Ensure we're running as regular user, not root
 if [ "$EUID" -eq 0 ]; then
@@ -29,20 +31,19 @@ sudo systemctl stop hostapd 2>/dev/null || true
 sudo systemctl stop dnsmasq 2>/dev/null || true
 sudo systemctl stop wpa_supplicant 2>/dev/null || true
 
-# Create setup directory
-echo "📁 Creating setup directory..."
-mkdir -p "$SETUP_DIR"
-cd "$SETUP_DIR"
+# Create temporary working directory
+echo "📁 Creating working directory..."
+mkdir -p "$WORK_DIR"
 
-# Copy setup files from repository
+# Copy setup files to working directory
 echo "📋 Copying setup files..."
-if [ -d "/home/$CURRENT_USER/grannytv-client/setup" ]; then
-    cp -r /home/$CURRENT_USER/grannytv-client/setup/* "$SETUP_DIR/"
-elif [ -d "$(pwd)/setup" ]; then
-    cp -r $(pwd)/setup/* "$SETUP_DIR/"
+if [ -d "$SETUP_DIR" ]; then
+    cp -r "$SETUP_DIR"/* "$WORK_DIR/"
+    cd "$WORK_DIR"
+    echo "   Setup files copied to: $WORK_DIR"
 else
-    echo "❌ Setup files not found!"
-    echo "💡 Make sure you're in the grannytv-client directory"
+    echo "❌ Setup files not found at: $SETUP_DIR"
+    echo "💡 Make sure you're running from the grannytv-client directory"
     exit 1
 fi
 
