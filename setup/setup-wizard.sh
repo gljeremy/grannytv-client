@@ -43,6 +43,9 @@ if [ -d "$SETUP_DIR" ]; then
     cp -r "$SETUP_DIR"/* "$WORK_DIR/"
     cd "$WORK_DIR"
     echo "   Setup files copied to: $WORK_DIR"
+    
+    # Make startup script executable
+    chmod +x "$WORK_DIR/start-setup-wizard.sh"
 else
     echo "❌ Setup files not found at: $SETUP_DIR"
     echo "💡 Make sure you're running from the grannytv-client directory"
@@ -131,22 +134,15 @@ sudo tee /etc/systemd/system/grannytv-setup.service > /dev/null << EOF
 [Unit]
 Description=GrannyTV Smartphone Setup Wizard
 After=network.target
-Wants=hostapd.service dnsmasq.service
 
 [Service]
 Type=simple
-User=$CURRENT_USER
-Group=$CURRENT_USER
-WorkingDirectory=$SETUP_DIR
-Environment=PYTHONPATH=$SETUP_DIR
-ExecStartPre=/bin/sleep 5
-ExecStartPre=/bin/bash -c 'sudo systemctl start hostapd'
-ExecStartPre=/bin/sleep 3
-ExecStartPre=/bin/bash -c 'sudo systemctl start dnsmasq'
-ExecStartPre=/bin/sleep 2
-ExecStart=/usr/bin/python3 web/setup_server.py
+User=root
+Group=root
+WorkingDirectory=$WORK_DIR
+ExecStart=$WORK_DIR/start-setup-wizard.sh
 Restart=on-failure
-RestartSec=10
+RestartSec=15
 StandardOutput=journal
 StandardError=journal
 
