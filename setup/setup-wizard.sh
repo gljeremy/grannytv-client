@@ -26,11 +26,12 @@ echo "🔧 Installing required packages..."
 sudo apt update
 sudo apt install -y hostapd dnsmasq python3-flask python3-pip git
 
-# Stop conflicting services
+# Stop conflicting services and unmask hostapd
 echo "🛑 Stopping conflicting services..."
 sudo systemctl stop hostapd 2>/dev/null || true
 sudo systemctl stop dnsmasq 2>/dev/null || true
 sudo systemctl stop wpa_supplicant 2>/dev/null || true
+sudo systemctl unmask hostapd 2>/dev/null || true
 
 # Create temporary working directory
 echo "📁 Creating working directory..."
@@ -94,18 +95,28 @@ EOF
 
 # Configure static IP for hotspot
 echo "🔌 Configuring network interface..."
-# Backup original dhcpcd.conf
-sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.backup
 
-# Add hotspot configuration to dhcpcd.conf
-if ! grep -q "interface wlan0" /etc/dhcpcd.conf; then
-    sudo tee -a /etc/dhcpcd.conf > /dev/null << EOF
+# Check if dhcpcd.conf exists, if not use NetworkManager approach
+if [ -f /etc/dhcpcd.conf ]; then
+    # Backup original dhcpcd.conf
+    sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.backup
+    
+    # Add hotspot configuration to dhcpcd.conf
+    if ! grep -q "interface wlan0" /etc/dhcpcd.conf; then
+        sudo tee -a /etc/dhcpcd.conf > /dev/null << EOF
 
 # GrannyTV Setup Hotspot Configuration
 interface wlan0
 static ip_address=$SETUP_IP/24
 nohook wpa_supplicant
 EOF
+    fi
+else
+    # Modern Raspberry Pi OS uses NetworkManager, configure via nmcli
+    echo "   Using NetworkManager configuration..."
+    sudo nmcli con add type wifi ifname wlan0 con-name GrannyTV-Hotspot autoconnect no ssid $SETUP_SSID 2>/dev/null || true
+    sudo nmcli con modify GrannyTV-Hotspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method manual ipv4.addr $SETUP_IP/24 2>/dev/null || true
+    sudo nmcli con modify GrannyTV-Hotspot wifi-sec.key-mgmt wpa-psk wifi-sec.psk $SETUP_PASSWORD 2>/dev/null || true
 fi
 
 # Enable hostapd daemon
@@ -143,9 +154,8 @@ StandardError=journal
 WantedBy=multi-user.target
 EOF
 
-# Install Python dependencies
-echo "🐍 Installing Python dependencies..."
-pip3 install flask requests --user
+# Install Python dependencies (Flask already installed via apt)
+echo "🐍 Python dependencies already installed via apt..."
 
 # Enable and start services
 echo "🚀 Enabling setup services..."
