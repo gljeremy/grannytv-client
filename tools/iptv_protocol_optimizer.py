@@ -100,25 +100,25 @@ class IPTVProtocolOptimizer:
         hls_type = self._detect_hls_type(url)
         
         if hls_type == 'live':
-            # Ultra-low latency for live HLS streams (like Pluto TV)
+            # Balanced low latency for live HLS streams (like Pluto TV)
             args.extend([
-                '--network-caching=150',      # Ultra-low HLS caching for live
-                '--live-caching=30',          # Minimal live buffering
-                '--file-caching=30',          # Minimal file buffering
+                '--network-caching=800',      # Balanced HLS caching for smooth playback
+                '--live-caching=200',         # Enough buffering to prevent stutters
+                '--file-caching=200',         # Smooth file segment loading
             ])
         elif hls_type == 'vod':
-            # Balanced for VOD HLS
+            # Optimized for VOD HLS
             args.extend([
-                '--network-caching=300',
-                '--live-caching=100',
-                '--file-caching=100',
+                '--network-caching=1000',
+                '--live-caching=300',
+                '--file-caching=300',
             ])
         else:
             # Default HLS optimizations
             args.extend([
-                '--network-caching=200',      
-                '--live-caching=50',          
-                '--file-caching=50',          
+                '--network-caching=600',      
+                '--live-caching=150',          
+                '--file-caching=150',         # Increased for smoother playback
             ])
         
         # Version-specific HLS enhancements
@@ -142,14 +142,11 @@ class IPTVProtocolOptimizer:
                 '--avcodec-skip-idct=0',      # Don't skip IDCT
             ])
         
-        # Performance tweaks
+        # Performance tweaks (less aggressive for smooth playback)
         if vlc_version_info.get('major', 0) >= 3:
             args.extend([
-                '--avcodec-fast',             # Fast decoding
-                '--avcodec-skiploopfilter=all', # Skip post-processing
                 '--avcodec-threads=0',        # Auto CPU threads
-                '--drop-late-frames',         # Drop late frames
-                '--skip-frames',              # Skip frames if needed
+                # Removed aggressive frame dropping for smoother playback
             ])
         
         return args

@@ -441,8 +441,20 @@ class SmartIPTVPlayer:
                         '--disable-screensaver',
                     ]
                     
-                    # Add protocol-specific optimizations
-                    performance_args.extend(protocol_args)
+                    # Add protocol-specific optimizations with smooth playback override
+                    # Override aggressive caching for Windows to prevent slideshow effect
+                    if platform.system() == 'Windows':
+                        # Windows-optimized smooth playback settings
+                        smooth_args = [
+                            '--network-caching=1500',    # Generous caching for smooth playback
+                            '--live-caching=500',        # Sufficient live buffer
+                            '--file-caching=500',        # Good file buffering
+                        ]
+                        performance_args.extend(smooth_args)
+                        logging.info("   Applied Windows smooth playback optimizations")
+                    else:
+                        # Use protocol optimizer on Linux/Pi
+                        performance_args.extend(protocol_args)
                     
                     # Add general performance options if supported
                     if self.vlc_version_info['major'] >= 3:
