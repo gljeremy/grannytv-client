@@ -77,6 +77,21 @@ start_services() {
 start_web_server() {
     echo "🌐 Starting web server..."
     
+    # Verify web files exist
+    if [ ! -f "$WORK_DIR/web/setup_server.py" ]; then
+        echo "❌ Web server files not found at $WORK_DIR/web/"
+        echo "💡 Copying setup files..."
+        
+        # Emergency file copy
+        if [ -d "/home/jeremy/gtv/setup" ]; then
+            cp -r /home/jeremy/gtv/setup/* "$WORK_DIR/"
+            chmod +x "$WORK_DIR/web/setup_server.py"
+        else
+            echo "❌ Cannot find setup files to copy"
+            return 1
+        fi
+    fi
+    
     # Set up port redirection (80 -> 8080) for captive portal
     iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 8080 2>/dev/null || true
     
@@ -92,6 +107,8 @@ start_web_server() {
         return 0
     else
         echo "❌ Web server failed to start"
+        # Try to show the error
+        wait $WEB_PID
         return 1
     fi
 }

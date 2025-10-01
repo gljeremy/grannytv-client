@@ -35,18 +35,38 @@ sudo systemctl unmask hostapd 2>/dev/null || true
 
 # Create temporary working directory
 echo "📁 Creating working directory..."
-mkdir -p "$WORK_DIR"
+sudo mkdir -p "$WORK_DIR"
 
 # Copy setup files to working directory
 echo "📋 Copying setup files..."
 if [ -d "$SETUP_DIR" ]; then
-    cp -r "$SETUP_DIR"/* "$WORK_DIR/"
-    cd "$WORK_DIR"
+    sudo cp -r "$SETUP_DIR"/* "$WORK_DIR/"
     echo "   Setup files copied to: $WORK_DIR"
     
+    # Verify critical files were copied
+    if [ ! -f "$WORK_DIR/web/setup_server.py" ]; then
+        echo "❌ Critical setup files missing after copy!"
+        echo "💡 Retrying with explicit permissions..."
+        sudo rm -rf "$WORK_DIR"
+        sudo mkdir -p "$WORK_DIR"
+        sudo cp -r "$SETUP_DIR"/* "$WORK_DIR/"
+    fi
+    
     # Make scripts executable
-    chmod +x "$WORK_DIR/start-setup-wizard.sh"
-    chmod +x "$WORK_DIR/prepare-hotspot.sh"
+    sudo chmod +x "$WORK_DIR/start-setup-wizard.sh" 2>/dev/null || true
+    sudo chmod +x "$WORK_DIR/prepare-hotspot.sh" 2>/dev/null || true
+    sudo chmod +x "$WORK_DIR/web/setup_server.py" 2>/dev/null || true
+    
+    # Set proper ownership for systemd service
+    sudo chown -R root:root "$WORK_DIR"
+    
+    # Verify final setup
+    if [ -f "$WORK_DIR/web/setup_server.py" ]; then
+        echo "   ✅ Setup files verified and ready"
+    else
+        echo "❌ Setup files verification failed!"
+        exit 1
+    fi
 else
     echo "❌ Setup files not found at: $SETUP_DIR"
     echo "💡 Make sure you're running from the grannytv-client directory"
@@ -184,6 +204,21 @@ sudo systemctl enable grannytv-prepare
 sudo systemctl enable hostapd
 sudo systemctl enable dnsmasq
 sudo systemctl enable grannytv-setup
+
+# Verify setup files are in place for services
+echo "🔍 Verifying setup files..."
+if [ ! -f "$WORK_DIR/web/setup_server.py" ]; then
+    echo "⚠️  Warning: Web server files not found, copying again..."
+    sudo cp -r "$SETUP_DIR"/* "$WORK_DIR/"
+    sudo chown -R root:root "$WORK_DIR"
+    sudo chmod +x "$WORK_DIR"/*.sh "$WORK_DIR/web/setup_server.py" 2>/dev/null || true
+fi
+
+if [ -f "$WORK_DIR/web/setup_server.py" ]; then
+    echo "   ✅ Setup files verified and ready"
+else
+    echo "   ❌ Setup files still missing - manual copy may be needed"
+fi
 
 # Create restoration script for after setup
 echo "🔄 Creating restoration script..."
