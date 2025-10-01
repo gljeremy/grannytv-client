@@ -1,8 +1,109 @@
 #!/bin/bash
 # First-time setup script for Raspberry Pi
-# Run this once to set up everything needed for the IPTV player
+# Run this once to set up everything needed for the Iecho "⚙️ Installing systemd service for auto-start..."
+sudo cp platforms/linux/iptv-player.service /etc/systemd/system/
+sudo systemctl daemon-reload
 
-echo "🍓 Setting up Raspberry Pi for IPTV Player..."
+# Advanced service configuration for bulletproof operation
+echo "🔧 Configuring bulletproof auto-start..."
+
+# Create user directory for XDG runtime (needed for audio)
+echo "🔊 Setting up audio runtime environment..."
+sudo mkdir -p /run/user/1000
+sudo chown jeremy:jeremy /run/user/1000
+
+# Configure Pi for headless operation with HDMI
+echo "📺 Optimizing Pi for reliable TV display..."
+
+# Force HDMI output (prevent HDMI auto-detection issues)
+if ! grep -q "hdmi_force_hotplug=1" /boot/config.txt; then
+    echo "hdmi_force_hotplug=1" | sudo tee -a /boot/config.txt
+    echo "   Added HDMI force hotplug to /boot/config.txt"
+fi
+
+# Set HDMI to safe mode (ensures compatibility)
+if ! grep -q "hdmi_safe=1" /boot/config.txt; then
+    echo "hdmi_safe=1" | sudo tee -a /boot/config.txt
+    echo "   Added HDMI safe mode to /boot/config.txt"
+fi
+
+# Ensure sufficient GPU memory for video
+if ! grep -q "gpu_mem=128" /boot/config.txt; then
+    echo "gpu_mem=128" | sudo tee -a /boot/config.txt
+    echo "   Set GPU memory to 128MB in /boot/config.txt"
+fi
+
+# Configure automatic login for immediate startup
+echo "🔐 Configuring automatic login for plug-and-play operation..."
+sudo raspi-config nonint do_boot_behaviour B2  # Boot to desktop, auto-login
+
+# Disable screen blanking for continuous TV operation
+echo "🖥️ Disabling screen blanking for 24/7 TV operation..."
+if ! grep -q "xset s off" /home/jeremy/.profile; then
+    echo "xset s off" >> /home/jeremy/.profile
+    echo "xset -dpms" >> /home/jeremy/.profile
+    echo "xset s noblank" >> /home/jeremy/.profile
+    echo "   Added screen blanking disable to .profile"
+fi
+
+# Create a backup start method via .bashrc (failsafe)
+echo "🛡️ Creating failsafe startup method..."
+if ! grep -q "grannytv auto-start" /home/jeremy/.bashrc; then
+    cat >> /home/jeremy/.bashrc << 'EOF'
+
+# GrannyTV auto-start failsafe
+if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ] && [ "$XDG_VTNR" = "1" ]; then
+    echo "Starting GrannyTV failsafe..."
+    cd /home/jeremy/gtv
+    source venv/bin/activate
+    python3 iptv_smart_player.py
+fi
+EOF
+    echo "   Added failsafe startup to .bashrc"
+fi
+
+# Enable the service
+echo "🚀 Enabling auto-start service..."
+sudo systemctl enable iptv-player
+
+# Test the service configuration
+echo "🧪 Testing service configuration..."
+if sudo systemctl is-enabled iptv-player >/dev/null 2>&1; then
+    echo "   ✅ Service enabled successfully"
+else
+    echo "   ❌ Service enable failed"
+    exit 1
+fi
+
+echo ""
+echo "🎉 COMPLETE SETUP FINISHED!"
+echo "=========================="
+echo ""
+echo "🎯 Your Raspberry Pi is now configured for TRUE plug-and-play operation:"
+echo ""
+echo "   📺 Auto-login enabled - no keyboard needed"
+echo "   🚀 Service starts automatically on boot" 
+echo "   🔊 HDMI audio configured and optimized"
+echo "   🖥️ Screen blanking disabled for 24/7 operation"
+echo "   🛡️ Failsafe startup method created"
+echo "   ⏱️ Service waits for network connection"
+echo "   � MPV player optimized for Pi hardware"
+echo ""
+echo "👥 END USER EXPERIENCE:"
+echo "   1. Plug Pi into TV via HDMI"
+echo "   2. Turn on Pi"
+echo "   3. TV automatically starts playing within 30 seconds"
+echo "   4. No keyboard, mouse, or technical knowledge needed!"
+echo ""
+echo "🔧 Maintenance Commands:"
+echo "   Check status:  sudo systemctl status iptv-player"
+echo "   View logs:     journalctl -u iptv-player -f"
+echo "   Restart:       sudo systemctl restart iptv-player"
+echo "   Update code:   ./platforms/linux/pi-update.sh"
+echo ""
+echo "🚀 READY TO TEST: sudo reboot"
+echo ""
+echo "After reboot, your Pi will be a true plug-and-play TV device!" Setting up Raspberry Pi for IPTV Player..."
 
 # Update system
 echo "📦 Updating system packages..."

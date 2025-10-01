@@ -5,8 +5,7 @@ Scripts and service files for MPV-based IPTV player deployment on Raspberry Pi.
 ## 📄 Files
 
 ### Setup Scripts
-- **`pi-setup.sh`** - Initial setup script for fresh Pi installation (installs MPV, configures auto-start)
-- **`service-setup.sh`** - Complete auto-start configuration (bulletproof service setup)  
+- **`pi-setup.sh`** - **Complete one-script setup** for fresh Pi installation (installs MPV, configures bulletproof auto-start, everything!)  
 - **`pi-update.sh`** - Updates code from Git and manages virtual environment
 
 ### Service Files  
@@ -17,16 +16,15 @@ Scripts and service files for MPV-based IPTV player deployment on Raspberry Pi.
 
 ### **Complete Setup (Plug-and-Play Experience)**
 ```bash
-# 1. Initial Pi setup (run once on fresh Pi)
+# ONE script does everything! (run once on fresh Pi)
 chmod +x platforms/linux/*.sh
 ./platforms/linux/pi-setup.sh
 
-# 2. Configure bulletproof auto-start (recommended)
-./platforms/linux/service-setup.sh
-
-# 3. Reboot - Pi will automatically start playing TV!
+# Reboot - Pi will automatically start playing TV!
 sudo reboot
 ```
+
+**That's it!** One script, one reboot, plug-and-play TV device ready.
 
 ### **Updates & Maintenance**
 ```bash

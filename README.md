@@ -13,7 +13,7 @@ Designed for elderly users who want zero-hassle television. The Raspberry Pi aut
 .\platforms\windows\test-windows.ps1    # Test locally
 
 # Pi deployment  
-./platforms/linux/pi-setup.sh           # Initial Pi setup (includes MPV)
+./platforms/linux/pi-setup.sh           # Complete Pi setup - does everything!
 ./platforms/linux/pi-update.sh          # Update from Git
 
 # Performance analysis
@@ -45,12 +45,9 @@ sudo ./tools/gpu-optimize.sh           # GPU acceleration for Pi
 git clone https://github.com/gljeremy/grannytv-client.git
 cd grannytv-client
 
-# Run automated setup (installs everything)
+# ONE script does everything!
 chmod +x platforms/linux/*.sh
 ./platforms/linux/pi-setup.sh
-
-# Configure bulletproof auto-start
-./platforms/linux/service-setup.sh
 
 # Reboot - TV will start automatically!
 sudo reboot
