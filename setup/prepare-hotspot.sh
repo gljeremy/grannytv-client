@@ -5,7 +5,7 @@
 echo "🔧 GrannyTV: Preparing hotspot mode..."
 
 # Check if we should be in setup mode
-if [ ! -f /tmp/grannytv-setup-mode ]; then
+if [ ! -f /var/lib/grannytv-setup-mode ]; then
     echo "   Not in setup mode, skipping..."
     exit 0
 fi

@@ -7,7 +7,7 @@ echo "============================="
 
 # Create setup mode flag
 echo "🏷️ Creating setup mode flag..."
-sudo touch /tmp/grannytv-setup-mode
+sudo touch /var/lib/grannytv-setup-mode
 
 # Stop all WiFi services immediately
 echo "🛑 Stopping all WiFi services..."
@@ -40,7 +40,23 @@ sleep 2
 
 # Start web server
 echo "🌐 Starting setup web server..."
-cd /tmp/grannytv-setup/web
+
+# Ensure setup files exist
+if [ ! -d "/opt/grannytv-setup/web" ]; then
+    echo "   Setup files not found, copying..."
+    sudo mkdir -p /opt/grannytv-setup
+    if [ -d "~/gtv/setup" ]; then
+        sudo cp -r ~/gtv/setup/* /opt/grannytv-setup/
+    elif [ -d "/home/jeremy/gtv/setup" ]; then
+        sudo cp -r /home/jeremy/gtv/setup/* /opt/grannytv-setup/
+    else
+        echo "❌ Cannot find setup files!"
+        exit 1
+    fi
+    sudo chmod +x /opt/grannytv-setup/web/setup_server.py
+fi
+
+cd /opt/grannytv-setup/web
 sudo python3 setup_server.py &
 
 echo ""

@@ -13,7 +13,7 @@ CURRENT_USER=$(whoami)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"              # Repository location (parent of setup/)
 SETUP_DIR="$PROJECT_DIR/setup"                      # Setup wizard files
-WORK_DIR="/tmp/grannytv-setup"                      # Temporary working directory
+WORK_DIR="/opt/grannytv-setup"                      # Persistent working directory
 
 # Ensure we're running as regular user, not root
 if [ "$EUID" -eq 0 ]; then
@@ -195,7 +195,7 @@ EOF
 
 # Create setup mode flag
 echo "🏷️ Creating setup mode flag..."
-sudo touch /tmp/grannytv-setup-mode
+sudo touch /var/lib/grannytv-setup-mode
 
 # Enable and start services
 echo "🚀 Enabling setup services..."
@@ -229,17 +229,26 @@ tee "$SETUP_DIR/restore-normal-wifi.sh" > /dev/null << 'EOF'
 echo "🔄 Restoring normal WiFi operation..."
 
 # Remove setup mode flag
-sudo rm -f /tmp/grannytv-setup-mode
+sudo rm -f /var/lib/grannytv-setup-mode
+
+# Stop any running web servers
+sudo pkill -f "python3.*setup_server.py" 2>/dev/null || true
 
 # Disable setup services
-sudo systemctl disable grannytv-prepare
-sudo systemctl stop grannytv-prepare
-sudo systemctl disable grannytv-setup
-sudo systemctl stop grannytv-setup
-sudo systemctl disable hostapd
-sudo systemctl stop hostapd
-sudo systemctl disable dnsmasq
-sudo systemctl stop dnsmasq
+sudo systemctl disable grannytv-prepare 2>/dev/null || true
+sudo systemctl stop grannytv-prepare 2>/dev/null || true
+sudo systemctl disable grannytv-setup 2>/dev/null || true
+sudo systemctl stop grannytv-setup 2>/dev/null || true
+sudo systemctl disable hostapd 2>/dev/null || true
+sudo systemctl stop hostapd 2>/dev/null || true
+sudo systemctl disable dnsmasq 2>/dev/null || true
+sudo systemctl stop dnsmasq 2>/dev/null || true
+
+# Clear WiFi interface
+sudo ip addr flush dev wlan0 2>/dev/null || true
+
+# Remove iptables rules
+sudo iptables -t nat -F PREROUTING 2>/dev/null || true
 
 # Restore original dhcpcd.conf
 if [ -f /etc/dhcpcd.conf.backup ]; then
@@ -250,6 +259,14 @@ fi
 sudo systemctl enable NetworkManager 2>/dev/null || true
 sudo systemctl start NetworkManager 2>/dev/null || true
 sudo systemctl enable wpa_supplicant 2>/dev/null || true
+
+# Clean up persistent setup files (optional)
+read -p "Remove setup files from /opt/grannytv-setup? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo rm -rf /opt/grannytv-setup
+    echo "   Setup files removed"
+fi
 
 echo "✅ Normal WiFi operation restored"
 echo "🔄 Rebooting to apply changes..."

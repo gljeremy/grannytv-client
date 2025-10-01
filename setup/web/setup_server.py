@@ -355,8 +355,10 @@ def favicon():
 
 if __name__ == '__main__':
     print("🌐 Starting GrannyTV Setup Server")
+    print(f"📁 Working directory: {os.getcwd()}")
     print("📱 Connect to WiFi: GrannyTV-Setup (password: SetupMe123)")
     print("🔗 Setup URL: http://192.168.4.1")
+    print("🔗 Direct URL: http://192.168.4.1:8080")
     
     # Ensure log directory exists
     os.makedirs('/tmp/grannytv-logs', exist_ok=True)

@@ -6,7 +6,7 @@ echo "🚀 Starting GrannyTV Setup Wizard..."
 
 # Configuration
 SETUP_IP="192.168.4.1"
-WORK_DIR="/tmp/grannytv-setup"
+WORK_DIR="/opt/grannytv-setup"
 
 # Function to check if interface has IP
 has_setup_ip() {
@@ -82,12 +82,29 @@ start_web_server() {
         echo "❌ Web server files not found at $WORK_DIR/web/"
         echo "💡 Copying setup files..."
         
-        # Emergency file copy
-        if [ -d "/home/jeremy/gtv/setup" ]; then
-            cp -r /home/jeremy/gtv/setup/* "$WORK_DIR/"
-            chmod +x "$WORK_DIR/web/setup_server.py"
-        else
+        # Emergency file copy - try multiple possible locations
+        POSSIBLE_LOCATIONS=(
+            "/home/jeremy/gtv/setup"
+            "/home/jeremy/grannytv-client/setup"
+            "/home/$USER/gtv/setup"
+            "/home/$USER/grannytv-client/setup"
+        )
+        
+        COPIED=false
+        for location in "${POSSIBLE_LOCATIONS[@]}"; do
+            if [ -d "$location" ]; then
+                echo "   Found setup files at: $location"
+                cp -r "$location"/* "$WORK_DIR/"
+                chmod +x "$WORK_DIR/web/setup_server.py" 2>/dev/null || true
+                chmod +x "$WORK_DIR"/*.sh 2>/dev/null || true
+                COPIED=true
+                break
+            fi
+        done
+        
+        if [ "$COPIED" = false ]; then
             echo "❌ Cannot find setup files to copy"
+            echo "   Searched: ${POSSIBLE_LOCATIONS[*]}"
             return 1
         fi
     fi
