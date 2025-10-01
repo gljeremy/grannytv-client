@@ -10,7 +10,8 @@ SETUP_SSID="GrannyTV-Setup"
 SETUP_PASSWORD="SetupMe123"
 SETUP_IP="192.168.4.1"
 CURRENT_USER=$(whoami)
-PROJECT_DIR="/home/$CURRENT_USER/grannytv-client"  # Repository location
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"              # Repository location (parent of setup/)
 SETUP_DIR="$PROJECT_DIR/setup"                      # Setup wizard files
 WORK_DIR="/tmp/grannytv-setup"                      # Temporary working directory
 
