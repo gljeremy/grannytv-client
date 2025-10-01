@@ -90,24 +90,39 @@ chmod +x /home/jeremy/.xinitrc
 # Configure boot to desktop
 sudo raspi-config nonint do_boot_behaviour B4
 
+# Clone the GrannyTV repository
+echo "📥 Cloning GrannyTV repository..."
+cd "$PI_PATH"
+if [ ! -d ".git" ]; then
+    git clone https://github.com/gljeremy/grannytv-client.git .
+else
+    echo "   Repository already exists, pulling latest changes..."
+    git pull origin main
+fi
+
+# Install Python dependencies
+echo "🐍 Installing Python dependencies..."
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Install and enable the systemd service
+echo "⚙️ Installing systemd service for auto-start..."
+sudo cp platforms/linux/iptv-player.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable iptv-player
+
 echo ""
-echo "✅ Basic setup complete!"
+echo "✅ Setup complete!"
 echo ""
-echo "🌐 Next steps:"
-echo "1. Clone your GitHub repository:"
-echo "   cd $PI_PATH"
-echo "   git clone https://github.com/YOUR_USERNAME/grannytv-client.git ."
+echo "🎬 Your Raspberry Pi is now configured for plug-and-play TV:"
+echo "   • MPV IPTV player installed and optimized"
+echo "   • Auto-start service enabled" 
+echo "   • Audio configured for HDMI output"
+echo "   • Display optimized for TV viewing"
 echo ""
-echo "2. Run the update script:"
-echo "   ./pi-update.sh"
+echo "� To start immediately: sudo systemctl start iptv-player"
+echo "📊 To check status: sudo systemctl status iptv-player"
+echo "📋 To view logs: journalctl -u iptv-player -f"
 echo ""
-echo "3. Install the systemd service:"
-echo "   sudo cp iptv-player.service /etc/systemd/system/"
-echo "   sudo systemctl daemon-reload"
-echo "   sudo systemctl enable iptv-player"
-echo ""
-echo "4. Reboot to test:"
+echo "🚀 Next: Reboot your Pi and it will automatically start playing TV!"
 echo "   sudo reboot"
-echo ""
-echo "📋 Manual clone command:"
-echo "git clone https://github.com/gljeremy/grannytv-client.git $PI_PATH"

@@ -1,7 +1,8 @@
 [Unit]
 Description=MPV-based IPTV Smart Player for Granny TV
-After=network.target graphical-session.target
-Wants=graphical-session.target
+After=network-online.target graphical-session.target sound.target
+Wants=network-online.target graphical-session.target
+Requires=network-online.target
 
 [Service]
 Type=simple
@@ -10,13 +11,28 @@ Group=jeremy
 WorkingDirectory=/home/jeremy/gtv
 ExecStart=/home/jeremy/gtv/venv/bin/python /home/jeremy/gtv/iptv_smart_player.py
 Restart=always
-RestartSec=10
+RestartSec=15
+StartLimitBurst=5
+StartLimitIntervalSec=300
+
+# Environment for audio/video
 Environment=DISPLAY=:0
 Environment=HOME=/home/jeremy
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=PULSE_RUNTIME_PATH=/run/user/1000/pulse
+
+# Wait for network and display to be ready
+ExecStartPre=/bin/sleep 10
+ExecStartPre=/bin/bash -c 'until ping -c1 8.8.8.8 >/dev/null 2>&1; do sleep 5; done'
 
 # Logging
 StandardOutput=append:/home/jeremy/gtv/iptv_service.log
 StandardError=append:/home/jeremy/gtv/iptv_service.log
+
+# Service behavior
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=30
 
 [Install]
 WantedBy=graphical-session.target

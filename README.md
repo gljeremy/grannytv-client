@@ -39,25 +39,31 @@ sudo ./tools/gpu-optimize.sh           # GPU acceleration for Pi
 
 **For the person setting up the Pi:**
 
-1. **Install on Raspberry Pi:**
+### **🚀 Quick Setup (Recommended)**
 ```bash
 # Get the code
 git clone https://github.com/gljeremy/grannytv-client.git
 cd grannytv-client
 
-# Install everything (including MPV)
-sudo apt update && sudo apt install python3-pip python3-venv mpv -y
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+# Run automated setup (installs everything)
+chmod +x platforms/linux/*.sh
+./platforms/linux/pi-setup.sh
 
-# Set up auto-start
-sudo cp platforms/linux/iptv-player.service /etc/systemd/system/
-sudo systemctl enable iptv-player
-sudo systemctl start iptv-player
+# Configure bulletproof auto-start
+./platforms/linux/service-setup.sh
+
+# Reboot - TV will start automatically!
+sudo reboot
 ```
 
-2. **That's it!** The Pi will automatically start playing TV when powered on.
+### **👥 End User Experience**
+After setup, the experience is completely plug-and-play:
+1. **Connect Pi to TV via HDMI**
+2. **Power on the Pi** 
+3. **TV automatically starts playing within 30 seconds**
+4. **No keyboard, mouse, or technical knowledge needed!**
+
+**That's it!** Perfect for elderly users or care facilities.
 
 ## Performance Optimized ⚡
 

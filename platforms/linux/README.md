@@ -4,24 +4,42 @@ Scripts and service files for MPV-based IPTV player deployment on Raspberry Pi.
 
 ## 📄 Files
 
-- **`pi-setup.sh`** - Initial setup script for fresh Pi installation (installs MPV)
+### Setup Scripts
+- **`pi-setup.sh`** - Initial setup script for fresh Pi installation (installs MPV, configures auto-start)
+- **`service-setup.sh`** - Complete auto-start configuration (bulletproof service setup)  
 - **`pi-update.sh`** - Updates code from Git and manages virtual environment
-- **`iptv-player.service`** - Systemd service for auto-start MPV player on boot
+
+### Service Files  
+- **`iptv-player.service`** - Enhanced systemd service for reliable auto-start on boot
+- **`service-diagnostics.sh`** - Troubleshooting script for service issues
 
 ## 🚀 Usage
 
+### **Complete Setup (Plug-and-Play Experience)**
 ```bash
-# Initial setup (run once)
-chmod +x platforms/linux/pi-setup.sh
+# 1. Initial Pi setup (run once on fresh Pi)
+chmod +x platforms/linux/*.sh
 ./platforms/linux/pi-setup.sh
 
-# Updates (run after code changes)  
+# 2. Configure bulletproof auto-start (recommended)
+./platforms/linux/service-setup.sh
+
+# 3. Reboot - Pi will automatically start playing TV!
+sudo reboot
+```
+
+### **Updates & Maintenance**
+```bash
+# Update code from Git (automatically restarts service)
 ./platforms/linux/pi-update.sh
 
-# Install service for auto-start
-sudo cp platforms/linux/iptv-player.service /etc/systemd/system/
-sudo systemctl enable iptv-player
-sudo systemctl start iptv-player
+# Troubleshoot service issues
+./platforms/linux/service-diagnostics.sh
+
+# Manual service management
+sudo systemctl start/stop/restart iptv-player
+sudo systemctl status iptv-player
+journalctl -u iptv-player -f
 ```
 
 ## 🔧 Requirements
@@ -32,8 +50,22 @@ sudo systemctl start iptv-player
 
 ## 📝 Notes
 
-- MPV provides 30-50% better performance than VLC on Pi hardware
-- Setup script automatically configures Pi-specific MPV optimizations
-- Service runs with conservative settings optimized for Pi 3/4
+- **MPV Performance**: 30-50% better performance than VLC on Pi hardware
+- **Auto-Start**: Complete plug-and-play experience - just connect Pi to TV and power on
+- **Reliability**: Enhanced service with network wait, display detection, and failsafe startup
+- **User Experience**: No keyboard, mouse, or technical knowledge required for end users
+- **Maintenance**: Remote updates via Git, comprehensive diagnostics, and service management
+
+## 🎯 End User Experience
+
+**Goal**: Grandma plugs Pi into TV → TV starts playing automatically
+
+1. **Power On**: Pi boots and auto-logs in
+2. **Network Wait**: Service waits for internet connection  
+3. **Display Ready**: Ensures HDMI output is working
+4. **Auto-Start**: IPTV player launches automatically
+5. **TV Playing**: Live television starts within 30 seconds of boot
+
+**Zero technical knowledge required for end users!**
 - VLC media player
 - Git
