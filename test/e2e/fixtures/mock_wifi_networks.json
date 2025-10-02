@@ -1,0 +1,42 @@
+[
+  {
+    "ssid": "TestNetwork1",
+    "signal": -45,
+    "security": "WPA2",
+    "frequency": "2.4GHz",
+    "channel": 6,
+    "bssid": "00:11:22:33:44:55"
+  },
+  {
+    "ssid": "TestNetwork2",
+    "signal": -67,
+    "security": "WPA3",
+    "frequency": "5GHz",
+    "channel": 36,
+    "bssid": "AA:BB:CC:DD:EE:FF"
+  },
+  {
+    "ssid": "OpenNetwork",
+    "signal": -52,
+    "security": "Open",
+    "frequency": "2.4GHz",
+    "channel": 11,
+    "bssid": "11:22:33:44:55:66"  
+  },
+  {
+    "ssid": "WeakSignal",
+    "signal": -85,
+    "security": "WPA2",
+    "frequency": "2.4GHz",
+    "channel": 1,
+    "bssid": "99:88:77:66:55:44"
+  },
+  {
+    "ssid": "5GHz_Network",
+    "signal": -60,
+    "security": "WPA2",
+    "frequency": "5GHz", 
+    "channel": 149,
+    "bssid": "DD:EE:FF:00:11:22"
+  }
+]

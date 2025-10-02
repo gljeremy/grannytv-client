@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # Raspberry Pi simulator container
+  pi-simulator:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.pi-simulator
+    container_name: grannytv-pi-sim
+    hostname: grannytv
+    privileged: true
+    volumes:
+      - ../../:/home/jeremy/gtv:ro  # Mount project root as read-only
+      - pi-data:/opt/grannytv-setup
+      - pi-var:/var/lib
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      - grannytv-test
+    ports:
+      - "8080:8080"
+      - "80:80"
+    environment:
+      - container=docker
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/lock
+    cap_add:
+      - SYS_ADMIN
+      - NET_ADMIN
+      - NET_RAW
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Test runner container
+  test-runner:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.test-runner
+    container_name: grannytv-test-runner
+    volumes:
+      - ./tests:/home/tester/tests:ro
+      - ./fixtures:/home/tester/fixtures:ro
+      - ./reports:/home/tester/reports
+    networks:
+      - grannytv-test
+    environment:
+      - PI_SIMULATOR_HOST=pi-simulator
+      - PI_SIMULATOR_PORT=8080
+      - TEST_TIMEOUT=300
+      - PYTHONPATH=/home/tester/tests
+    depends_on:
+      pi-simulator:
+        condition: service_healthy
+    profiles:
+      - testing
+
+  # Web browser simulator for UI testing
+  browser-sim:
+    image: selenium/standalone-chrome:4.15.0
+    container_name: grannytv-browser-sim
+    networks:
+      - grannytv-test
+    ports:
+      - "4444:4444"
+      - "7900:7900"  # VNC port for debugging
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+    volumes:
+      - /dev/shm:/dev/shm
+    profiles:
+      - ui-testing
+
+networks:
+  grannytv-test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+
+volumes:
+  pi-data:
+    driver: local
+  pi-var:
+    driver: local

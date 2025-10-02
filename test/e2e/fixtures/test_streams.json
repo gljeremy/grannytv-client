@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Test Stream 1",
+    "url": "http://test.example.com/stream1.m3u8",
+    "group": "Test Group",
+    "logo": "http://test.example.com/logo1.png"
+  },
+  {
+    "name": "Test Stream 2",
+    "url": "http://test.example.com/stream2.m3u8",
+    "group": "Test Group",
+    "logo": "http://test.example.com/logo2.png"
+  },
+  {
+    "name": "Alternative Test Stream",
+    "url": "http://alternative.example.com/stream.m3u8",
+    "group": "Alternative",
+    "logo": "http://alternative.example.com/logo.png"
+  }
+]

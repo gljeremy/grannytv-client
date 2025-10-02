@@ -1,0 +1,154 @@
+name: GrannyTV E2E Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      test_category:
+        description: 'Test category to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - setup
+          - web
+          - services
+          - recovery
+      debug_mode:
+        description: 'Enable debug mode'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    strategy:
+      matrix:
+        test-category: 
+          - setup
+          - web
+          - services
+          - recovery
+      fail-fast: false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+          
+    - name: Free up disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        
+    - name: Run E2E Tests
+      run: |
+        cd test/e2e
+        chmod +x run-tests.sh
+        
+        # Determine test category
+        if [ "${{ github.event.inputs.test_category }}" != "" ] && [ "${{ github.event.inputs.test_category }}" != "all" ]; then
+          TEST_CATEGORY="${{ github.event.inputs.test_category }}"
+        else
+          TEST_CATEGORY="${{ matrix.test-category }}"
+        fi
+        
+        # Set debug mode
+        DEBUG_FLAG=""
+        if [ "${{ github.event.inputs.debug_mode }}" == "true" ]; then
+          DEBUG_FLAG="--debug"
+        fi
+        
+        # Run tests
+        ./run-tests.sh --category "$TEST_CATEGORY" $DEBUG_FLAG --timeout 600
+      
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-${{ matrix.test-category }}
+        path: |
+          test/e2e/reports/
+          
+    - name: Upload Docker logs
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: docker-logs-${{ matrix.test-category }}
+        path: |
+          /tmp/docker-logs/
+          
+  test-summary:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    if: always()
+    
+    steps:
+    - name: Download all test results
+      uses: actions/download-artifact@v3
+      
+    - name: Generate test summary
+      run: |
+        echo "# GrannyTV E2E Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Count results
+        TOTAL_TESTS=0
+        PASSED_TESTS=0
+        
+        for category in setup web services recovery; do
+          if [ -d "test-results-$category" ]; then
+            echo "## $category Tests" >> $GITHUB_STEP_SUMMARY
+            
+            # Simple check - if junit results exist, parse them
+            if [ -f "test-results-$category/test-results.xml" ]; then
+              # This is a simplified parser - in production you'd use proper XML parsing
+              CATEGORY_TESTS=$(grep -c "testcase" "test-results-$category/test-results.xml" || echo "0")
+              CATEGORY_FAILURES=$(grep -c "failure\|error" "test-results-$category/test-results.xml" || echo "0")
+              CATEGORY_PASSED=$((CATEGORY_TESTS - CATEGORY_FAILURES))
+              
+              echo "- Total: $CATEGORY_TESTS" >> $GITHUB_STEP_SUMMARY
+              echo "- Passed: $CATEGORY_PASSED" >> $GITHUB_STEP_SUMMARY
+              echo "- Failed: $CATEGORY_FAILURES" >> $GITHUB_STEP_SUMMARY
+              
+              TOTAL_TESTS=$((TOTAL_TESTS + CATEGORY_TESTS))
+              PASSED_TESTS=$((PASSED_TESTS + CATEGORY_PASSED))
+            else
+              echo "- Results not available" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+        done
+        
+        echo "## Overall Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Total Tests: $TOTAL_TESTS" >> $GITHUB_STEP_SUMMARY
+        echo "- Passed: $PASSED_TESTS" >> $GITHUB_STEP_SUMMARY
+        echo "- Failed: $((TOTAL_TESTS - PASSED_TESTS))" >> $GITHUB_STEP_SUMMARY
+        
+        if [ $PASSED_TESTS -eq $TOTAL_TESTS ] && [ $TOTAL_TESTS -gt 0 ]; then
+          echo "- Status: ✅ All tests passed!" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- Status: ❌ Some tests failed" >> $GITHUB_STEP_SUMMARY
+        fi

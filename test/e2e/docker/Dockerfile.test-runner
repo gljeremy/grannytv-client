@@ -1,0 +1,40 @@
+# Test Runner Container for GrannyTV E2E Tests
+FROM python:3.11-slim
+
+# Install system dependencies for testing
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    ssh \
+    netcat-openbsd \
+    iproute2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python testing dependencies
+RUN pip install \
+    pytest \
+    pytest-asyncio \
+    pytest-html \
+    pytest-cov \
+    requests \
+    selenium \
+    beautifulsoup4 \
+    pexpect \
+    docker \
+    paramiko
+
+# Create test user
+RUN useradd -m -s /bin/bash tester
+USER tester
+WORKDIR /home/tester
+
+# Set up test environment
+ENV PYTHONPATH=/home/tester/tests
+ENV PYTEST_ARGS="--tb=short -v"
+
+# Default command
+CMD ["pytest"]
+
+# Labels
+LABEL purpose="grannytv-e2e-testing"
+LABEL component="test-runner"
