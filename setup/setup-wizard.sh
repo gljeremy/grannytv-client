@@ -260,12 +260,19 @@ sudo systemctl enable NetworkManager 2>/dev/null || true
 sudo systemctl start NetworkManager 2>/dev/null || true
 sudo systemctl enable wpa_supplicant 2>/dev/null || true
 
-# Clean up persistent setup files (optional)
-read -p "Remove setup files from /opt/grannytv-setup? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Clean up persistent setup files automatically when run non-interactively
+if [ -t 0 ]; then
+    # Interactive mode - ask user
+    read -p "Remove setup files from /opt/grannytv-setup? (y/N): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo rm -rf /opt/grannytv-setup
+        echo "   Setup files removed"
+    fi
+else
+    # Non-interactive mode - remove automatically
     sudo rm -rf /opt/grannytv-setup
-    echo "   Setup files removed"
+    echo "   Setup files removed automatically"
 fi
 
 echo "✅ Normal WiFi operation restored"

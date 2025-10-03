@@ -5,11 +5,12 @@ import pytest
 import requests
 import time
 import os
-import subprocess
+
 
 # Test configuration
 PI_HOST = os.getenv('PI_SIMULATOR_HOST', 'pi-simulator')
-PI_PORT = int(os.getenv('PI_SIMULATOR_PORT', '8080'))
+PI_PORT = int(os.getenv('PI_SIMULATOR_PORT', '8080'))  # Setup web server port
+PI_HEALTH_PORT = int(os.getenv('PI_HEALTH_PORT', '9080'))  # Health/execute API port
 TEST_TIMEOUT = int(os.getenv('TEST_TIMEOUT', '300'))
 
 @pytest.fixture(scope="session")
@@ -18,7 +19,9 @@ def pi_simulator():
     return {
         'host': PI_HOST,
         'port': PI_PORT,
-        'base_url': f'http://{PI_HOST}:{PI_PORT}'
+        'base_url': f'http://{PI_HOST}:{PI_PORT}',
+        'health_port': PI_HEALTH_PORT,
+        'health_url': f'http://{PI_HOST}:{PI_HEALTH_PORT}'
     }
 
 @pytest.fixture(scope="session")
@@ -29,7 +32,7 @@ def wait_for_pi_ready(pi_simulator):
     
     for attempt in range(max_retries):
         try:
-            response = requests.get(f"{pi_simulator['base_url']}/health", timeout=5)
+            response = requests.get(f"{pi_simulator['health_url']}/health", timeout=5)
             if response.status_code == 200:
                 return True
         except requests.exceptions.RequestException:
@@ -40,54 +43,74 @@ def wait_for_pi_ready(pi_simulator):
     pytest.fail(f"Pi simulator not ready after {max_retries * retry_delay} seconds")
 
 @pytest.fixture
-def execute_on_pi():
-    """Execute commands on Pi simulator"""
+def execute_on_pi(pi_simulator):
+    """Execute commands on Pi simulator as jeremy user via HTTP API"""
     def _execute(command, cwd="/home/jeremy/gtv", timeout=30):
-        cmd = [
-            'docker', 'exec', 'grannytv-pi-sim',
-            'sudo', '-u', 'jeremy', 'bash', '-c',
-            f'cd {cwd} && {command}'
-        ]
-        
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=timeout
-        )
-        
-        return {
-            'returncode': result.returncode,
-            'stdout': result.stdout,
-            'stderr': result.stderr,
-            'success': result.returncode == 0
-        }
+        try:
+            response = requests.post(
+                f"{pi_simulator['health_url']}/execute",
+                json={
+                    'command': command,
+                    'cwd': cwd,
+                    'timeout': timeout,
+                    'user': 'jeremy'
+                },
+                timeout=timeout + 5
+            )
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {'error': response.text}
+                return {
+                    'returncode': 1,
+                    'stdout': '',
+                    'stderr': error_data.get('error', 'HTTP request failed'),
+                    'success': False
+                }
+        except Exception as e:
+            return {
+                'returncode': 1,
+                'stdout': '',
+                'stderr': str(e),
+                'success': False
+            }
     
     return _execute
 
 @pytest.fixture
-def execute_on_pi_root():
-    """Execute commands on Pi simulator as root"""
+def execute_on_pi_root(pi_simulator):
+    """Execute commands on Pi simulator as root via HTTP API"""
     def _execute(command, cwd="/home/jeremy/gtv", timeout=30):
-        cmd = [
-            'docker', 'exec', 'grannytv-pi-sim',
-            'bash', '-c',
-            f'cd {cwd} && {command}'
-        ]
-        
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=timeout
-        )
-        
-        return {
-            'returncode': result.returncode,
-            'stdout': result.stdout,
-            'stderr': result.stderr,
-            'success': result.returncode == 0
-        }
+        try:
+            response = requests.post(
+                f"{pi_simulator['health_url']}/execute",
+                json={
+                    'command': command,
+                    'cwd': cwd,
+                    'timeout': timeout,
+                    'user': 'root'
+                },
+                timeout=timeout + 5
+            )
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {'error': response.text}
+                return {
+                    'returncode': 1,
+                    'stdout': '',
+                    'stderr': error_data.get('error', 'HTTP request failed'),
+                    'success': False
+                }
+        except Exception as e:
+            return {
+                'returncode': 1,
+                'stdout': '',
+                'stderr': str(e),
+                'success': False
+            }
     
     return _execute
 
@@ -99,7 +122,7 @@ def web_client(pi_simulator):
     return session
 
 @pytest.fixture
-def cleanup_pi():
+def cleanup_pi(pi_simulator):
     """Cleanup Pi simulator state after tests"""
     yield
     
@@ -115,10 +138,19 @@ def cleanup_pi():
     ]
     
     for cmd in cleanup_commands:
-        subprocess.run([
-            'docker', 'exec', 'grannytv-pi-sim',
-            'bash', '-c', cmd
-        ], capture_output=True)
+        try:
+            requests.post(
+                f"{pi_simulator['health_url']}/execute",
+                json={
+                    'command': cmd,
+                    'cwd': '/home/jeremy/gtv',
+                    'timeout': 10,
+                    'user': 'root'
+                },
+                timeout=15
+            )
+        except Exception:
+            pass  # Ignore cleanup failures
 
 @pytest.fixture
 def mock_wifi_networks():

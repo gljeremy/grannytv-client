@@ -67,7 +67,7 @@ class TestWebServer:
         time.sleep(5)
         
         try:
-            response = web_client.get(f"{pi_simulator['base_url']}/api/scan-wifi")
+            response = web_client.get(f"{pi_simulator['base_url']}/scan_wifi")
             # May return error due to simulated environment, but should respond
             assert response.status_code in [200, 400, 500]
         except requests.exceptions.RequestException:
@@ -85,7 +85,7 @@ class TestWebServer:
         
         try:
             response = web_client.post(
-                f"{pi_simulator['base_url']}/api/configure",
+                f"{pi_simulator['base_url']}/configure",
                 json=test_config
             )
             # Should accept configuration or return validation error
@@ -104,7 +104,7 @@ class TestWebServer:
         time.sleep(5)
         
         try:
-            response = web_client.get(f"{pi_simulator['base_url']}/api/device-info")
+            response = web_client.get(f"{pi_simulator['base_url']}/detect_pi")
             if response.status_code == 200:
                 data = response.json()
                 assert 'hostname' in data
@@ -136,7 +136,7 @@ class TestWebServerErrorHandling:
         for config in invalid_configs:
             try:
                 response = web_client.post(
-                    f"{pi_simulator['base_url']}/api/configure",
+                    f"{pi_simulator['base_url']}/configure",
                     json=config
                 )
                 # Should return validation error
@@ -156,7 +156,7 @@ class TestWebServerErrorHandling:
         
         try:
             response = web_client.post(
-                f"{pi_simulator['base_url']}/api/configure",
+                f"{pi_simulator['base_url']}/configure",
                 data="invalid json",
                 headers={'Content-Type': 'application/json'}
             )

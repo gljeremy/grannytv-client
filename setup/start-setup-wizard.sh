@@ -4,6 +4,15 @@
 
 echo "🚀 Starting GrannyTV Setup Wizard..."
 
+# Check if setup mode is still active
+if [ ! -f /var/lib/grannytv-setup-mode ]; then
+    echo "⚠️  Setup mode flag not found - setup already completed"
+    echo "   Exiting to prevent hotspot from starting"
+    exit 0
+fi
+
+echo "✅ Setup mode active - proceeding with hotspot configuration"
+
 # Configuration
 SETUP_IP="192.168.4.1"
 WORK_DIR="/opt/grannytv-setup"

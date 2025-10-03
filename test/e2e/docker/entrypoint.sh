@@ -15,9 +15,9 @@ fi
 setup_test_environment() {
     echo "🔧 Setting up test environment..."
     
-    # Create mock network interface
-    ip link add wlan0 type dummy 2>/dev/null || true
-    ip link set wlan0 up 2>/dev/null || true
+    # Create mock network interface (if possible in container)
+    ip link add wlan0 type dummy 2>/dev/null || echo "Could not create wlan0 (expected in test environment)"
+    ip link set wlan0 up 2>/dev/null || echo "Could not bring up wlan0 (expected in test environment)"
     
     # Set permissions
     chown -R jeremy:jeremy /home/jeremy/gtv 2>/dev/null || true

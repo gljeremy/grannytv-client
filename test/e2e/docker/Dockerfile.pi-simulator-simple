@@ -1,11 +1,8 @@
-# Raspberry Pi OS Simulator for GrannyTV Testing
+# Simplified Raspberry Pi OS Simulator for GrannyTV Testing
 FROM debian:bookworm-slim
 
 # Install system packages that would be on Raspberry Pi OS
 RUN apt-get update && apt-get install -y \
-    systemd \
-    systemd-sysv \
-    dbus \
     hostapd \
     dnsmasq \
     python3 \
@@ -21,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     procps \
     psmisc \
     nano \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a user similar to Pi default user
@@ -33,24 +31,17 @@ RUN useradd -m -s /bin/bash jeremy && \
 RUN mkdir -p /home/jeremy/gtv \
     /opt/grannytv-setup \
     /var/lib \
-    /etc/hostapd \
-    /etc/systemd/system
-
-# Set up systemd environment
-RUN systemctl set-default multi-user.target
-
-# Note: Mock wireless interface will be created at runtime in entrypoint
+    /etc/hostapd
 
 # Install Python testing dependencies
 RUN pip3 install --break-system-packages \
     pytest \
     requests \
     flask \
-    pexpect \
     psutil
 
 # Copy scripts
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint-simple.sh /usr/local/bin/entrypoint.sh
 COPY health_server.py /usr/local/bin/health_server.py
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
@@ -59,11 +50,10 @@ WORKDIR /home/jeremy/gtv
 
 # Use our entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["systemd"]
 
 # Expose ports for web server testing
 EXPOSE 8080 80
 
 # Labels for identification
 LABEL purpose="grannytv-e2e-testing"
-LABEL component="pi-simulator"
+LABEL component="pi-simulator-simple"

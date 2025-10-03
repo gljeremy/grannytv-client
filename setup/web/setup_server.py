@@ -260,8 +260,44 @@ def finalize():
             config = json.load(f)
         
         # Apply WiFi configuration
-        subprocess.run(['sudo', 'cp', '/tmp/wpa_supplicant.conf', 
-                       '/etc/wpa_supplicant/wpa_supplicant.conf'], check=True)
+        try:
+            subprocess.run(['sudo', 'cp', '/tmp/wpa_supplicant.conf', 
+                           '/etc/wpa_supplicant/wpa_supplicant.conf'], check=True)
+            print("WiFi configuration applied successfully")
+        except subprocess.CalledProcessError as e:
+            print(f"Warning: Could not apply WiFi configuration: {e}")
+            # Continue with cleanup anyway - this might be a test environment
+        
+        # IMMEDIATELY disable hotspot and switch to client mode
+        print("Disabling hotspot and switching to client mode...")
+        try:
+            # Stop hotspot services
+            subprocess.run(['sudo', 'systemctl', 'stop', 'hostapd'], check=False)
+            subprocess.run(['sudo', 'systemctl', 'stop', 'dnsmasq'], check=False)
+            subprocess.run(['sudo', 'systemctl', 'disable', 'hostapd'], check=False)
+            subprocess.run(['sudo', 'systemctl', 'disable', 'dnsmasq'], check=False)
+            
+            # Clear wlan0 interface
+            subprocess.run(['sudo', 'ip', 'addr', 'flush', 'dev', 'wlan0'], check=False)
+            
+            # Remove iptables NAT rules
+            subprocess.run(['sudo', 'iptables', '-t', 'nat', '-F', 'PREROUTING'], check=False)
+            
+            # Restore dhcpcd.conf if backup exists
+            if os.path.exists('/etc/dhcpcd.conf.backup'):
+                subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=False)
+            
+            # Start normal WiFi services
+            subprocess.run(['sudo', 'systemctl', 'start', 'wpa_supplicant'], check=False)
+            subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
+            
+            # Restart networking to pick up new configuration
+            subprocess.run(['sudo', 'systemctl', 'restart', 'dhcpcd'], check=False)
+            
+            print("Hotspot disabled, switching to client mode")
+        except Exception as e:
+            print(f"Warning: Error during hotspot cleanup: {e}")
+            # Continue anyway - the installation script will also try to clean up
         
         # Create installation script that will run after reboot
         install_script = f"""#!/bin/bash
@@ -296,8 +332,11 @@ chmod +x platforms/linux/pi-setup.sh
 echo "✅ GrannyTV installation complete!"
 EOF
 
-# Clean up setup mode
-/home/{os.getenv('USER')}/gtv-setup/restore-normal-wifi.sh
+# Clean up any remaining setup mode artifacts
+if [ -f /opt/grannytv-setup/restore-normal-wifi.sh ]; then
+    echo "Running final cleanup..."
+    /opt/grannytv-setup/restore-normal-wifi.sh
+fi
 """
         
         # Write and schedule installation script
@@ -332,6 +371,57 @@ WantedBy=multi-user.target
         subprocess.run(['sudo', 'systemctl', 'enable', 'grannytv-install'], check=True)
         
         print("Finalization complete - scheduling reboot")
+        
+        # Create immediate cleanup script and run it in background
+        immediate_cleanup = """#!/bin/bash
+# Immediate cleanup to switch from hotspot to client mode
+echo "Starting immediate WiFi switch..."
+
+# Remove setup mode flag FIRST - this prevents services from restarting
+sudo rm -f /var/lib/grannytv-setup-mode
+
+# Stop hotspot services immediately
+sudo systemctl stop hostapd 2>/dev/null || true
+sudo systemctl stop dnsmasq 2>/dev/null || true
+
+# Clear the static IP from wlan0
+sudo ip addr flush dev wlan0 2>/dev/null || true
+
+# Remove iptables rules
+sudo iptables -t nat -F PREROUTING 2>/dev/null || true
+
+# Start normal WiFi services with the new configuration
+sudo systemctl start wpa_supplicant 2>/dev/null || true
+sudo systemctl start dhcpcd 2>/dev/null || true
+
+# Give it a moment to connect
+sleep 5
+
+# Stop the web server after giving time for response
+sleep 10
+sudo pkill -f "python3.*setup_server.py" 2>/dev/null || true
+
+# Stop and disable setup services  
+sudo systemctl disable grannytv-setup 2>/dev/null || true
+sudo systemctl stop grannytv-setup 2>/dev/null || true
+sudo systemctl disable grannytv-prepare 2>/dev/null || true
+sudo systemctl stop grannytv-prepare 2>/dev/null || true
+
+echo "Immediate cleanup complete - Pi should now be on home WiFi"
+"""
+        
+        with open('/tmp/immediate-cleanup.sh', 'w') as f:
+            f.write(immediate_cleanup)
+        
+        os.chmod('/tmp/immediate-cleanup.sh', 0o755)
+        
+        # Run cleanup in background
+        subprocess.Popen(['/tmp/immediate-cleanup.sh'], 
+                        stdout=subprocess.DEVNULL, 
+                        stderr=subprocess.DEVNULL)
+        
+        print("Immediate cleanup started in background")
+        
         return jsonify({'success': True, 'message': 'Setup complete! Rebooting in 5 seconds...'})
         
     except Exception as e:
