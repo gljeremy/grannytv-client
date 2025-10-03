@@ -397,15 +397,18 @@ sudo systemctl start dhcpcd 2>/dev/null || true
 # Give it a moment to connect
 sleep 5
 
-# Stop the web server after giving time for response
-sleep 10
-sudo pkill -f "python3.*setup_server.py" 2>/dev/null || true
-
 # Stop and disable setup services  
 sudo systemctl disable grannytv-setup 2>/dev/null || true
 sudo systemctl stop grannytv-setup 2>/dev/null || true
 sudo systemctl disable grannytv-prepare 2>/dev/null || true
 sudo systemctl stop grannytv-prepare 2>/dev/null || true
+
+# Wait before rebooting to allow web response and WiFi switch
+sleep 15
+
+# Reboot the system
+echo "Rebooting system to complete setup..."
+sudo reboot
 
 echo "Immediate cleanup complete - Pi should now be on home WiFi"
 """
@@ -415,14 +418,14 @@ echo "Immediate cleanup complete - Pi should now be on home WiFi"
         
         os.chmod('/tmp/immediate-cleanup.sh', 0o755)
         
-        # Run cleanup in background
+        # Run cleanup in background - this will also handle the reboot
         subprocess.Popen(['/tmp/immediate-cleanup.sh'], 
                         stdout=subprocess.DEVNULL, 
                         stderr=subprocess.DEVNULL)
         
-        print("Immediate cleanup started in background")
+        print("Immediate cleanup and reboot scheduled in background")
         
-        return jsonify({'success': True, 'message': 'Setup complete! Rebooting in 5 seconds...'})
+        return jsonify({'success': True, 'message': 'Setup complete! System will reboot in 15 seconds.', 'rebooting': True})
         
     except Exception as e:
         print(f"Finalization error: {e}")
