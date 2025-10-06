@@ -43,12 +43,29 @@ def load_config():
 # Load configuration
 CONFIG = load_config()
 
-# Configure logging
+# Configure logging with read-only filesystem support
 log_handlers = [logging.StreamHandler(sys.stdout)]
+
+# Try to create file handler, fallback to stdout-only if filesystem is read-only
 try:
+    # First try to create the directory if it doesn't exist
+    log_dir = os.path.dirname(CONFIG['log_file'])
+    if log_dir and not os.path.exists(log_dir):
+        os.makedirs(log_dir, exist_ok=True)
+    
+    # Try to create the log file handler
     log_handlers.append(logging.FileHandler(CONFIG['log_file'], encoding='utf-8'))
-except Exception:
-    log_handlers.append(logging.FileHandler(CONFIG['log_file']))
+    print(f"IPTV Player: Logging to file: {CONFIG['log_file']}")
+except (OSError, IOError, PermissionError) as e:
+    # Read-only filesystem or permission issue - continue with stdout only
+    print(f"IPTV Player: Cannot write to log file ({e}), using stdout only")
+except Exception as e:
+    # Any other error - try without encoding parameter
+    try:
+        log_handlers.append(logging.FileHandler(CONFIG['log_file']))
+        print(f"IPTV Player: Logging to file: {CONFIG['log_file']} (no encoding)")
+    except Exception:
+        print(f"IPTV Player: Cannot write to log file ({e}), using stdout only")
 
 logging.basicConfig(
     level=logging.INFO,

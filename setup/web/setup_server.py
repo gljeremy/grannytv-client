@@ -200,37 +200,89 @@ def configure():
         config = request.json
         print(f"Received configuration: {config}")
         
-        # Validate required fields
-        required = ['wifi_ssid', 'wifi_password', 'username', 'install_path']
-        missing = [field for field in required if not config.get(field)]
-        if missing:
-            return jsonify({'error': f'Missing required fields: {", ".join(missing)}'}), 400
+        # Input validation and sanitization
+        def validate_and_sanitize_config(config):
+            """Validate and sanitize configuration inputs"""
+            if not isinstance(config, dict):
+                raise ValueError("Configuration must be a JSON object")
+            
+            # Validate required fields
+            required = ['wifi_ssid', 'wifi_password', 'username', 'install_path']
+            missing = [field for field in required if not config.get(field) or not isinstance(config.get(field), str)]
+            if missing:
+                raise ValueError(f'Missing or invalid required fields: {", ".join(missing)}')
+            
+            # Sanitize WiFi SSID (alphanumeric, spaces, dashes, underscores only)
+            wifi_ssid = str(config['wifi_ssid']).strip()
+            if not re.match(r'^[a-zA-Z0-9\s\-_]{1,32}$', wifi_ssid):
+                raise ValueError("WiFi SSID contains invalid characters or is too long (max 32 chars)")
+            
+            # Sanitize WiFi password (no shell metacharacters)
+            wifi_password = str(config['wifi_password'])
+            if len(wifi_password) < 8 or len(wifi_password) > 63:
+                raise ValueError("WiFi password must be 8-63 characters long")
+            # Check for dangerous characters that could cause command injection
+            dangerous_chars = ['$', '`', '\\', '"', "'", ';', '|', '&', '\n', '\r']
+            if any(char in wifi_password for char in dangerous_chars):
+                raise ValueError("WiFi password contains invalid characters")
+            
+            # Validate install path (must be within allowed directories)
+            install_path = str(config['install_path']).strip()
+            allowed_paths = ['/home/', '/opt/grannytv']
+            if not any(install_path.startswith(allowed) for allowed in allowed_paths):
+                raise ValueError("Install path must be within /home/ or /opt/grannytv")
+            # Prevent path traversal
+            if '..' in install_path or install_path.startswith('/'):
+                if not install_path.startswith('/home/') and not install_path.startswith('/opt/grannytv'):
+                    raise ValueError("Invalid install path - path traversal detected")
+            
+            # Sanitize username (alphanumeric and underscore only)
+            username = str(config['username']).strip()
+            if not re.match(r'^[a-zA-Z0-9_]{3,32}$', username):
+                raise ValueError("Username must be 3-32 characters, alphanumeric and underscore only")
+            
+            return {
+                'wifi_ssid': wifi_ssid,
+                'wifi_password': wifi_password,
+                'install_path': os.path.abspath(install_path),  # Normalize path
+                'username': username,
+                'wifi_country': config.get('wifi_country', 'US'),
+                'tv_name': str(config.get('tv_name', 'GrannyTV')).strip()[:32]  # Limit length
+            }
         
-        # Save configuration
-        if not setup_config.save_config(config):
+        # Validate and sanitize input
+        try:
+            sanitized_config = validate_and_sanitize_config(config)
+        except ValueError as e:
+            return jsonify({'error': str(e)}), 400
+        
+        # Save sanitized configuration
+        if not setup_config.save_config(sanitized_config):
             return jsonify({'error': 'Failed to save configuration'}), 500
         
-        # Create user if needed
+        # Create user if needed (using sanitized username)
         current_user = os.getenv('USER', 'pi')
-        if config['username'] != current_user and config['username'] != 'pi':
+        if sanitized_config['username'] != current_user and sanitized_config['username'] != 'pi':
             try:
                 subprocess.run(['sudo', 'useradd', '-m', '-s', '/bin/bash', 
-                               config['username']], check=True)
+                               sanitized_config['username']], check=True)
                 subprocess.run(['sudo', 'usermod', '-a', '-G', 
-                               'sudo,video,audio,dialout', config['username']], check=True)
-                print(f"Created user: {config['username']}")
+                               'sudo,video,audio,dialout', sanitized_config['username']], check=True)
+                print(f"Created user: {sanitized_config['username']}")
             except subprocess.CalledProcessError as e:
                 if 'already exists' not in str(e):
                     return jsonify({'error': f'Failed to create user: {e}'}), 500
         
-        # Create WiFi configuration
-        wifi_config = f"""country={config.get('wifi_country', 'US')}
+        # Create WiFi configuration with proper escaping
+        # Use shlex.quote to prevent injection attacks
+        import shlex
+        wifi_config = f"""country={sanitized_config['wifi_country']}
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 
 network={{
-    ssid="{config['wifi_ssid']}"
-    psk="{config['wifi_password']}"
+    ssid={shlex.quote(sanitized_config['wifi_ssid'])}
+    psk={shlex.quote(sanitized_config['wifi_password'])}
     key_mgmt=WPA-PSK
 }}
 """
