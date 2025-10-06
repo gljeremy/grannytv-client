@@ -30,6 +30,22 @@ if [ -f /etc/dhcpcd.conf.backup ]; then
     sudo cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
 fi
 
+# Remove hostapd and dnsmasq configurations created by setup wizard
+if [ -f /etc/hostapd/hostapd.conf ]; then
+    sudo rm /etc/hostapd/hostapd.conf
+    echo "   Removed hostapd configuration"
+fi
+
+if [ -f /etc/dnsmasq.conf ]; then
+    sudo rm /etc/dnsmasq.conf
+    echo "   Removed dnsmasq configuration"
+fi
+
+if [ -f /etc/default/hostapd ]; then
+    sudo sh -c 'echo "" > /etc/default/hostapd'
+    echo "   Cleared hostapd defaults"
+fi
+
 # Re-enable normal WiFi services
 sudo systemctl enable NetworkManager 2>/dev/null || true
 sudo systemctl start NetworkManager 2>/dev/null || true

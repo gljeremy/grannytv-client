@@ -420,6 +420,10 @@ def finalize():
             if os.path.exists('/etc/dhcpcd.conf.backup'):
                 subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=False)
             
+            # Enable and start NetworkManager (modern Raspberry Pi OS uses this)
+            subprocess.run(['sudo', 'systemctl', 'enable', 'NetworkManager'], check=False)
+            subprocess.run(['sudo', 'systemctl', 'start', 'NetworkManager'], check=False)
+            
             # Start normal WiFi services
             subprocess.run(['sudo', 'systemctl', 'start', 'wpa_supplicant'], check=False)
             subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
@@ -522,6 +526,15 @@ sudo ip addr flush dev wlan0 2>/dev/null || true
 
 # Remove iptables rules
 sudo iptables -t nat -F PREROUTING 2>/dev/null || true
+
+# Restore original dhcpcd.conf if backup exists
+if [ -f /etc/dhcpcd.conf.backup ]; then
+    sudo cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
+fi
+
+# Enable and start NetworkManager (modern Raspberry Pi OS uses this)
+sudo systemctl enable NetworkManager 2>/dev/null || true
+sudo systemctl start NetworkManager 2>/dev/null || true
 
 # Start normal WiFi services with the new configuration
 sudo systemctl start wpa_supplicant 2>/dev/null || true
