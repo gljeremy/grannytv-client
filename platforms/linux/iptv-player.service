@@ -3,6 +3,8 @@ Description=MPV-based IPTV Smart Player for Granny TV
 After=network-online.target graphical-session.target sound.target
 Wants=network-online.target graphical-session.target
 Requires=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
 
 [Service]
 Type=simple
@@ -12,8 +14,6 @@ WorkingDirectory=/home/jeremy/gtv
 ExecStart=/home/jeremy/gtv/venv/bin/python /home/jeremy/gtv/iptv_smart_player.py
 Restart=always
 RestartSec=15
-StartLimitBurst=5
-StartLimitIntervalSec=300
 
 # Environment for audio/video
 Environment=DISPLAY=:0
