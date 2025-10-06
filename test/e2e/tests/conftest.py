@@ -8,7 +8,7 @@ import os
 
 
 # Test configuration
-PI_HOST = os.getenv('PI_SIMULATOR_HOST', 'pi-simulator')
+PI_HOST = os.getenv('PI_SIMULATOR_HOST', 'localhost')  # Changed from 'pi-simulator' to 'localhost'
 PI_PORT = int(os.getenv('PI_SIMULATOR_PORT', '8080'))  # Setup web server port
 PI_HEALTH_PORT = int(os.getenv('PI_HEALTH_PORT', '9080'))  # Health/execute API port
 TEST_TIMEOUT = int(os.getenv('TEST_TIMEOUT', '300'))

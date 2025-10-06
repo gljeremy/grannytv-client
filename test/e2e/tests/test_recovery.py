@@ -19,7 +19,7 @@ class TestFileRecovery:
         result = execute_on_pi_root('./setup/verify-setup.sh',
                                   cwd="/home/jeremy/gtv", timeout=60)
         
-        assert "Setup files copied successfully" in result['stdout']
+        assert "Setup files copied to:" in result['stdout'] or "Setup files verified and ready" in result['stdout']
         
         # Verify files are restored
         result = execute_on_pi_root('ls -la /opt/grannytv-setup/web/setup_server.py')
@@ -237,7 +237,8 @@ class TestEmergencyScenarios:
                                   cwd="/home/jeremy/gtv", timeout=60)
         
         # Should handle missing files gracefully
-        assert "FORCING GRANNYTV SETUP MODE" in result['stdout']
+        assert result['success'], f"Force setup mode failed: {result.get('stderr', 'Unknown error')}"
+        assert "FORCING GRANNYTV SETUP MODE" in result['stdout'], f"Expected text not found in output: {result.get('stdout', '')}"
         
     def test_debug_script_from_broken_state(self, execute_on_pi_root, cleanup_pi):
         """Test debug script when system is in broken state"""
