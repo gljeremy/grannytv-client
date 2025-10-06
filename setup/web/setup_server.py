@@ -30,6 +30,15 @@ class SetupConfig:
             if os.path.exists(SETUP_CONFIG_FILE):
                 with open(SETUP_CONFIG_FILE, 'r') as f:
                     self.config = json.load(f)
+            else:
+                # Try alternative location
+                alt_config_file = os.path.expanduser('~/grannytv_setup_config.json')
+                if os.path.exists(alt_config_file):
+                    print(f"Loading config from alternative location: {alt_config_file}")
+                    with open(alt_config_file, 'r') as f:
+                        self.config = json.load(f)
+                else:
+                    self.config = {}
         except Exception as e:
             print(f"Error loading config: {e}")
             self.config = {}
@@ -38,12 +47,25 @@ class SetupConfig:
         """Save configuration to file"""
         self.config.update(new_config)
         try:
+            # Ensure the directory exists
+            os.makedirs(os.path.dirname(SETUP_CONFIG_FILE), exist_ok=True)
             with open(SETUP_CONFIG_FILE, 'w') as f:
                 json.dump(self.config, f, indent=2)
+            print(f"Configuration saved successfully to {SETUP_CONFIG_FILE}")
             return True
         except Exception as e:
-            print(f"Error saving config: {e}")
-            return False
+            print(f"Error saving config to {SETUP_CONFIG_FILE}: {e}")
+            # Try alternative location if /tmp fails
+            try:
+                alt_config_file = os.path.expanduser('~/grannytv_setup_config.json')
+                print(f"Attempting to save to alternative location: {alt_config_file}")
+                with open(alt_config_file, 'w') as f:
+                    json.dump(self.config, f, indent=2)
+                print(f"Configuration saved successfully to alternative location: {alt_config_file}")
+                return True
+            except Exception as e2:
+                print(f"Error saving config to alternative location: {e2}")
+                return False
 
 setup_config = SetupConfig()
 
@@ -302,8 +324,24 @@ network={{
 """
         
         # Write WiFi config to temporary file
-        with open('/tmp/wpa_supplicant.conf', 'w') as f:
-            f.write(wifi_config)
+        try:
+            with open('/tmp/wpa_supplicant.conf', 'w') as f:
+                f.write(wifi_config)
+            print("WiFi configuration written to /tmp/wpa_supplicant.conf")
+        except PermissionError as e:
+            print(f"Permission denied writing to /tmp/wpa_supplicant.conf: {e}")
+            # Try alternative location in user's home directory
+            try:
+                alt_wifi_config = os.path.expanduser('~/wpa_supplicant.conf')
+                with open(alt_wifi_config, 'w') as f:
+                    f.write(wifi_config)
+                print(f"WiFi configuration written to alternative location: {alt_wifi_config}")
+            except Exception as e2:
+                print(f"Error writing WiFi config to alternative location: {e2}")
+                return jsonify({'error': f'Permission denied: {e}'}), 500
+        except Exception as e:
+            print(f"Error writing WiFi config: {e}")
+            return jsonify({'error': f'Failed to write network configuration: {e}'}), 500
         
         print("Configuration saved successfully")
         return jsonify({'success': True, 'message': 'Configuration saved!'})
@@ -319,17 +357,37 @@ def finalize():
         print("Starting finalization process...")
         
         # Load saved configuration
-        if not os.path.exists(SETUP_CONFIG_FILE):
-            return jsonify({'error': 'No configuration found'}), 400
+        config = None
+        if os.path.exists(SETUP_CONFIG_FILE):
+            with open(SETUP_CONFIG_FILE, 'r') as f:
+                config = json.load(f)
+        else:
+            # Try alternative location
+            alt_config_file = os.path.expanduser('~/grannytv_setup_config.json')
+            if os.path.exists(alt_config_file):
+                print(f"Loading config from alternative location: {alt_config_file}")
+                with open(alt_config_file, 'r') as f:
+                    config = json.load(f)
         
-        with open(SETUP_CONFIG_FILE, 'r') as f:
-            config = json.load(f)
+        if config is None:
+            return jsonify({'error': 'No configuration found'}), 400
         
         # Apply WiFi configuration
         try:
-            subprocess.run(['sudo', 'cp', '/tmp/wpa_supplicant.conf', 
-                           '/etc/wpa_supplicant/wpa_supplicant.conf'], check=True)
-            print("WiFi configuration applied successfully")
+            # Try primary location first
+            if os.path.exists('/tmp/wpa_supplicant.conf'):
+                subprocess.run(['sudo', 'cp', '/tmp/wpa_supplicant.conf', 
+                               '/etc/wpa_supplicant/wpa_supplicant.conf'], check=True)
+                print("WiFi configuration applied successfully from /tmp")
+            else:
+                # Try alternative location
+                alt_wifi_config = os.path.expanduser('~/wpa_supplicant.conf')
+                if os.path.exists(alt_wifi_config):
+                    subprocess.run(['sudo', 'cp', alt_wifi_config, 
+                                   '/etc/wpa_supplicant/wpa_supplicant.conf'], check=True)
+                    print(f"WiFi configuration applied successfully from {alt_wifi_config}")
+                else:
+                    print("Warning: No WiFi configuration file found")
         except subprocess.CalledProcessError as e:
             print(f"Warning: Could not apply WiFi configuration: {e}")
             # Continue with cleanup anyway - this might be a test environment

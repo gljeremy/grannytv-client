@@ -81,6 +81,18 @@ sudo systemctl start iptv-player
 
 ## Daily Development Commands
 
+### **Windows with WSL2 (Recommended for Development)**
+```bash
+# Setup development environment (one-time)
+wsl --install -d Ubuntu-22.04
+wsl -d Ubuntu-22.04 -- sudo apt update
+wsl -d Ubuntu-22.04 -- sudo apt install -y python3-pip python3-venv docker.io git curl
+
+# Daily development in WSL2
+wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/c/Users/$(whoami)/source/repos/grannytv-client && ./test/e2e/run_comprehensive_tests.sh"
+```
+
+### **Windows Native (Deployment)**
 ```powershell
 # First time setup (creates virtual environment):
 .\setup-venv.ps1
@@ -100,6 +112,8 @@ sudo systemctl start iptv-player
 # Just deploy to Pi (no commit/push):
 .\git-deploy.ps1 -DeployOnly
 ```
+
+> **💡 Development Tip**: Use WSL2 for development and testing (91% test success rate), then use native Windows PowerShell scripts for deployment to Pi.
 
 ## Troubleshooting
 
