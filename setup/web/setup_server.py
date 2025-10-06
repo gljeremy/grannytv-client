@@ -616,27 +616,13 @@ echo "Immediate cleanup complete - Pi should now be on home WiFi"
         
         os.chmod('/tmp/immediate-cleanup.sh', 0o755)
         
-        # Create systemd service for reboot (more reliable than sudo from web server)
-        reboot_service = """[Unit]
-Description=GrannyTV Setup Reboot
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/reboot
-User=root
-
-[Install]
-WantedBy=multi-user.target
-"""
-        
-        with open('/tmp/grannytv-reboot.service', 'w') as f:
-            f.write(reboot_service)
-        
-        subprocess.run(['sudo', 'cp', '/tmp/grannytv-reboot.service', 
-                       '/etc/systemd/system/'], check=True)
-        subprocess.run(['sudo', 'systemctl', 'daemon-reload'], check=True)
-        subprocess.run(['sudo', 'systemctl', 'start', 'grannytv-reboot'], check=True)
+        # Execute the cleanup script in background
+        # This will clean up services, remove flags, and reboot after 15 seconds
+        with open('/tmp/immediate-cleanup.log', 'w') as log_file:
+            subprocess.Popen(['bash', '/tmp/immediate-cleanup.sh'], 
+                            stdout=log_file, 
+                            stderr=subprocess.STDOUT,
+                            start_new_session=True)
         
         print("Immediate cleanup and reboot scheduled in background")
         
