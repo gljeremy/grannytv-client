@@ -1,5 +1,28 @@
 # IPTV Player Development Workflow
 
+## Development Environment Setup
+
+### **Option 1: Windows with WSL2 (Recommended)**
+```powershell
+# Install WSL2 Ubuntu
+wsl --install -d Ubuntu-22.04
+
+# Setup development environment in WSL2
+wsl -d Ubuntu-22.04 -- sudo apt update
+wsl -d Ubuntu-22.04 -- sudo apt install -y python3-pip python3-venv docker.io git curl
+wsl -d Ubuntu-22.04 -- sudo usermod -aG docker $USER
+
+# Access project files from Windows
+wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/c/Users/$(whoami)/source/repos/grannytv-client"
+```
+
+### **Option 2: Native Linux**
+```bash
+# Install dependencies
+sudo apt update && sudo apt install -y python3-pip python3-venv docker.io git curl
+sudo usermod -aG docker $USER
+```
+
 ## Git-Based Development (Recommended)
 
 ### Initial Setup

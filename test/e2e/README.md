@@ -14,6 +14,23 @@ The E2E tests simulate a Raspberry Pi environment using Docker containers to tes
 
 ## Quick Start
 
+### **Windows (WSL2 Recommended)**
+```powershell
+# Install WSL2 Ubuntu (one-time setup)
+wsl --install -d Ubuntu-22.04
+
+# Install dependencies in WSL2
+wsl -d Ubuntu-22.04 -- sudo apt update
+wsl -d Ubuntu-22.04 -- sudo apt install -y python3-pip python3-venv docker.io python3-pytest
+
+# Run tests in WSL2
+wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/c/Users/$(whoami)/source/repos/grannytv-client/test/e2e && ./run-tests.sh"
+
+# Or run specific tests
+wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/c/path/to/grannytv-client/test/e2e && python3 -m pytest tests/test_critical_gaps.py -v"
+```
+
+### **Linux/WSL2**
 ```bash
 # Run all tests
 cd test/e2e
@@ -24,6 +41,13 @@ docker-compose run --rm test-runner pytest tests/test_setup_wizard.py -v
 
 # Interactive debugging
 docker-compose run --rm --entrypoint bash pi-simulator
+```
+
+### **Native Windows (Limited Support)**
+```powershell
+# Note: Many tests will fail due to Linux-specific dependencies
+cd test/e2e
+python -m pytest tests/test_critical_gaps.py -v
 ```
 
 ## Test Structure
