@@ -302,6 +302,15 @@ def configure():
                                'sudo,video,audio,dialout', sanitized_config['username']], check=True)
                 print(f"Updated groups for user: {sanitized_config['username']}")
                 
+                # Grant passwordless sudo access for reboot (needed for setup completion)
+                sudoers_entry = f"{sanitized_config['username']} ALL=(ALL) NOPASSWD: /sbin/reboot"
+                with open(f'/tmp/grannytv-sudoers-{sanitized_config["username"]}', 'w') as f:
+                    f.write(sudoers_entry + '\n')
+                subprocess.run(['sudo', 'cp', f'/tmp/grannytv-sudoers-{sanitized_config["username"]}', 
+                               f'/etc/sudoers.d/grannytv-{sanitized_config["username"]}'], check=True)
+                subprocess.run(['sudo', 'chmod', '0440', f'/etc/sudoers.d/grannytv-{sanitized_config["username"]}'], check=True)
+                print(f"Granted sudo reboot permissions to user: {sanitized_config['username']}")
+                
             except subprocess.CalledProcessError as e:
                 # Check if it's a "user already exists" error (exit code 9)
                 if e.returncode == 9:
@@ -542,10 +551,27 @@ echo "Immediate cleanup complete - Pi should now be on home WiFi"
         
         os.chmod('/tmp/immediate-cleanup.sh', 0o755)
         
-        # Run cleanup in background - this will also handle the reboot
-        subprocess.Popen(['/tmp/immediate-cleanup.sh'], 
-                        stdout=subprocess.DEVNULL, 
-                        stderr=subprocess.DEVNULL)
+        # Create systemd service for reboot (more reliable than sudo from web server)
+        reboot_service = """[Unit]
+Description=GrannyTV Setup Reboot
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/reboot
+User=root
+
+[Install]
+WantedBy=multi-user.target
+"""
+        
+        with open('/tmp/grannytv-reboot.service', 'w') as f:
+            f.write(reboot_service)
+        
+        subprocess.run(['sudo', 'cp', '/tmp/grannytv-reboot.service', 
+                       '/etc/systemd/system/'], check=True)
+        subprocess.run(['sudo', 'systemctl', 'daemon-reload'], check=True)
+        subprocess.run(['sudo', 'systemctl', 'start', 'grannytv-reboot'], check=True)
         
         print("Immediate cleanup and reboot scheduled in background")
         
