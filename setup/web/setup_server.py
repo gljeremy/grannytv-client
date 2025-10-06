@@ -419,52 +419,43 @@ def finalize():
             # CRITICAL: Remove hotspot configuration from dhcpcd.conf
             # This prevents the static IP 192.168.4.1 from being set on reboot
             try:
-                with open('/etc/dhcpcd.conf', 'r') as f:
-                    dhcpcd_lines = f.readlines()
-                
-                # Remove GrannyTV hotspot configuration section
-                cleaned_lines = []
-                skip_section = False
-                for line in dhcpcd_lines:
-                    if 'GrannyTV Setup Hotspot Configuration' in line:
-                        skip_section = True
-                        continue
-                    if skip_section:
-                        # Skip lines that are part of the hotspot config
-                        if line.strip().startswith('interface wlan0') or \
-                           line.strip().startswith('static ip_address=192.168.4.1') or \
-                           line.strip().startswith('nohook wpa_supplicant'):
-                            continue
-                        else:
-                            # End of hotspot section
-                            skip_section = False
-                    
-                    if not skip_section:
-                        cleaned_lines.append(line)
-                
-                # Write cleaned configuration
-                with open('/tmp/dhcpcd.conf.cleaned', 'w') as f:
-                    f.writelines(cleaned_lines)
-                
-                subprocess.run(['sudo', 'cp', '/tmp/dhcpcd.conf.cleaned', '/etc/dhcpcd.conf'], check=True)
+                # Use sed to remove the hotspot configuration section
+                # This is more reliable than reading/writing as it handles permissions correctly
+                subprocess.run([
+                    'sudo', 'sed', '-i',
+                    '/# GrannyTV Setup Hotspot Configuration/,+3d',
+                    '/etc/dhcpcd.conf'
+                ], check=True)
                 print("✅ Removed hotspot configuration from dhcpcd.conf")
             except Exception as e:
                 print(f"Warning: Could not clean dhcpcd.conf: {e}")
                 # Try backup restore as fallback
-                if os.path.exists('/etc/dhcpcd.conf.backup'):
-                    subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=False)
-                    print("✅ Restored dhcpcd.conf from backup")
+                try:
+                    if os.path.exists('/etc/dhcpcd.conf.backup'):
+                        subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=True)
+                        print("✅ Restored dhcpcd.conf from backup")
+                except Exception as e2:
+                    print(f"Warning: Backup restore also failed: {e2}")
             
-            # Enable and start NetworkManager (modern Raspberry Pi OS uses this)
-            subprocess.run(['sudo', 'systemctl', 'enable', 'NetworkManager'], check=False)
-            subprocess.run(['sudo', 'systemctl', 'start', 'NetworkManager'], check=False)
+            # Check if system uses NetworkManager or dhcpcd
+            nm_active = subprocess.run(['systemctl', 'is-active', 'NetworkManager'], 
+                                      capture_output=True, text=True).returncode == 0
             
-            # Start normal WiFi services
-            subprocess.run(['sudo', 'systemctl', 'start', 'wpa_supplicant'], check=False)
-            subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
-            
-            # Restart networking to pick up new configuration
-            subprocess.run(['sudo', 'systemctl', 'restart', 'dhcpcd'], check=False)
+            if nm_active:
+                # Use NetworkManager
+                print("Using NetworkManager for network management")
+                subprocess.run(['sudo', 'systemctl', 'enable', 'NetworkManager'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'NetworkManager'], check=False)
+                # Stop dhcpcd to avoid conflicts
+                subprocess.run(['sudo', 'systemctl', 'stop', 'dhcpcd'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'disable', 'dhcpcd'], check=False)
+            else:
+                # Use dhcpcd (traditional Raspberry Pi)
+                print("Using dhcpcd for network management")
+                subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'wpa_supplicant'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'enable', 'dhcpcd'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'dhcpcd'], check=False)
             
             print("Hotspot disabled, switching to client mode")
         except Exception as e:
@@ -570,31 +561,36 @@ sudo iptables -t nat -F PREROUTING 2>/dev/null || true
 if [ -f /etc/dhcpcd.conf ]; then
     echo "Cleaning dhcpcd.conf..."
     
-    # Create cleaned version without hotspot configuration
-    sudo sed -i '/# GrannyTV Setup Hotspot Configuration/,/nohook wpa_supplicant/d' /etc/dhcpcd.conf
-    
-    # Also try backup restore as additional safety
-    if [ -f /etc/dhcpcd.conf.backup ]; then
-        sudo cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
-        echo "Restored dhcpcd.conf from backup"
-    fi
+    # Remove GrannyTV hotspot configuration section (comment line + 3 config lines)
+    sudo sed -i '/# GrannyTV Setup Hotspot Configuration/,+3d' /etc/dhcpcd.conf
+    echo "Removed hotspot configuration from dhcpcd.conf"
 fi
 
-# Remove hotspot NetworkManager connection profile
-sudo nmcli con delete GrannyTV-Hotspot 2>/dev/null || true
-
-# Stop and disable dhcpcd if it's running (NetworkManager will manage interfaces)
-sudo systemctl stop dhcpcd 2>/dev/null || true
-sudo systemctl disable dhcpcd 2>/dev/null || true
-
-# Enable and start NetworkManager (modern Raspberry Pi OS uses this)
-sudo systemctl enable NetworkManager 2>/dev/null || true
-sudo systemctl start NetworkManager 2>/dev/null || true
-sudo systemctl enable wpa_supplicant 2>/dev/null || true
-
-# Bring interface back up and let NetworkManager take over
-sudo ip link set wlan0 up 2>/dev/null || true
-sudo nmcli device set wlan0 managed yes 2>/dev/null || true
+# Decide which network manager to use
+if systemctl is-active --quiet NetworkManager; then
+    echo "Using NetworkManager..."
+    # Remove hotspot NetworkManager connection profile
+    sudo nmcli con delete GrannyTV-Hotspot 2>/dev/null || true
+    
+    # Stop and disable dhcpcd to avoid conflicts
+    sudo systemctl stop dhcpcd 2>/dev/null || true
+    sudo systemctl disable dhcpcd 2>/dev/null || true
+    
+    # Enable NetworkManager
+    sudo systemctl enable NetworkManager 2>/dev/null || true
+    sudo systemctl restart NetworkManager 2>/dev/null || true
+    
+    # Bring interface back up and let NetworkManager manage it
+    sudo ip link set wlan0 up 2>/dev/null || true
+    sudo nmcli device set wlan0 managed yes 2>/dev/null || true
+else
+    echo "Using dhcpcd and wpa_supplicant..."
+    # Traditional Raspberry Pi network setup
+    sudo systemctl enable wpa_supplicant 2>/dev/null || true
+    sudo systemctl restart wpa_supplicant 2>/dev/null || true
+    sudo systemctl enable dhcpcd 2>/dev/null || true
+    sudo systemctl restart dhcpcd 2>/dev/null || true
+fi
 
 # Give it a moment to connect
 sleep 5

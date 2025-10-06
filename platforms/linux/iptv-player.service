@@ -1,8 +1,7 @@
 [Unit]
 Description=MPV-based IPTV Smart Player for Granny TV
-After=network-online.target graphical-session.target sound.target
-Wants=network-online.target graphical-session.target
-Requires=network-online.target
+After=network-online.target sound.target
+Wants=network-online.target
 StartLimitIntervalSec=300
 StartLimitBurst=5
 
@@ -21,7 +20,7 @@ Environment=HOME=/home/jeremy
 Environment=XDG_RUNTIME_DIR=/run/user/1000
 Environment=PULSE_RUNTIME_PATH=/run/user/1000/pulse
 
-# Wait for network and display to be ready
+# Wait for network to be ready
 ExecStartPre=/bin/sleep 10
 ExecStartPre=/bin/bash -c 'until ping -c1 8.8.8.8 >/dev/null 2>&1; do sleep 5; done'
 
@@ -35,4 +34,4 @@ KillSignal=SIGTERM
 TimeoutStopSec=30
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=multi-user.target
