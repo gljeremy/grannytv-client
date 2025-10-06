@@ -181,15 +181,17 @@ class MPVIPTVPlayer:
             if is_raspberry_pi:
                 # Pi 3 optimized - uses ~30% less CPU than VLC
                 mpv_configs = [
-                    # Config 1: Performance optimized (best)
+                    # Config 1: Performance optimized with HLS support (best)
                     [
                         'mpv',
                         '--hwdec=no',                    # Software decode (stable on Pi 3)
                         '--vo=gpu',                      # GPU output (efficient)
                         '--cache=yes',                   # Enable cache
-                        '--cache-secs=2',                # 2 second cache (low latency)
-                        '--demuxer-max-bytes=20M',       # Reasonable buffer
-                        '--demuxer-readahead-secs=2',    # 2 sec readahead
+                        '--cache-secs=10',               # Increased cache for HLS stability (was 2)
+                        '--demuxer-max-bytes=50M',       # Larger buffer for HLS segments (was 20M)
+                        '--demuxer-readahead-secs=10',   # More readahead for HLS (was 2)
+                        '--hls-bitrate=max',             # Use best quality available
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1,reconnect_delay_max=5',  # HLS reconnection support
                         '--framedrop=vo',                # Smart frame dropping
                         '--no-osc',                      # No on-screen controls
                         '--no-input-default-bindings',   # No keyboard bindings
@@ -199,13 +201,15 @@ class MPVIPTVPlayer:
                         '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
                         stream_url
                     ],
-                    # Config 2: Even lighter (fallback)
+                    # Config 2: Lighter with HLS support (fallback)
                     [
                         'mpv',
                         '--hwdec=no',
                         '--vo=gpu',
                         '--cache=yes',
-                        '--cache-secs=1',                # Minimal cache
+                        '--cache-secs=5',                # Still enough for HLS (was 1)
+                        '--demuxer-max-bytes=30M',       # Moderate buffer
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',  # Basic reconnection
                         '--no-osc',
                         '--really-quiet',
                         '--fullscreen',
@@ -232,7 +236,9 @@ class MPVIPTVPlayer:
                         '--hwdec=auto',
                         '--vo=gpu',
                         '--cache=yes',
-                        '--cache-secs=3',
+                        '--cache-secs=10',               # Increased for HLS stability (was 3)
+                        '--demuxer-max-bytes=50M',       # Larger buffer for HLS
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1',  # HLS reconnection
                         '--no-osc',
                         '--fullscreen',
                         stream_url
