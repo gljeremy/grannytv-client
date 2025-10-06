@@ -179,50 +179,57 @@ class MPVIPTVPlayer:
             mpv_configs = []
             
             if is_raspberry_pi:
-                # Pi 3 optimized - uses ~30% less CPU than VLC
+                # Pi 3 optimized - MINIMAL MEMORY USAGE (only 731MB total RAM!)
+                # OOM killer was killing with large cache - reduced to prevent crashes
                 mpv_configs = [
-                    # Config 1: Performance optimized with HLS support (best)
+                    # Config 1: DRM with MINIMAL cache (no X11 needed, low memory)
                     [
                         'mpv',
-                        '--hwdec=no',                    # Software decode (stable on Pi 3)
-                        '--vo=gpu',                      # GPU output (efficient)
-                        '--cache=yes',                   # Enable cache
-                        '--cache-secs=10',               # Increased cache for HLS stability (was 2)
-                        '--demuxer-max-bytes=50M',       # Larger buffer for HLS segments (was 20M)
-                        '--demuxer-readahead-secs=10',   # More readahead for HLS (was 2)
-                        '--hls-bitrate=max',             # Use best quality available
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1,reconnect_delay_max=5',  # HLS reconnection support
-                        '--framedrop=vo',                # Smart frame dropping
+                        '--vo=drm',                      # Direct Rendering Manager (framebuffer)
+                        '--drm-connector=HDMI-A-1',      # Explicit HDMI output  
+                        '--drm-mode=0',                  # Use highest resolution mode
+                        '--hwdec=no',                    # Software decode
+                        '--cache=yes',
+                        '--cache-secs=2',                # MINIMAL cache (was 10, causing OOM!)
+                        '--demuxer-max-bytes=10M',       # Small buffer (was 50M, too much!)
+                        '--demuxer-readahead-secs=2',    # Minimal readahead (was 10)
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1,reconnect_delay_max=5',
+                        '--framedrop=vo',                # Drop frames if needed
                         '--no-osc',                      # No on-screen controls
                         '--no-input-default-bindings',   # No keyboard bindings
                         '--really-quiet',                # Quiet mode
-                        '--fullscreen',                  # Fullscreen
-                        '--loop-playlist=inf',           # Loop forever (continuous play)
+                        '--loop-playlist=inf',           # Loop forever
                         '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
                         stream_url
                     ],
-                    # Config 2: Lighter with HLS support (fallback)
+                    # Config 2: DRM even more minimal (if Config 1 still uses too much memory)
                     [
                         'mpv',
+                        '--vo=drm',
+                        '--drm-connector=HDMI-A-1',
                         '--hwdec=no',
-                        '--vo=gpu',
                         '--cache=yes',
-                        '--cache-secs=5',                # Still enough for HLS (was 1)
-                        '--demuxer-max-bytes=30M',       # Moderate buffer
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',  # Basic reconnection
+                        '--cache-secs=1',                # ULTRA minimal cache
+                        '--demuxer-max-bytes=5M',        # Very small buffer
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',
+                        '--framedrop=vo',
                         '--no-osc',
                         '--really-quiet',
-                        '--fullscreen',
                         '--loop-playlist=inf',
                         stream_url
                     ],
-                    # Config 3: Minimal (last resort)
+                    # Config 3: GPU fallback (requires graphical.target)
                     [
                         'mpv',
-                        '--vo=gpu',
+                        '--vo=gpu',                      # GPU output
+                        '--hwdec=no',
                         '--cache=yes',
+                        '--cache-secs=2',
+                        '--demuxer-max-bytes=10M',
+                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',
+                        '--framedrop=vo',
                         '--no-osc',
-                        '--quiet',
+                        '--really-quiet',
                         '--fullscreen',
                         '--loop-playlist=inf',
                         stream_url
