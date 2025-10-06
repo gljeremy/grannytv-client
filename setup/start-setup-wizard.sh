@@ -86,6 +86,16 @@ start_services() {
 start_web_server() {
     echo "🌐 Starting web server..."
     
+    # Kill any existing web server processes first (prevents resource leaks)
+    echo "🧹 Cleaning up any existing web server processes..."
+    pkill -f "python3.*setup_server.py" 2>/dev/null || true
+    
+    # Remove old PID file
+    rm -f /tmp/grannytv-web.pid
+    
+    # Wait a moment for processes to fully terminate
+    sleep 2
+    
     # Verify web files exist
     if [ ! -f "$WORK_DIR/web/setup_server.py" ]; then
         echo "❌ Web server files not found at $WORK_DIR/web/"
@@ -121,20 +131,39 @@ start_web_server() {
     # Set up port redirection (80 -> 8080) for captive portal
     iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 8080 2>/dev/null || true
     
+    # Start web server with proper logging and error handling
     cd "$WORK_DIR/web"
-    python3 setup_server.py &
+    echo "🌐 Starting Flask web server on port 8080..."
+    
+    # Start server in background with logging
+    nohup python3 setup_server.py > /tmp/setup_server.log 2>&1 &
     WEB_PID=$!
     
+    # Save PID for later management
+    echo "$WEB_PID" > /tmp/grannytv-web.pid
+    
     # Wait a moment and check if it's still running
-    sleep 3
+    sleep 5
     if kill -0 $WEB_PID 2>/dev/null; then
         echo "✅ Web server started (PID: $WEB_PID)"
-        echo "$WEB_PID" > /tmp/grannytv-web.pid
-        return 0
+        echo "📋 Log file: /tmp/setup_server.log"
+        
+        # Verify server is responding
+        for i in {1..10}; do
+            if curl -s --connect-timeout 2 http://localhost:8080/ >/dev/null 2>&1; then
+                echo "✅ Web server responding on port 8080"
+                return 0
+            fi
+            echo "⏳ Waiting for web server to respond... ($i/10)"
+            sleep 2
+        done
+        
+        echo "⚠️  Web server started but not responding on port 8080"
+        return 0  # Process is running, might just need more time
     else
         echo "❌ Web server failed to start"
-        # Try to show the error
-        wait $WEB_PID
+        echo "📋 Error log:"
+        tail -n 10 /tmp/setup_server.log 2>/dev/null || echo "   No log file found"
         return 1
     fi
 }

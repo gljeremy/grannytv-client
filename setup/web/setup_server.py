@@ -264,13 +264,27 @@ def configure():
         current_user = os.getenv('USER', 'pi')
         if sanitized_config['username'] != current_user and sanitized_config['username'] != 'pi':
             try:
-                subprocess.run(['sudo', 'useradd', '-m', '-s', '/bin/bash', 
-                               sanitized_config['username']], check=True)
+                # Check if user already exists first
+                check_user = subprocess.run(['id', sanitized_config['username']], 
+                                          capture_output=True, text=True)
+                if check_user.returncode == 0:
+                    print(f"User {sanitized_config['username']} already exists, skipping creation")
+                else:
+                    # User doesn't exist, create it
+                    subprocess.run(['sudo', 'useradd', '-m', '-s', '/bin/bash', 
+                                   sanitized_config['username']], check=True)
+                    print(f"Created user: {sanitized_config['username']}")
+                
+                # Always try to ensure user has correct groups (safe to run multiple times)
                 subprocess.run(['sudo', 'usermod', '-a', '-G', 
                                'sudo,video,audio,dialout', sanitized_config['username']], check=True)
-                print(f"Created user: {sanitized_config['username']}")
+                print(f"Updated groups for user: {sanitized_config['username']}")
+                
             except subprocess.CalledProcessError as e:
-                if 'already exists' not in str(e):
+                # Check if it's a "user already exists" error (exit code 9)
+                if e.returncode == 9:
+                    print(f"User {sanitized_config['username']} already exists (exit code 9), continuing")
+                else:
                     return jsonify({'error': f'Failed to create user: {e}'}), 500
         
         # Create WiFi configuration with proper escaping

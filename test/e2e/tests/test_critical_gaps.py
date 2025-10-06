@@ -54,11 +54,14 @@ class TestWebServerStability:
     
     def test_web_server_handles_malformed_requests(self, execute_on_pi_root, execute_on_pi, cleanup_pi):
         """Test web server handles malformed HTTP requests gracefully"""
-        # Setup and start web server
+        # Setup environment
         execute_on_pi_root('sudo -u jeremy ./setup/setup-wizard.sh',
                           cwd="/home/jeremy/gtv", timeout=120)
-        execute_on_pi('nohup python3 /opt/grannytv-setup/web/setup_server.py > /tmp/setup_server.log 2>&1 &',
-                     timeout=10)
+        
+        # Start web server using reliable test helper
+        execute_on_pi_root('chmod +x ./setup/test-web-server.sh', cwd="/home/jeremy/gtv", timeout=10)
+        result = execute_on_pi_root('./setup/test-web-server.sh start', cwd="/home/jeremy/gtv", timeout=30)
+        assert result['success'], f"Failed to start web server: {result.get('stderr', 'Unknown error')}"
         time.sleep(3)
         
         # Test various malformed requests
@@ -80,31 +83,50 @@ class TestWebServerStability:
     
     def test_web_server_resource_cleanup(self, execute_on_pi_root, execute_on_pi, cleanup_pi):
         """Test that web server properly cleans up resources"""  
-        # Start web server
+        # Setup environment
         execute_on_pi_root('sudo -u jeremy ./setup/setup-wizard.sh',
                           cwd="/home/jeremy/gtv", timeout=120)
-        execute_on_pi('nohup python3 /opt/grannytv-setup/web/setup_server.py > /tmp/setup_server.log 2>&1 &',
-                     timeout=10)
+        
+        # Start web server using reliable test helper
+        execute_on_pi_root('chmod +x ./setup/test-web-server.sh', cwd="/home/jeremy/gtv", timeout=10)
+        result = execute_on_pi_root('./setup/test-web-server.sh start', cwd="/home/jeremy/gtv", timeout=30)
+        assert result['success'], f"Failed to start web server: {result.get('stderr', 'Unknown error')}"
         time.sleep(3)
         
-        # Check initial process count
-        initial_processes = execute_on_pi_root('ps aux | grep setup_server.py | grep -v grep | wc -l')
-        assert initial_processes['success'], "Could not check process count"
+        # Check initial process count (should be 1)
+        initial_result = execute_on_pi_root('./setup/test-web-server.sh status', cwd="/home/jeremy/gtv", timeout=10)
+        assert initial_result['success'], "Could not check initial web server status"
         
-        # Kill and restart server multiple times
+        # Test restart functionality multiple times (this tests resource cleanup)
         for i in range(3):
-            execute_on_pi_root('pkill -f setup_server.py', timeout=5)
-            time.sleep(1)
-            execute_on_pi('nohup python3 /opt/grannytv-setup/web/setup_server.py > /tmp/setup_server.log 2>&1 &',
-                          timeout=10)
+            print(f"Testing restart cycle {i+1}/3")
+            
+            # Restart server using proper cleanup
+            restart_result = execute_on_pi_root('./setup/test-web-server.sh restart', cwd="/home/jeremy/gtv", timeout=30)
+            assert restart_result['success'], f"Failed to restart web server on cycle {i+1}"
+            
+            # Brief pause between restarts
             time.sleep(2)
         
-        # Check final process count - should not have accumulated zombie processes
-        final_processes = execute_on_pi_root('ps aux | grep setup_server.py | grep -v grep | wc -l')
-        assert final_processes['success'], "Could not check final process count"
+        # Check final status - proper cleanup should prevent resource leaks  
+        final_result = execute_on_pi_root('./setup/test-web-server.sh status', cwd="/home/jeremy/gtv", timeout=10)
+        assert final_result['success'], "Could not check final web server status"
         
-        # Should have only one process running
-        assert int(final_processes['stdout'].strip()) <= 2, "Too many server processes running (resource leak)"
+        # Verify reasonable number of processes (no serious resource leaks)
+        process_count = execute_on_pi_root('pgrep -f "python3.*setup_server.py" | wc -l', timeout=10)
+        assert process_count['success'], "Could not count server processes"
+        
+        count = int(process_count['stdout'].strip())
+        
+        # Allow up to 2 processes (sometimes there's a brief overlap during restart)
+        # But fail if there are many processes (serious resource leak)
+        assert count <= 2, f"Serious resource leak detected: {count} server processes running (expected ≤2)"
+        
+        if count <= 1:
+            print(f"✅ Resource cleanup test passed - {count} server process(es) running (excellent)")
+        else:
+            print(f"⚠️  Resource cleanup test passed with warning - {count} server processes running (acceptable but not ideal)")
+            print("💡 Note: Brief process overlap during restart is normal in test environment")
 
 
 class TestConfigurationValidation:
@@ -112,11 +134,14 @@ class TestConfigurationValidation:
     
     def test_wifi_password_validation(self, execute_on_pi_root, execute_on_pi, cleanup_pi):
         """Test WiFi password validation with edge cases"""
-        # Setup web server
+        # Setup environment
         execute_on_pi_root('sudo -u jeremy ./setup/setup-wizard.sh',
                           cwd="/home/jeremy/gtv", timeout=120)
-        execute_on_pi('nohup python3 /opt/grannytv-setup/web/setup_server.py > /tmp/setup_server.log 2>&1 &',
-                     timeout=10)
+        
+        # Start web server using reliable test helper
+        execute_on_pi_root('chmod +x ./setup/test-web-server.sh', cwd="/home/jeremy/gtv", timeout=10)
+        result = execute_on_pi_root('./setup/test-web-server.sh start', cwd="/home/jeremy/gtv", timeout=30)
+        assert result['success'], f"Failed to start web server: {result.get('stderr', 'Unknown error')}"
         time.sleep(3)
         
         # Test edge case passwords - security validation test
@@ -170,11 +195,14 @@ class TestConfigurationValidation:
     
     def test_path_traversal_prevention(self, execute_on_pi_root, execute_on_pi, cleanup_pi):
         """Test that path traversal attacks are prevented"""
-        # Setup web server
+        # Setup environment
         execute_on_pi_root('sudo -u jeremy ./setup/setup-wizard.sh',
                           cwd="/home/jeremy/gtv", timeout=120)
-        execute_on_pi('nohup python3 /opt/grannytv-setup/web/setup_server.py > /tmp/setup_server.log 2>&1 &',
-                     timeout=10)
+        
+        # Start web server using reliable test helper
+        execute_on_pi_root('chmod +x ./setup/test-web-server.sh', cwd="/home/jeremy/gtv", timeout=10)
+        result = execute_on_pi_root('./setup/test-web-server.sh start', cwd="/home/jeremy/gtv", timeout=30)
+        assert result['success'], f"Failed to start web server: {result.get('stderr', 'Unknown error')}"
         time.sleep(3)
         
         # Test malicious install paths
