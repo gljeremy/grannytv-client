@@ -179,75 +179,45 @@ class MPVIPTVPlayer:
             mpv_configs = []
             
             if is_raspberry_pi:
-                # Pi 3 optimized - MINIMAL MEMORY USAGE (only 731MB total RAM!)
-                # OOM killer was killing with large cache - reduced to prevent crashes
+                # Pi 3 optimized - Variant 14 (Balanced optimization) - best performance in testing
                 mpv_configs = [
-                    # Config 1: DRM with MINIMAL cache (no X11 needed, low memory)
+                    # Variant 14: Balanced optimization (3s cache, 25M buffer, 3s readahead) - BEST PERFORMANCE
                     [
                         'mpv',
-                        '--vo=drm',                      # Direct Rendering Manager (framebuffer)
-                        '--drm-connector=HDMI-A-1',      # Explicit HDMI output  
-                        '--drm-mode=0',                  # Use highest resolution mode
-                        '--hwdec=no',                    # Software decode
-                        '--cache=yes',
-                        '--cache-secs=2',                # MINIMAL cache (was 10, causing OOM!)
-                        '--demuxer-max-bytes=10M',       # Small buffer (was 50M, too much!)
-                        '--demuxer-readahead-secs=2',    # Minimal readahead (was 10)
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1,reconnect_delay_max=5',
-                        '--framedrop=vo',                # Drop frames if needed
-                        '--no-osc',                      # No on-screen controls
-                        '--no-input-default-bindings',   # No keyboard bindings
-                        '--really-quiet',                # Quiet mode
-                        '--loop-playlist=inf',           # Loop forever
-                        '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
-                        stream_url
-                    ],
-                    # Config 2: DRM even more minimal (if Config 1 still uses too much memory)
-                    [
-                        'mpv',
-                        '--vo=drm',
-                        '--drm-connector=HDMI-A-1',
                         '--hwdec=no',
+                        '--vo=gpu',
                         '--cache=yes',
-                        '--cache-secs=1',                # ULTRA minimal cache
-                        '--demuxer-max-bytes=5M',        # Very small buffer
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',
+                        '--cache-secs=3',
+                        '--demuxer-max-bytes=25M',
+                        '--demuxer-readahead-secs=3',
                         '--framedrop=vo',
                         '--no-osc',
-                        '--really-quiet',
-                        '--loop-playlist=inf',
-                        stream_url
-                    ],
-                    # Config 3: GPU fallback (requires graphical.target)
-                    [
-                        'mpv',
-                        '--vo=gpu',                      # GPU output
-                        '--hwdec=no',
-                        '--cache=yes',
-                        '--cache-secs=2',
-                        '--demuxer-max-bytes=10M',
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1',
-                        '--framedrop=vo',
-                        '--no-osc',
+                        '--no-input-default-bindings',
                         '--really-quiet',
                         '--fullscreen',
                         '--loop-playlist=inf',
+                        '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
                         stream_url
                     ]
                 ]
             else:
-                # Desktop/Windows - can use more features
+                # Desktop/Windows - also use Variant 14 for consistency
                 mpv_configs = [
                     [
                         'mpv',
-                        '--hwdec=auto',
+                        '--hwdec=no',
                         '--vo=gpu',
                         '--cache=yes',
-                        '--cache-secs=10',               # Increased for HLS stability (was 3)
-                        '--demuxer-max-bytes=50M',       # Larger buffer for HLS
-                        '--stream-lavf-o=reconnect=1,reconnect_at_eof=1,reconnect_streamed=1',  # HLS reconnection
+                        '--cache-secs=3',
+                        '--demuxer-max-bytes=25M',
+                        '--demuxer-readahead-secs=3',
+                        '--framedrop=vo',
                         '--no-osc',
+                        '--no-input-default-bindings',
+                        '--really-quiet',
                         '--fullscreen',
+                        '--loop-playlist=inf',
+                        '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
                         stream_url
                     ]
                 ]
