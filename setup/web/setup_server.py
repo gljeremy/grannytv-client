@@ -488,6 +488,12 @@ else
     git pull origin main
 fi
 
+# DRM mode - no graphical.target needed (minimal resources)
+# MPV uses Direct Rendering Manager for direct framebuffer output
+echo "🖥️ Configuring console mode (multi-user target)..."
+sudo systemctl set-default multi-user.target
+echo "✅ Console mode configured - minimal resources, direct video output"
+
 # Run the main setup script
 chmod +x platforms/linux/pi-setup.sh
 ./platforms/linux/pi-setup.sh
