@@ -1,9 +1,9 @@
 #!/bin/bash
-# Test script for buffering fix validation
-# This will start the player and monitor for crashes
+# Diagnostic script to verify MPV streaming stability
+# Starts the player and monitors for crashes
 
 echo "======================================"
-echo "IPTV Buffering Fix - Test Script"
+echo "MPV Stability Test - Diagnostic Run"
 echo "======================================"
 echo ""
 

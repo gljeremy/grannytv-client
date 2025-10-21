@@ -125,13 +125,13 @@ git add . && git commit -m "Update" && git push
 **Testing:** `python iptv_smart_player.py --test`  
 **Logs:** Check `/home/jeremy/gtv/iptv_player.log`
 
-## Documentation (Simple & Updated)
+## Documentation
 
-� **[Quick Start](QUICKSTART.md)** - Get TV working in 5 minutes  
-⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Common commands for optimized version  
-📊 **[Project Status](PROJECT_STATUS.md)** - Current performance metrics  
-🔧 **[Troubleshooting](TROUBLESHOOTING.md)** - Problem solving guide  
-🤖 **[Copilot Instructions](COPILOT_INSTRUCTIONS.md)** - For AI development assistance  
+- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) - Development workflow and tooling
+- [setup/README.md](setup/README.md) - Smartphone setup and recovery scripts
+- [platforms/README.md](platforms/README.md) - Platform-specific deployment guidance
+- [tools/README.md](tools/README.md) - Utility scripts and diagnostics overview
+- [test/e2e/README.md](test/e2e/README.md) - Docker-based end-to-end test harness
 
 ## ⚡ MPV Performance Analysis
 
