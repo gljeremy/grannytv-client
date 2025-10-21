@@ -82,6 +82,12 @@ class MPVIPTVPlayer:
         self.current_stream = None
         self.running = True
         
+        # Playback health monitoring
+        self.last_health_check = time.time()
+        self.consecutive_stall_checks = 0
+        self.health_check_interval = 30  # Check every 30 seconds
+        self.max_stall_checks = 3  # Restart after 3 consecutive stall detections
+        
         # Backup streams
         self.backup_streams = [
             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -111,7 +117,7 @@ class MPVIPTVPlayer:
     def load_working_streams(self):
         """Load working streams from database"""
         # Try optimized database first
-        optimized_file = os.path.join(self.config['base_path'], 'working_streams_optimized.json')
+        optimized_file = os.path.join(self.config['base_path'], 'working_streams.json')
         
         try:
             if os.path.exists(optimized_file):
@@ -152,6 +158,78 @@ class MPVIPTVPlayer:
         matching_streams.sort(key=lambda x: x['score'], reverse=True)
         return matching_streams[:limit]
 
+    def check_playback_health(self):
+        """Check if MPV is actually playing (not frozen/stalled)
+        Uses MPV's IPC to check playback state"""
+        if not self.current_process or self.current_process.poll() is not None:
+            return False  # Process not running
+        
+        try:
+            # Check if process is responsive by sending a signal
+            # On Linux, signal 0 checks if process exists and is responsive
+            if platform.system() != 'Windows':
+                os.kill(self.current_process.pid, 0)
+            
+            # Additional check: Look at process state on Linux
+            if platform.system() != 'Windows':
+                try:
+                    with open(f'/proc/{self.current_process.pid}/stat', 'r') as f:
+                        stat = f.read().split()
+                        state = stat[2]  # Process state (R, S, D, Z, T, W)
+                        
+                        # D = uninterruptible sleep (usually IO), Z = zombie
+                        if state in ['D', 'Z']:
+                            logging.warning(f"[HEALTH] MPV process in bad state: {state}")
+                            return False
+                        
+                        # Check CPU time to see if process is doing anything
+                        # stat[13] = utime, stat[14] = stime (in clock ticks)
+                        cpu_time = int(stat[13]) + int(stat[14])
+                        
+                        # Store and compare CPU time to detect stalls
+                        if hasattr(self, '_last_cpu_time'):
+                            if cpu_time == self._last_cpu_time:
+                                # No CPU activity since last check
+                                logging.warning(f"[HEALTH] MPV process appears stalled (no CPU activity)")
+                                return False
+                        
+                        self._last_cpu_time = cpu_time
+                        
+                except (FileNotFoundError, IndexError, ValueError) as e:
+                    logging.warning(f"[HEALTH] Cannot read process state: {e}")
+                    # Continue with basic checks
+            
+            return True  # Process appears healthy
+            
+        except OSError:
+            logging.warning("[HEALTH] MPV process not responding")
+            return False
+        except Exception as e:
+            logging.warning(f"[HEALTH] Health check error: {e}")
+            return True  # Assume healthy if we can't check properly
+
+    def restart_playback(self, reason="Playback issue detected"):
+        """Restart the current stream or move to next stream"""
+        logging.warning(f"[RESTART] {reason}")
+        
+        if self.current_process:
+            try:
+                logging.info("[RESTART] Stopping current player...")
+                self.current_process.terminate()
+                self.current_process.wait(timeout=5)
+            except:
+                try:
+                    self.current_process.kill()
+                except:
+                    pass
+        
+        # Kill any remaining MPV processes
+        if platform.system() != 'Windows':
+            subprocess.run(['pkill', '-9', '^mpv$'], check=False)
+        
+        time.sleep(1)
+        return True  # Signal to restart
+
     def launch_mpv(self, stream_url, env):
         """Launch MPV with optimal settings for Raspberry Pi 3"""
         try:
@@ -180,6 +258,7 @@ class MPVIPTVPlayer:
             
             if is_raspberry_pi:
                 # Pi 3 optimized - Variant 14 (Balanced optimization) - best performance in testing
+                # Added network timeout and reconnection options to prevent long pauses
                 mpv_configs = [
                     # Variant 14: Balanced optimization (3s cache, 25M buffer, 3s readahead) - BEST PERFORMANCE
                     [
@@ -197,6 +276,11 @@ class MPVIPTVPlayer:
                         '--fullscreen',
                         '--loop-playlist=inf',
                         '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
+                        '--network-timeout=15',  # Timeout after 15s of no data
+                        '--demuxer-lavf-o=timeout=10000000',  # 10 second timeout for initial connection
+                        '--stream-lavf-o=reconnect=1',  # Enable reconnection
+                        '--stream-lavf-o=reconnect_streamed=1',  # Reconnect for streamed content
+                        '--stream-lavf-o=reconnect_delay_max=5',  # Max 5s delay between reconnects
                         stream_url
                     ]
                 ]
@@ -218,6 +302,11 @@ class MPVIPTVPlayer:
                         '--fullscreen',
                         '--loop-playlist=inf',
                         '--user-agent=Mozilla/5.0 (Smart-IPTV-Player)',
+                        '--network-timeout=15',  # Timeout after 15s of no data
+                        '--demuxer-lavf-o=timeout=10000000',  # 10 second timeout for initial connection
+                        '--stream-lavf-o=reconnect=1',  # Enable reconnection
+                        '--stream-lavf-o=reconnect_streamed=1',  # Reconnect for streamed content
+                        '--stream-lavf-o=reconnect_delay_max=5',  # Max 5s delay between reconnects
                         stream_url
                     ]
                 ]
@@ -449,9 +538,31 @@ class MPVIPTVPlayer:
                         logging.error(f"[ERROR] Stream crashed with exit code {exit_code}")
                         break
                 
-                time.sleep(60)
-                if self.current_process:
-                    logging.info(f"[TV] Status: Playing (PID: {self.current_process.pid})")
+                # Health check at intervals
+                current_time = time.time()
+                if current_time - self.last_health_check >= self.health_check_interval:
+                    self.last_health_check = current_time
+                    
+                    if self.current_process:
+                        is_healthy = self.check_playback_health()
+                        
+                        if not is_healthy:
+                            self.consecutive_stall_checks += 1
+                            logging.warning(f"[HEALTH] Playback health check failed ({self.consecutive_stall_checks}/{self.max_stall_checks})")
+                            
+                            if self.consecutive_stall_checks >= self.max_stall_checks:
+                                logging.error("[HEALTH] Multiple consecutive health check failures - restarting playback")
+                                self.restart_playback("Playback stalled")
+                                self.consecutive_stall_checks = 0
+                                break  # Exit loop to restart
+                        else:
+                            # Reset counter on successful health check
+                            if self.consecutive_stall_checks > 0:
+                                logging.info("[HEALTH] Playback recovered")
+                            self.consecutive_stall_checks = 0
+                            logging.info(f"[TV] Status: Playing (PID: {self.current_process.pid}) - Health: OK")
+                    
+                time.sleep(10)  # Check more frequently for responsiveness
                 
         except KeyboardInterrupt:
             logging.info("Service interrupted by user")

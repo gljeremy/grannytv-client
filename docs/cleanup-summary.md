@@ -51,7 +51,7 @@
 - ✅ `tools/performance-monitor.py` - System performance monitoring
 - ✅ `tools/network-optimize.sh` - Network optimization (generic)
 - ✅ `tools/gpu-optimize.sh` - Pi GPU optimization (generic)
-- ✅ `working_streams.json` & `working_streams_optimized.json` - Stream databases
+- ✅ `working_streams.json` & `working_streams.json` - Stream databases
 
 ### Core Application
 - ✅ `iptv_smart_player.py` - Already MPV-based, no changes needed
