@@ -1,8 +1,11 @@
 [Unit]
 Description=MPV-based IPTV Smart Player for Granny TV
-After=network-online.target graphical-session.target sound.target
-Wants=network-online.target graphical-session.target
-Requires=network-online.target
+# Uses MPV with DRM (Direct Rendering Manager) for direct framebuffer output
+# No X11/desktop environment needed - minimal resources, direct video output
+After=multi-user.target network-online.target sound.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
 
 [Service]
 Type=simple
@@ -12,16 +15,18 @@ WorkingDirectory=/home/jeremy/gtv
 ExecStart=/home/jeremy/gtv/venv/bin/python /home/jeremy/gtv/iptv_smart_player.py
 Restart=always
 RestartSec=15
-StartLimitBurst=5
-StartLimitIntervalSec=300
 
-# Environment for audio/video
-Environment=DISPLAY=:0
+# Environment for audio/video (DRM mode - no DISPLAY needed)
 Environment=HOME=/home/jeremy
 Environment=XDG_RUNTIME_DIR=/run/user/1000
-Environment=PULSE_RUNTIME_PATH=/run/user/1000/pulse
 
-# Wait for network and display to be ready
+# Memory limits to prevent OOM killer (Pi 3 has only 731MB RAM)
+# Limit MPV to 250MB max to leave headroom for system
+MemoryMax=250M
+MemoryHigh=200M
+MemorySwapMax=50M
+
+# Wait for network to be ready
 ExecStartPre=/bin/sleep 10
 ExecStartPre=/bin/bash -c 'until ping -c1 8.8.8.8 >/dev/null 2>&1; do sleep 5; done'
 
@@ -35,4 +40,4 @@ KillSignal=SIGTERM
 TimeoutStopSec=30
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=multi-user.target

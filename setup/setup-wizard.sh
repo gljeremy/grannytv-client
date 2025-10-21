@@ -246,19 +246,46 @@ sudo systemctl stop dnsmasq 2>/dev/null || true
 
 # Clear WiFi interface
 sudo ip addr flush dev wlan0 2>/dev/null || true
+sudo ip link set wlan0 down 2>/dev/null || true
 
 # Remove iptables rules
 sudo iptables -t nat -F PREROUTING 2>/dev/null || true
 
-# Restore original dhcpcd.conf
-if [ -f /etc/dhcpcd.conf.backup ]; then
-    sudo cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
+# Clean up dhcpcd.conf to remove static IP configuration
+# This prevents 192.168.4.1 from being set on reboot
+if [ -f /etc/dhcpcd.conf ]; then
+    echo "🧹 Cleaning dhcpcd.conf..."
+    
+    # Remove GrannyTV hotspot configuration section (comment line + 3 config lines)
+    sudo sed -i '/# GrannyTV Setup Hotspot Configuration/,+3d' /etc/dhcpcd.conf
+    echo "   Removed hotspot configuration"
 fi
 
-# Re-enable normal WiFi services
-sudo systemctl enable NetworkManager 2>/dev/null || true
-sudo systemctl start NetworkManager 2>/dev/null || true
-sudo systemctl enable wpa_supplicant 2>/dev/null || true
+# Decide which network manager to use
+if systemctl is-active --quiet NetworkManager; then
+    echo "🔄 Using NetworkManager..."
+    # Remove hotspot NetworkManager connection profile
+    sudo nmcli con delete GrannyTV-Hotspot 2>/dev/null || true
+    
+    # Stop and disable dhcpcd to avoid conflicts
+    sudo systemctl stop dhcpcd 2>/dev/null || true
+    sudo systemctl disable dhcpcd 2>/dev/null || true
+    
+    # Enable NetworkManager
+    sudo systemctl enable NetworkManager 2>/dev/null || true
+    sudo systemctl restart NetworkManager 2>/dev/null || true
+    
+    # Bring interface back up and let NetworkManager manage it
+    sudo ip link set wlan0 up 2>/dev/null || true
+    sudo nmcli device set wlan0 managed yes 2>/dev/null || true
+else
+    echo "🔄 Using dhcpcd and wpa_supplicant..."
+    # Traditional Raspberry Pi network setup
+    sudo systemctl enable wpa_supplicant 2>/dev/null || true
+    sudo systemctl restart wpa_supplicant 2>/dev/null || true
+    sudo systemctl enable dhcpcd 2>/dev/null || true
+    sudo systemctl restart dhcpcd 2>/dev/null || true
+fi
 
 # Clean up persistent setup files automatically when run non-interactively
 if [ -t 0 ]; then

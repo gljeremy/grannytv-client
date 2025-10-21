@@ -5,18 +5,21 @@ Advanced diagnostic and optimization utilities for MPV-based ultra-low latency I
 ## 📄 Files
 
 ### Core Analysis Tools
-- **`iptv_protocol_optimizer.py`** ✅ - Universal IPTV protocol detection & optimization
-- **`stream_performance_analyzer.py`** ✅ - Stream latency testing & database optimization  
-- **`performance-monitor.py`** ✅ - Real-time system performance monitoring
+- **`iptv_protocol_optimizer.py`** - Universal IPTV protocol detection & optimization
+- **`stream_performance_analyzer.py`** - Stream latency testing & database optimization  
+- **`performance-monitor.py`** - Real-time system performance monitoring
 
 ### System Optimization
-- **`network-optimize.sh`** ✅ - Network optimization for streaming performance
-- **`gpu-optimize.sh`** ✅ - GPU and video acceleration optimization for Pi
+- **`network-optimize.sh`** - Network optimization for streaming performance
+- **`gpu-optimize.sh`** - GPU and video acceleration optimization for Pi
 
-### Legacy Tools (Deprecated)
-- ~~`vlc-setup.sh`~~ - Removed (replaced by MPV-based system)
-- ~~`vlc-option-validator.sh`~~ - Removed (VLC no longer used)
-- ~~`vlc-compatibility-check.py`~~ - Removed (VLC no longer used)
+### MPV Configuration Testing
+- **`batch_test_variants.sh`** - Batch test multiple MPV configuration variants
+- **`quick_test_config.sh`** - Quick test individual MPV variants (1-20)
+- **`benchmark_mpv_configs.sh`** - Benchmark MPV configurations for performance
+- **`test_mpv_configs.sh`** - Test MPV config variations
+- **`test_single_config.sh`** - Test a single MPV configuration
+- **`test_buffering_fix.sh`** - Test buffering optimizations
 
 ## 🚀 Quick Performance Setup
 
@@ -37,54 +40,70 @@ python3 ./tools/iptv_protocol_optimizer.py
 python3 ./tools/performance-monitor.py --check-only
 ```
 
-## 🎬 MPV Performance System ✅
+## 🎯 MPV Configuration Testing
+
+Test and find the optimal MPV configuration for your setup:
+
+```bash
+# Quick test a specific variant (1-20)
+./tools/quick_test_config.sh 14
+
+# Batch test multiple variants to find the best
+./tools/batch_test_variants.sh 30 14 15 16
+
+# Benchmark different configurations
+./tools/benchmark_mpv_configs.sh
+
+# Test buffering optimizations
+./tools/test_buffering_fix.sh
+```
+
+**Current Optimal Configuration:** Variant 14 (Balanced optimization)
+- cache-secs=3
+- demuxer-max-bytes=25M
+- demuxer-readahead-secs=3
+
+## 🎬 MPV Performance System
 
 **Platform-Aware MPV Optimization:**
 
 The player automatically detects your platform and applies optimized MPV configurations:
 
 **Platform-Specific Features:**
-- **Windows:** Hardware decode enabled (`--hwdec=auto`), 3-second cache
-- **Raspberry Pi:** Conservative settings, 2-second cache, software decode
-- **Desktop Linux:** Standard configurations with hardware acceleration
+- **Raspberry Pi:** Balanced settings (Variant 14), 3-second cache, software decode
+- **Desktop/Windows:** Same balanced config for consistency
+- **Hardware acceleration:** Software decode for maximum stability
 
 **Smart Performance Adaptation:**
 - Pi hardware detection with GPU memory checking
-- Automatic fallback configurations (Performance → Lighter → Minimal)
+- Variant-based configuration system (20 tested variants)
 - Cross-platform consistency with platform-specific optimizations
 - MPV process monitoring with automatic restart on failure
 
 ## 🔧 Individual Tool Usage
 
-### VLC Diagnostics
+### Stream Analysis & Optimization
 ```bash
-./tools/vlc-setup.sh --test
-./tools/vlc-setup.sh --framebuffer  
-./tools/vlc-setup.sh --desktop
+# Analyze stream performance and create optimized database
+python3 ./tools/stream_performance_analyzer.py
 
-# Test VLC option compatibility
-./tools/vlc-option-validator.sh
-
-# Check VLC version compatibility
-python3 ./tools/vlc-compatibility-check.py --report
-
-# Test protocol detection
-python3 ./tools/iptv-protocol-optimizer.py
+# Test protocol detection and optimization
+python3 ./tools/iptv_protocol_optimizer.py
 ```
 
-### HLS & Stream Optimization ⚡ NEW
+### MPV Configuration Testing
 ```bash
-# One-command HLS optimization
-./tools/setup-hls-optimization.sh
+# Interactive variant selection (1-20)
+./tools/quick_test_config.sh
 
-# Manual stream analysis and optimization
-python3 ./tools/stream-performance-analyzer.py
+# Test specific variant with custom stream
+./tools/quick_test_config.sh 14 "http://stream-url" 60
 
-# Create HLS performance profiles
-./tools/create-hls-profiles.sh
+# Batch test multiple variants
+./tools/batch_test_variants.sh 30 1 3 8 14 15
 
-# Test protocol detection
-python3 ./tools/iptv-protocol-optimizer.py
+# Benchmark configurations
+./tools/benchmark_mpv_configs.sh
 ```
 
 ### Performance Monitoring
@@ -96,21 +115,29 @@ python3 ./tools/performance-monitor.py --check-only
 python3 ./tools/performance-monitor.py --duration 60
 ```
 
+### System Optimization
+```bash
+# Optimize network settings for streaming
+sudo ./tools/network-optimize.sh
+
+# Configure GPU acceleration for Raspberry Pi
+sudo ./tools/gpu-optimize.sh
+```
+
 ## ⚡ Performance Optimizations
 
-### HLS Protocol Optimizations ⚡ NEW
+### MPV Variant System
+- **20 tested variants:** From minimal (Variant 17) to performance (Variant 15)
+- **Balanced optimization (Variant 14):** Current best-in-class configuration
 - **Protocol detection:** Automatic detection of HLS, DASH, RTMP, RTSP, UDP streams
-- **HLS ultra-low latency:** <200ms for live streams (Pluto TV optimized)
-- **Adaptive bitrate:** Smart quality adjustment for network conditions
 - **Stream ranking:** Performance-based stream selection (fastest first)
 - **CDN optimization:** Provider-specific optimizations (Pluto, Cloudflare, etc.)
 
 ### Ultra Low-Latency Features
-- **Stream latency:** Reduced to <1 second end-to-end
-- **Network caching:** Optimized from 3000ms to 500ms
-- **Live buffering:** Minimized to 100ms for real-time feel
-- **Process priority:** VLC runs with high CPU priority
-- **Hardware decode:** GPU-accelerated video processing
+- **Stream latency:** Optimized caching and buffering for smooth playback
+- **Network caching:** Variant-based (1-5 seconds depending on configuration)
+- **Process priority:** MPV runs with optimized settings
+- **Hardware considerations:** Software decode for maximum stability on Pi
 
 ### System-Level Enhancements
 - **Network buffers:** Increased to 128MB for smooth streaming
@@ -120,9 +147,10 @@ python3 ./tools/performance-monitor.py --duration 60
 
 ## 📊 Expected Performance Results
 
-After applying all optimizations:
-- **Startup time:** ~0.8 seconds (was 12+ seconds)
-- **CPU usage:** 15-30% during streaming (was 60%+)
-- **Memory efficiency:** Optimized buffer management
-- **Network throughput:** Enhanced for 4K+ streams
-- **Stability:** Hardware-accelerated, crash-resistant playback
+After applying all optimizations (using Variant 14):
+- **Startup time:** ~2-3 seconds to video
+- **CPU usage:** 25-40% during streaming (30-50% less than VLC)
+- **Memory usage:** ~150MB (25% less than VLC)
+- **Network throughput:** Enhanced for HD+ streams
+- **Stability:** Software decode, crash-resistant playback
+- **Cache efficiency:** 3-second buffer with 25M demuxer buffer

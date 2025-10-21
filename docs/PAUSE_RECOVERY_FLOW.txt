@@ -1,0 +1,161 @@
+PLAYBACK PAUSE DETECTION & RECOVERY - SYSTEM FLOW
+═══════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        MPV PLAYER STARTS                                 │
+│                     Playing IPTV Stream                                  │
+└────────────────────────────┬────────────────────────────────────────────┘
+                             │
+                             │ Monitor every 10 seconds
+                             │
+                             ▼
+                  ┌──────────────────────┐
+                  │ Has 30 seconds passed│
+                  │ since last health    │
+                  │ check?               │
+                  └──────┬───────────────┘
+                         │
+                    ┌────┴────┐
+                    │         │
+                   NO        YES
+                    │         │
+                    │         ▼
+                    │  ┌──────────────────────────────────┐
+                    │  │   RUN HEALTH CHECK               │
+                    │  │   1. Process alive?              │
+                    │  │   2. Good state (not zombie)?    │
+                    │  │   3. CPU active?                 │
+                    │  │   4. Responsive to signals?      │
+                    │  └──────────┬───────────────────────┘
+                    │             │
+                    │        ┌────┴────┐
+                    │        │         │
+                    │       PASS      FAIL
+                    │        │         │
+                    │        │         ▼
+                    │        │  ┌──────────────────────────┐
+                    │        │  │ Increment failure count  │
+                    │        │  │ consecutive_stall_checks++│
+                    │        │  └──────────┬───────────────┘
+                    │        │             │
+                    │        │        ┌────┴─────┐
+                    │        │        │          │
+                    │        │     Count < 3   Count = 3
+                    │        │        │          │
+                    │        │        │          ▼
+                    │        │        │   ┌──────────────────────┐
+                    │        │        │   │ RESTART PLAYBACK      │
+                    │        │        │   │ 1. Log warning        │
+                    │        │        │   │ 2. Kill MPV process   │
+                    │        │        │   │ 3. Wait 1 second      │
+                    │        │        │   │ 4. Restart stream     │
+                    │        │        │   └──────────┬───────────┘
+                    │        │        │              │
+                    │        │        │              ▼
+                    │        │        │   ┌──────────────────────┐
+                    │        │        │   │ BACK TO START        │
+                    │        │        │   │ New MPV process      │
+                    │        │        │   └──────────────────────┘
+                    │        │        │
+                    │        │        ▼
+                    │        │   ┌──────────────────────────┐
+                    │        │   │ Log warning (X/3)        │
+                    │        │   └──────────┬───────────────┘
+                    │        │              │
+                    │        ▼              │
+                    │   ┌──────────────────────────┐
+                    │   │ Reset failure count to 0  │
+                    │   │ Log "Health: OK"         │
+                    │   └──────────┬───────────────┘
+                    │              │
+                    └──────────────┴────────┐
+                                            │
+                                            ▼
+                                   ┌────────────────┐
+                                   │ Wait 10 seconds│
+                                   └────────┬───────┘
+                                            │
+                                            │ Loop
+                                            │
+                                   ┌────────┴───────┐
+                                   │ Check if MPV   │
+                                   │ process exited │
+                                   └────────┬───────┘
+                                            │
+                                       ┌────┴────┐
+                                       │         │
+                                    RUNNING   EXITED
+                                       │         │
+                                       │         ▼
+                                       │   ┌──────────────┐
+                                       │   │ Try next     │
+                                       │   │ stream       │
+                                       │   └──────────────┘
+                                       │
+                                       └─── Back to monitoring
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+TIMELINE EXAMPLE (90-second stall detection):
+
+Time 0:00    MPV starts playing stream
+Time 0:30    Health check #1 - PASS ✓
+Time 1:00    Health check #2 - PASS ✓
+Time 1:30    Health check #3 - PASS ✓
+             [STREAM FREEZES HERE]
+Time 2:00    Health check #4 - FAIL ✗ (1/3)
+Time 2:30    Health check #5 - FAIL ✗ (2/3)
+Time 3:00    Health check #6 - FAIL ✗ (3/3)
+             → RESTART TRIGGERED
+Time 3:10    New MPV process starts
+Time 3:15    Playback resumed
+Time 3:45    Health check #1 - PASS ✓ (reset counter)
+             [Normal operation continues]
+
+═══════════════════════════════════════════════════════════════════════════
+
+MPV NETWORK RESILIENCE (handles BEFORE health check needed):
+
+┌────────────────────────────────────────────────────────────────┐
+│ MPV Playing Stream                                              │
+└───────────────────┬────────────────────────────────────────────┘
+                    │
+                    ▼
+         ┌──────────────────────┐
+         │ Network Issue        │
+         │ (connection drop,    │
+         │  timeout, etc.)      │
+         └──────────┬───────────┘
+                    │
+                    ▼
+         ┌──────────────────────┐
+         │ MPV Auto-reconnect   │
+         │ --reconnect=1        │
+         │ --reconnect_delay=5s │
+         └──────────┬───────────┘
+                    │
+               ┌────┴────┐
+               │         │
+          SUCCESS     TIMEOUT
+               │         │
+               │         ▼
+               │    ┌─────────────────┐
+               │    │ Network timeout │
+               │    │ (15 seconds)    │
+               │    └────────┬────────┘
+               │             │
+               │             ▼
+               │    ┌─────────────────┐
+               │    │ MPV may exit or │
+               │    │ health check    │
+               │    │ will detect     │
+               │    └─────────────────┘
+               │
+               ▼
+     ┌──────────────────────┐
+     │ Seamless playback    │
+     │ User doesn't notice  │
+     └──────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════

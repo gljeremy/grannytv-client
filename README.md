@@ -38,6 +38,7 @@ sudo ./tools/gpu-optimize.sh           # GPU acceleration for Pi
 ✅ **Smart Stream Selection** - Finds working TV channels automatically  
 ✅ **Ultra-Fast Performance** - MPV player optimized for Raspberry Pi hardware  
 ✅ **Reliable** - Self-healing with automatic failovers  
+✅ **Health Monitoring** - Detects and recovers from playback pauses automatically  
 ✅ **Simple** - No remote controls or complicated menus  
 ✅ **Efficient** - 30-50% more efficient than VLC on Pi
 
@@ -125,13 +126,14 @@ git add . && git commit -m "Update" && git push
 **Testing:** `python iptv_smart_player.py --test`  
 **Logs:** Check `/home/jeremy/gtv/iptv_player.log`
 
-## Documentation
+## Documentation (Simple & Updated)
 
-- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) - Development workflow and tooling
-- [setup/README.md](setup/README.md) - Smartphone setup and recovery scripts
-- [platforms/README.md](platforms/README.md) - Platform-specific deployment guidance
-- [tools/README.md](tools/README.md) - Utility scripts and diagnostics overview
-- [test/e2e/README.md](test/e2e/README.md) - Docker-based end-to-end test harness
+📺 **[Quick Start](QUICKSTART.md)** - Get TV working in 5 minutes  
+⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Common commands for optimized version  
+📊 **[Project Status](PROJECT_STATUS.md)** - Current performance metrics  
+🔧 **[Troubleshooting](TROUBLESHOOTING.md)** - Problem solving guide  
+💚 **[Playback Health Monitoring](PLAYBACK_HEALTH_MONITORING.md)** - Auto-recovery from pauses  
+🤖 **[Copilot Instructions](COPILOT_INSTRUCTIONS.md)** - For AI development assistance  
 
 ## ⚡ MPV Performance Analysis
 

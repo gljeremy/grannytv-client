@@ -184,7 +184,7 @@ class StreamPerformanceAnalyzer:
             'fastest_streams': fastest_streams
         }
     
-    def create_optimized_database(self, results, output_file='working_streams_optimized.json'):
+    def create_optimized_database(self, results, output_file='working_streams.json'):
         """Create performance-optimized stream database"""
         successful_results = [r for r in results.values() if r['performance']['success']]
         
@@ -249,7 +249,7 @@ class StreamPerformanceAnalyzer:
             print("   ❌ High latency detected - network or CDN issues possible")
         
         print(f"\n🚀 Next steps:")
-        print(f"   1. Use working_streams_optimized.json for best performance")
+        print(f"   1. Use working_streams.json for best performance")
         print(f"   2. Update main player to prefer fastest streams")
         print(f"   3. Consider CDN-specific optimizations")
         

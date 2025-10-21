@@ -416,16 +416,46 @@ def finalize():
             # Remove iptables NAT rules
             subprocess.run(['sudo', 'iptables', '-t', 'nat', '-F', 'PREROUTING'], check=False)
             
-            # Restore dhcpcd.conf if backup exists
-            if os.path.exists('/etc/dhcpcd.conf.backup'):
-                subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=False)
+            # CRITICAL: Remove hotspot configuration from dhcpcd.conf
+            # This prevents the static IP 192.168.4.1 from being set on reboot
+            try:
+                # Use sed to remove the hotspot configuration section
+                # This is more reliable than reading/writing as it handles permissions correctly
+                subprocess.run([
+                    'sudo', 'sed', '-i',
+                    '/# GrannyTV Setup Hotspot Configuration/,+3d',
+                    '/etc/dhcpcd.conf'
+                ], check=True)
+                print("✅ Removed hotspot configuration from dhcpcd.conf")
+            except Exception as e:
+                print(f"Warning: Could not clean dhcpcd.conf: {e}")
+                # Try backup restore as fallback
+                try:
+                    if os.path.exists('/etc/dhcpcd.conf.backup'):
+                        subprocess.run(['sudo', 'cp', '/etc/dhcpcd.conf.backup', '/etc/dhcpcd.conf'], check=True)
+                        print("✅ Restored dhcpcd.conf from backup")
+                except Exception as e2:
+                    print(f"Warning: Backup restore also failed: {e2}")
             
-            # Start normal WiFi services
-            subprocess.run(['sudo', 'systemctl', 'start', 'wpa_supplicant'], check=False)
-            subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
+            # Check if system uses NetworkManager or dhcpcd
+            nm_active = subprocess.run(['systemctl', 'is-active', 'NetworkManager'], 
+                                      capture_output=True, text=True).returncode == 0
             
-            # Restart networking to pick up new configuration
-            subprocess.run(['sudo', 'systemctl', 'restart', 'dhcpcd'], check=False)
+            if nm_active:
+                # Use NetworkManager
+                print("Using NetworkManager for network management")
+                subprocess.run(['sudo', 'systemctl', 'enable', 'NetworkManager'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'NetworkManager'], check=False)
+                # Stop dhcpcd to avoid conflicts
+                subprocess.run(['sudo', 'systemctl', 'stop', 'dhcpcd'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'disable', 'dhcpcd'], check=False)
+            else:
+                # Use dhcpcd (traditional Raspberry Pi)
+                print("Using dhcpcd for network management")
+                subprocess.run(['sudo', 'systemctl', 'enable', 'wpa_supplicant'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'wpa_supplicant'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'enable', 'dhcpcd'], check=False)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'dhcpcd'], check=False)
             
             print("Hotspot disabled, switching to client mode")
         except Exception as e:
@@ -457,6 +487,12 @@ if [ ! -d ".git" ]; then
 else
     git pull origin main
 fi
+
+# DRM mode - no graphical.target needed (minimal resources)
+# MPV uses Direct Rendering Manager for direct framebuffer output
+echo "🖥️ Configuring console mode (multi-user target)..."
+sudo systemctl set-default multi-user.target
+echo "✅ Console mode configured - minimal resources, direct video output"
 
 # Run the main setup script
 chmod +x platforms/linux/pi-setup.sh
@@ -516,16 +552,51 @@ sudo rm -f /var/lib/grannytv-setup-mode
 # Stop hotspot services immediately
 sudo systemctl stop hostapd 2>/dev/null || true
 sudo systemctl stop dnsmasq 2>/dev/null || true
+sudo systemctl disable hostapd 2>/dev/null || true
+sudo systemctl disable dnsmasq 2>/dev/null || true
 
 # Clear the static IP from wlan0
 sudo ip addr flush dev wlan0 2>/dev/null || true
+sudo ip link set wlan0 down 2>/dev/null || true
 
 # Remove iptables rules
 sudo iptables -t nat -F PREROUTING 2>/dev/null || true
 
-# Start normal WiFi services with the new configuration
-sudo systemctl start wpa_supplicant 2>/dev/null || true
-sudo systemctl start dhcpcd 2>/dev/null || true
+# CRITICAL: Clean up dhcpcd.conf to remove static IP configuration
+# This prevents 192.168.4.1 from being set on reboot
+if [ -f /etc/dhcpcd.conf ]; then
+    echo "Cleaning dhcpcd.conf..."
+    
+    # Remove GrannyTV hotspot configuration section (comment line + 3 config lines)
+    sudo sed -i '/# GrannyTV Setup Hotspot Configuration/,+3d' /etc/dhcpcd.conf
+    echo "Removed hotspot configuration from dhcpcd.conf"
+fi
+
+# Decide which network manager to use
+if systemctl is-active --quiet NetworkManager; then
+    echo "Using NetworkManager..."
+    # Remove hotspot NetworkManager connection profile
+    sudo nmcli con delete GrannyTV-Hotspot 2>/dev/null || true
+    
+    # Stop and disable dhcpcd to avoid conflicts
+    sudo systemctl stop dhcpcd 2>/dev/null || true
+    sudo systemctl disable dhcpcd 2>/dev/null || true
+    
+    # Enable NetworkManager
+    sudo systemctl enable NetworkManager 2>/dev/null || true
+    sudo systemctl restart NetworkManager 2>/dev/null || true
+    
+    # Bring interface back up and let NetworkManager manage it
+    sudo ip link set wlan0 up 2>/dev/null || true
+    sudo nmcli device set wlan0 managed yes 2>/dev/null || true
+else
+    echo "Using dhcpcd and wpa_supplicant..."
+    # Traditional Raspberry Pi network setup
+    sudo systemctl enable wpa_supplicant 2>/dev/null || true
+    sudo systemctl restart wpa_supplicant 2>/dev/null || true
+    sudo systemctl enable dhcpcd 2>/dev/null || true
+    sudo systemctl restart dhcpcd 2>/dev/null || true
+fi
 
 # Give it a moment to connect
 sleep 5
@@ -551,27 +622,13 @@ echo "Immediate cleanup complete - Pi should now be on home WiFi"
         
         os.chmod('/tmp/immediate-cleanup.sh', 0o755)
         
-        # Create systemd service for reboot (more reliable than sudo from web server)
-        reboot_service = """[Unit]
-Description=GrannyTV Setup Reboot
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/reboot
-User=root
-
-[Install]
-WantedBy=multi-user.target
-"""
-        
-        with open('/tmp/grannytv-reboot.service', 'w') as f:
-            f.write(reboot_service)
-        
-        subprocess.run(['sudo', 'cp', '/tmp/grannytv-reboot.service', 
-                       '/etc/systemd/system/'], check=True)
-        subprocess.run(['sudo', 'systemctl', 'daemon-reload'], check=True)
-        subprocess.run(['sudo', 'systemctl', 'start', 'grannytv-reboot'], check=True)
+        # Execute the cleanup script in background
+        # This will clean up services, remove flags, and reboot after 15 seconds
+        with open('/tmp/immediate-cleanup.log', 'w') as log_file:
+            subprocess.Popen(['bash', '/tmp/immediate-cleanup.sh'], 
+                            stdout=log_file, 
+                            stderr=subprocess.STDOUT,
+                            start_new_session=True)
         
         print("Immediate cleanup and reboot scheduled in background")
         
